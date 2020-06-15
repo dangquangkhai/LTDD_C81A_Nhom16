@@ -17,14 +17,15 @@ import com.ldt.musicr.ui.LayerController;
 import java.util.ArrayList;
 
 public abstract class BaseLayerFragment extends Fragment implements LayerController.BaseLayer {
-    private static final String TAG ="BaseLayerFragment";
+    private static final String TAG = "BaseLayerFragment";
 
     public LayerController getLayerController() {
         return mLayerController;
     }
 
     public LayerController mLayerController;
-    public  void setLayerController(LayerController layerController) {
+
+    public void setLayerController(LayerController layerController) {
         this.mLayerController = layerController;
     }
 
@@ -33,14 +34,15 @@ public abstract class BaseLayerFragment extends Fragment implements LayerControl
 
     }
 
-    private int mMaxPosition=0;
+    private int mMaxPosition = 0;
     private View v;
+
     public View getParent(Activity activity, ViewGroup container, int maxPosition) {
-        if(v==null) {
+        if (v == null) {
             mMaxPosition = maxPosition;
             View view = onCreateView(LayoutInflater.from(activity), container);
-            Log.d(TAG, "getParent: id = "+view.getId());
-            FrameLayout.LayoutParams params =new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, (int) mMaxPosition);
+            Log.d(TAG, "getParent: id = " + view.getId());
+            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, (int) mMaxPosition);
             params.gravity = Gravity.BOTTOM;
             view.setLayoutParams(params);
             v = view;
@@ -65,11 +67,12 @@ public abstract class BaseLayerFragment extends Fragment implements LayerControl
 
     @Override
     public final View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        if(mMaxPosition==0) {
+        if (mMaxPosition == 0) {
             if (getMaxPositionType()) mMaxPosition = mLayerController.ScreenSize[1];
-            else mMaxPosition = (int) (mLayerController.ScreenSize[1] -mLayerController.status_height - 2 * mLayerController.oneDp - mLayerController.mMaxMarginTop);
+            else
+                mMaxPosition = (int) (mLayerController.ScreenSize[1] - mLayerController.status_height - 2 * mLayerController.oneDp - mLayerController.mMaxMarginTop);
         }
-        return getParent(getActivity(),container,mMaxPosition);
+        return getParent(getActivity(), container, mMaxPosition);
     }
 
     @Override
@@ -92,5 +95,7 @@ public abstract class BaseLayerFragment extends Fragment implements LayerControl
 
 
     @Override
-    public boolean onBackPressed() {return false;}
+    public boolean onBackPressed() {
+        return false;
+    }
 }

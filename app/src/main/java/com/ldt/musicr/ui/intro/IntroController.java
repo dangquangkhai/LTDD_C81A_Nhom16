@@ -13,7 +13,7 @@ import com.ldt.musicr.ui.widget.fragmentnavigationcontroller.SupportFragment;
 import static com.ldt.musicr.ui.widget.fragmentnavigationcontroller.SupportFragment.PRESENT_STYLE_DEFAULT;
 
 public class IntroController {
-    private static final String TAG ="IntroController";
+    private static final String TAG = "IntroController";
 
     FragmentNavigationController mNavigationController;
 
@@ -29,12 +29,14 @@ public class IntroController {
         initBackStack(activity, savedInstanceState);
 
     }
+
     private boolean isNavigationControllerInit() {
-        return null!= mNavigationController;
+        return null != mNavigationController;
     }
+
     public void presentFragment(SupportFragment fragment) {
         Log.d(TAG, "presentFragment");
-        if(isNavigationControllerInit()) {
+        if (isNavigationControllerInit()) {
             Log.d(TAG, "presentFragment: INIT");
 //            Random r = new Random();
 //            mNavigationController.setPresentStyle(r.nextInt(39)+1); //exclude NONE present style
@@ -45,6 +47,7 @@ public class IntroController {
 
         }
     }
+
     private void initBackStack(AppCompatActivity activity, Bundle savedInstanceState) {
         FragmentManager fm = activity.getSupportFragmentManager();
         mNavigationController = FragmentNavigationController.navigationController(fm, R.id.back_wall_container);

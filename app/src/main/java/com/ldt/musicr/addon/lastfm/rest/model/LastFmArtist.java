@@ -52,8 +52,8 @@ public class LastFmArtist {
             this.url = url;
         }
 
-        public String mbid="";
-        public String url="";
+        public String mbid = "";
+        public String url = "";
 
 
         @Expose

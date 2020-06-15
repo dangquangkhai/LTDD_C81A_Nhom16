@@ -33,7 +33,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class FeatureSongAdapter extends RecyclerView.Adapter<FeatureSongAdapter.ItemHolder>{
+public class FeatureSongAdapter extends RecyclerView.Adapter<FeatureSongAdapter.ItemHolder> {
     private static final String TAG = "SongAdapter";
     public ArrayList<Song> mAllSongs = new ArrayList<>();
     public ArrayList<Song> mData = new ArrayList<>();
@@ -51,7 +51,7 @@ public class FeatureSongAdapter extends RecyclerView.Adapter<FeatureSongAdapter.
 
     public void setData(List<Song> data) {
         mAllSongs.clear();
-        if(data!=null) mAllSongs.addAll(data);
+        if (data != null) mAllSongs.addAll(data);
 
         initializeSong();
     }
@@ -62,7 +62,7 @@ public class FeatureSongAdapter extends RecyclerView.Adapter<FeatureSongAdapter.
         Collections.shuffle(mAllSongs);
 
         int size = mAllSongs.size();
-        for(int i = 0;i<4&&i<size;i++)
+        for (int i = 0; i < 4 && i < size; i++)
             mData.add(mAllSongs.get(i));
 
         this.songIDs = getSongIds();
@@ -74,6 +74,7 @@ public class FeatureSongAdapter extends RecyclerView.Adapter<FeatureSongAdapter.
     public int getItemCount() {
         return mData.size();
     }
+
     public int getAllItemCount() {
         return mAllSongs.size();
     }
@@ -90,9 +91,10 @@ public class FeatureSongAdapter extends RecyclerView.Adapter<FeatureSongAdapter.
     @NotNull
     @Override
     public ItemHolder onCreateViewHolder(@NotNull ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_feature_song,viewGroup,false);
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_feature_song, viewGroup, false);
         return new ItemHolder(v);
     }
+
     @Override
     public void onBindViewHolder(@NotNull ItemHolder itemHolder, int i) {
         itemHolder.bind(mData.get(i));
@@ -102,22 +104,27 @@ public class FeatureSongAdapter extends RecyclerView.Adapter<FeatureSongAdapter.
     private void setOnPopupMenuListener(ItemHolder itemHolder, final int position) {
         itemHolder.mMenuButton.setOnClickListener(v -> {
             OptionBottomSheet
-                    .newInstance(SongMenuHelper.SONG_OPTION,mData.get(position))
-                    .show(((AppCompatActivity)mContext).getSupportFragmentManager(), "song_popup_menu");
+                    .newInstance(SongMenuHelper.SONG_OPTION, mData.get(position))
+                    .show(((AppCompatActivity) mContext).getSupportFragmentManager(), "song_popup_menu");
         });
     }
 
     public class ItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        @BindView(R.id.title) TextView mTitle;
-        @BindView(R.id.description) TextView mDescription;
-        @BindView(R.id.image) ImageView mImage;
-        @BindView(R.id.menu_button) View mMenuButton;
-        @BindView(R.id.quick_play_pause) ImageView mQuickPlayPause;
+        @BindView(R.id.title)
+        TextView mTitle;
+        @BindView(R.id.description)
+        TextView mDescription;
+        @BindView(R.id.image)
+        ImageView mImage;
+        @BindView(R.id.menu_button)
+        View mMenuButton;
+        @BindView(R.id.quick_play_pause)
+        ImageView mQuickPlayPause;
 
         @OnClick(R.id.quick_play_pause)
         void clickQuickPlayPause() {
-            if(MusicPlayerRemote.getCurrentSong().id==mData.get(getAdapterPosition()).id) {
+            if (MusicPlayerRemote.getCurrentSong().id == mData.get(getAdapterPosition()).id) {
                 MusicPlayerRemote.playOrPause();
                 checkQuickPlayPause();
             } else onClick(itemView);
@@ -125,7 +132,7 @@ public class FeatureSongAdapter extends RecyclerView.Adapter<FeatureSongAdapter.
 
         public ItemHolder(View view) {
             super(view);
-            ButterKnife.bind(this,view);
+            ButterKnife.bind(this, view);
             view.setOnClickListener(this);
         }
 
@@ -133,14 +140,14 @@ public class FeatureSongAdapter extends RecyclerView.Adapter<FeatureSongAdapter.
         public void onClick(View view) {
             final Handler handler = new Handler();
             handler.postDelayed(() -> {
-                MusicPlayerRemote.openQueue(mAllSongs,getAdapterPosition(),true);
-                Handler handler1 = new Handler() ;
+                MusicPlayerRemote.openQueue(mAllSongs, getAdapterPosition(), true);
+                Handler handler1 = new Handler();
                 handler1.postDelayed(() -> {
                     notifyItemChanged(currentlyPlayingPosition);
                     notifyItemChanged(getAdapterPosition());
                     currentlyPlayingPosition = getAdapterPosition();
-                },50);
-            },100);
+                }, 50);
+            }, 100);
         }
 
         public void bind(Song song) {
@@ -157,31 +164,31 @@ public class FeatureSongAdapter extends RecyclerView.Adapter<FeatureSongAdapter.
                     .placeholder(R.drawable.music_empty)
                     .error(R.drawable.music_empty)
                     .into(mImage);*/
-         Glide.with(mContext).load(Util.getAlbumArtUri(song.albumId))
-                 .placeholder(R.drawable.music_empty)
-                 .error(R.drawable.music_empty)
-                 .into(mImage);
+            Glide.with(mContext).load(Util.getAlbumArtUri(song.albumId))
+                    .placeholder(R.drawable.music_empty)
+                    .error(R.drawable.music_empty)
+                    .into(mImage);
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 ((RippleDrawable) itemView.getBackground()).setColor(ColorStateList.valueOf(Tool.getBaseColor()));
             } else {
                 //TODO: Below Android L
             }
-            setOnPopupMenuListener(this,getAdapterPosition());
+            setOnPopupMenuListener(this, getAdapterPosition());
             checkQuickPlayPause();
         }
+
         public void checkQuickPlayPause() {
-            if(MusicPlayerRemote.getCurrentSong().id==mData.get(getAdapterPosition()).id) {
+            if (MusicPlayerRemote.getCurrentSong().id == mData.get(getAdapterPosition()).id) {
                 currentlyPlayingPosition = getAdapterPosition();
                 mTitle.setTextColor(Tool.getBaseColor());
 
-                if(MusicPlayerRemote.isPlaying()) {
+                if (MusicPlayerRemote.isPlaying()) {
                     mQuickPlayPause.setImageResource(R.drawable.ic_pause_circle_filled_black_24dp);
                 } else {
                     mQuickPlayPause.setImageResource(R.drawable.ic_play_circle_filled_black_24dp);
                 }
-            }
-            else {
+            } else {
                 mQuickPlayPause.setImageDrawable(null);
                 mTitle.setTextColor(mContext.getResources().getColor(R.color.FlatWhite));
             }

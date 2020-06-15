@@ -16,12 +16,13 @@ import com.ldt.musicr.R;
 public class View_RewriteWaveform extends View {
 
     public View_RewriteWaveform(Context context, AttributeSet attrs) {
-        super(context,attrs);
+        super(context, attrs);
         sizeEachDPs = Tool.getOneDps(context);
 
-        widthOfLine*=sizeEachDPs;
+        widthOfLine *= sizeEachDPs;
         runFirstTime();
     }
+
     enum Status {
         Non_Initialize,  // Chưa đính file nhạc
         Initializing,  // vừa đính file nhạc và đang chờ xử lý dữ liệu
@@ -29,9 +30,11 @@ public class View_RewriteWaveform extends View {
         Pausing, // Tạm ngừng
         Deleting // Đã xóa file nhạc
     }
+
     enum onGesture {
 
     }
+
     public Status status;
     public String filePath;
     public int total_time;
@@ -46,16 +49,15 @@ public class View_RewriteWaveform extends View {
 
     protected CheapSoundFile mSoundFile;
 
-    public void setStatus_BySafeWay(Status status_bySafeWay)
-    {
+    public void setStatus_BySafeWay(Status status_bySafeWay) {
         status = status_bySafeWay;
     }
-    private void runFirstTime()
-    {
+
+    private void runFirstTime() {
         mSelectedLinePaint = new Paint();
         mSelectedLinePaint.setAntiAlias(false);
         mSelectedLinePaint.setColor(getResources().getColor(R.color.waveform_selected));
-        mSelectedBelowLinePaint= new Paint();
+        mSelectedBelowLinePaint = new Paint();
         mSelectedBelowLinePaint.setAntiAlias(false);
         mSelectedBelowLinePaint.setColor(getResources().getColor(R.color.waveform_selected));
         mSelectedBelowLinePaint.setAlpha(150);
@@ -83,18 +85,20 @@ public class View_RewriteWaveform extends View {
     }
 
     public boolean isInitialized() {
-       return status!=Status.Non_Initialize;
+        return status != Status.Non_Initialize;
     }
+
     private int widthOfLine = 5;
-    private float sizeEachDPs=1;
+    private float sizeEachDPs = 1;
+
     protected void drawWaveformLine(Canvas canvas, int x, int y0, int y1, Paint paint) {
-        paint.setStrokeWidth(widthOfLine*2/3);
+        paint.setStrokeWidth(widthOfLine * 2 / 3);
         canvas.drawLine(x, y0, x, y1, paint);
         //  canvas.drawRect(x,y1,x+widthOfLine,y0,paint);
-        drawWaveformLine_New(canvas,x,y0,y1,paint);
+        drawWaveformLine_New(canvas, x, y0, y1, paint);
     }
-    protected void drawWaveformLine_New(Canvas canvas,int x,int y0,int y1,Paint paint)
-    {
+
+    protected void drawWaveformLine_New(Canvas canvas, int x, int y0, int y1, Paint paint) {
         //  canvas.drawRect(x,y1,x+1,y0,paint);
     }
 

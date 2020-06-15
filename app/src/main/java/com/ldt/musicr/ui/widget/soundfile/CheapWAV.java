@@ -17,14 +17,14 @@ package com.ldt.musicr.ui.widget.soundfile;
  */
 
 
-        import android.util.Log;
+import android.util.Log;
 
-        import java.io.File;
+import java.io.File;
 
 /**
  * CheapWAV represents a standard 16-bit WAV file, splitting it into
  * artificial frames to get an approximation of the waveform contour.
- *
+ * <p>
  * Modified by Anna Stępień <anna.stepien@semantive.com>
  */
 public class CheapWAV extends CheapSoundFile {
@@ -35,6 +35,7 @@ public class CheapWAV extends CheapSoundFile {
             public CheapSoundFile create() {
                 return new CheapWAV();
             }
+
             public String[] getSupportedExtensions() {
                 return new String[]{"wav"};
             }

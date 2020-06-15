@@ -17,8 +17,7 @@ import android.util.AttributeSet;
  * Created by trung on 8/26/2017.
  */
 
-final public class SeeThroughTextView extends AppCompatTextView
-{
+final public class SeeThroughTextView extends AppCompatTextView {
     private Bitmap mMaskBitmap;
     private Canvas mMaskCanvas;
     private Paint mPaint;
@@ -125,8 +124,8 @@ final public class SeeThroughTextView extends AppCompatTextView
         clear(mBackgroundCanvas);
         mBackground.draw(mBackgroundCanvas);
         mBackgroundCanvas.drawBitmap(mMaskBitmap, 0.f, 0.f, mPaint);
-       // backgroundCloudEffectPaint.setStyle(Paint.Style.STROKE);
-   //     mBackgroundCanvas.drawRect(0,0,mBackgroundCanvas.getWidth()-1,mBackgroundCanvas.getHeight()-1,backgroundCloudEffectPaint);
+        // backgroundCloudEffectPaint.setStyle(Paint.Style.STROKE);
+        //     mBackgroundCanvas.drawRect(0,0,mBackgroundCanvas.getWidth()-1,mBackgroundCanvas.getHeight()-1,backgroundCloudEffectPaint);
     }
 
     private static void clear(Canvas canvas) {

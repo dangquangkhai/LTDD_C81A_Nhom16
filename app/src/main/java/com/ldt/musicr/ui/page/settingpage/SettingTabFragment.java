@@ -53,30 +53,31 @@ public class SettingTabFragment extends BaseMusicServiceSupportFragment implemen
     @BindView(R.id.hide_switch)
     SwitchCompat mUseArtistImgAsBg;
 
-    @BindView(R.id.create_now) View mCreateNowView;
+    @BindView(R.id.create_now)
+    View mCreateNowView;
 
     @OnCheckedChanged(R.id.hide_switch)
     void onChangedUseArtistImgAsBg(boolean value) {
         App.getInstance().getPreferencesUtility().setIsUsingArtistImageAsBackground(value);
-        if(getActivity() instanceof MainActivity) {
-            ((MainActivity)getActivity()).getBackStackController().onUsingArtistImagePreferenceChanged();
+        if (getActivity() instanceof MainActivity) {
+            ((MainActivity) getActivity()).getBackStackController().onUsingArtistImagePreferenceChanged();
         }
     }
 
     @Nullable
     @Override
     protected View onCreateView(LayoutInflater inflater, ViewGroup container) {
-        return inflater.inflate(R.layout.setting_tab_fragment,container,false);
+        return inflater.inflate(R.layout.setting_tab_fragment, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(this,view);
+        ButterKnife.bind(this, view);
         mAppVolumeSeekBar.setOnRangeChangedListener(this);
         mBalanceSeekBar.setOnRangeChangedListener(this);
         refreshData();
-      onPaletteChanged();
+        onPaletteChanged();
 
     }
 
@@ -86,8 +87,8 @@ public class SettingTabFragment extends BaseMusicServiceSupportFragment implemen
 
     private void refreshInAppVolume() {
         mCurrentInAppVolume = App.getInstance().getPreferencesUtility().getInAppVolume();
-        if(mCurrentInAppVolume>=0) {
-            mAppVolumeSeekBar.setValue(100*mCurrentInAppVolume);
+        if (mCurrentInAppVolume >= 0) {
+            mAppVolumeSeekBar.setValue(100 * mCurrentInAppVolume);
         } else {
 
         }
@@ -95,9 +96,9 @@ public class SettingTabFragment extends BaseMusicServiceSupportFragment implemen
 
     private void refreshBalanceValue() {
         mCurrentBalanceValue = App.getInstance().getPreferencesUtility().getBalanceValue();
-        if(mCurrentBalanceValue<0) mCurrentBalanceValue =0;
-        else if(mCurrentBalanceValue>1) mCurrentBalanceValue = 1;
-        mBalanceSeekBar.setValue(100*mCurrentBalanceValue);
+        if (mCurrentBalanceValue < 0) mCurrentBalanceValue = 0;
+        else if (mCurrentBalanceValue > 1) mCurrentBalanceValue = 1;
+        mBalanceSeekBar.setValue(100 * mCurrentBalanceValue);
     }
 
     void refreshData() {
@@ -106,11 +107,11 @@ public class SettingTabFragment extends BaseMusicServiceSupportFragment implemen
         mUseArtistImgAsBg.setChecked(App.getInstance().getPreferencesUtility().isUsingArtistImageAsBackground());
 
         Context context = getContext();
-        if(context!=null) {
+        if (context != null) {
             String lang = LocaleHelper.getLanguage(context);
             mIsEnglish = lang.equals(EN);
 
-            if(mIsEnglish) {
+            if (mIsEnglish) {
                 mSwitchToEn.setBackgroundResource(R.drawable.ripple_16dp_solid_left);
                 mSwitchToVi.setBackgroundResource(R.drawable.ripple_16dp_border_right);
                 mSwitchToEn.setTextColor(getResources().getColor(R.color.flatOrange));
@@ -127,11 +128,11 @@ public class SettingTabFragment extends BaseMusicServiceSupportFragment implemen
 
     @OnClick(R.id.switch_to_en)
     void switchToEN() {
-        if(mIsEnglish) return;
+        if (mIsEnglish) return;
         Activity activity = getActivity();
-        if(activity!=null) {
-            LocaleHelper.setLocale(activity,"en");
-           activity.recreate();
+        if (activity != null) {
+            LocaleHelper.setLocale(activity, "en");
+            activity.recreate();
         }
     }
 
@@ -142,7 +143,7 @@ public class SettingTabFragment extends BaseMusicServiceSupportFragment implemen
 
     @OnClick(R.id.switch_to_vi)
     void switchToVI() {
-        if(mIsEnglish) {
+        if (mIsEnglish) {
             Activity activity = getActivity();
             if (activity != null) {
                 LocaleHelper.setLocale(activity, "vi");
@@ -157,18 +158,18 @@ public class SettingTabFragment extends BaseMusicServiceSupportFragment implemen
         super.onPaletteChanged();
 
         int color = Tool.getBaseColor();
-        int alpha_color = Color.argb(0x22,Color.red(color),Color.green(color),Color.blue(color));
-        int[][] states = new int[][] {
-                new int[] {-android.R.attr.state_checked},
-                new int[] {android.R.attr.state_checked},
+        int alpha_color = Color.argb(0x22, Color.red(color), Color.green(color), Color.blue(color));
+        int[][] states = new int[][]{
+                new int[]{-android.R.attr.state_checked},
+                new int[]{android.R.attr.state_checked},
         };
 
-        int[] thumbColors = new int[] {
+        int[] thumbColors = new int[]{
                 0xFF888888,
                 color,
         };
 
-        int[] trackColors = new int[] {
+        int[] trackColors = new int[]{
                 0x22000000,
                 alpha_color,
         };
@@ -191,31 +192,31 @@ public class SettingTabFragment extends BaseMusicServiceSupportFragment implemen
                     new int[] {color, alpha_color}
             );*/
 
-                ((RippleDrawable) mSwitchToEn.getBackground()).setColor(ColorStateList.valueOf(color));
+            ((RippleDrawable) mSwitchToEn.getBackground()).setColor(ColorStateList.valueOf(color));
             ((RippleDrawable) mSwitchToVi.getBackground()).setColor(ColorStateList.valueOf(color));
             ((RippleDrawable) mCreateNowView.getBackground()).setColor(ColorStateList.valueOf(color));
             ((RippleDrawable) mMoreSettingView.getBackground()).setColor(ColorStateList.valueOf(color));
 
         }
 
-        if(mIsEnglish) {
+        if (mIsEnglish) {
             mSwitchToEn.setTextColor(color);
-        }
-        else mSwitchToVi.setTextColor(color);
+        } else mSwitchToVi.setTextColor(color);
 
     }
+
     public void setCurrentInAppVolume(float volume) {
         float vol = volume;
-        if(vol<0) vol = 0;
-        else if(vol>1) vol = 1;
+        if (vol < 0) vol = 0;
+        else if (vol > 1) vol = 1;
         mCurrentInAppVolume = vol;
         App.getInstance().getPreferencesUtility().setInAppVolume(vol);
     }
 
     private void setCurrentBalanceValue(float value) {
         float vol = value;
-        if(vol<0) vol = 0;
-        else if(vol>1) vol = 1;
+        if (vol < 0) vol = 0;
+        else if (vol > 1) vol = 1;
         mCurrentBalanceValue = vol;
         App.getInstance().getPreferencesUtility().setBalanceValue(vol);
     }
@@ -223,13 +224,13 @@ public class SettingTabFragment extends BaseMusicServiceSupportFragment implemen
 
     @Override
     public void onRangeChanged(RangeSeekBar view, float leftValue, float rightValue, boolean isFromUser) {
-        if(isFromUser) {
+        if (isFromUser) {
             switch (view.getId()) {
                 case R.id.in_app_volume_seek_bar:
-                        setCurrentInAppVolume(leftValue / 100);
+                    setCurrentInAppVolume(leftValue / 100);
                     break;
                 case R.id.left_right_balance_seek_bar:
-                    setCurrentBalanceValue(leftValue/100);
+                    setCurrentBalanceValue(leftValue / 100);
                     break;
             }
         }
@@ -245,7 +246,10 @@ public class SettingTabFragment extends BaseMusicServiceSupportFragment implemen
     public void onStopTrackingTouch(RangeSeekBar view, boolean isLeft) {
 
     }
-    @BindView(R.id.more_setting) View mMoreSettingView;
+
+    @BindView(R.id.more_setting)
+    View mMoreSettingView;
+
     @OnClick(R.id.more_setting)
     void goToMoreSetting() {
         getNavigationController().presentFragment(MoreOptionFragment.newInstance());

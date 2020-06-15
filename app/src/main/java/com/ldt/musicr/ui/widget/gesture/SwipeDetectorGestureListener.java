@@ -9,7 +9,7 @@ import com.ldt.musicr.ui.page.BaseLayerFragment;
 import com.ldt.musicr.ui.LayerController;
 
 public class SwipeDetectorGestureListener extends GestureDetector.SimpleOnGestureListener {
-    private static final String TAG ="SwipeDetector";
+    private static final String TAG = "SwipeDetector";
 
 
     private static final int SWIPE_THRESHOLD = 100;
@@ -17,6 +17,7 @@ public class SwipeDetectorGestureListener extends GestureDetector.SimpleOnGestur
     public int item = -1;
     public LayerController.Attr attr;
     public BaseLayerFragment layer;
+
     public void setMotionLayer(int i, BaseLayerFragment b, LayerController.Attr a) {
         item = i;
         layer = b;
@@ -30,41 +31,45 @@ public class SwipeDetectorGestureListener extends GestureDetector.SimpleOnGestur
     }
 
     public boolean isLayerAvailable() {
-        return item !=-1;
+        return item != -1;
     }
 
 
     protected int id;
+
     public void setAdaptiveView(View v) {
-        id =v.getId();
+        id = v.getId();
     }
+
     public boolean onUp(MotionEvent e) {
         return false;
     }
+
     public boolean onMove(MotionEvent e) {
         return false;
     }
+
     @Override
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
         boolean result = false;
         try {
             float diffY = e2.getRawY() - e1.getRawY();
             float diffX = e2.getRawX() - e1.getRawX();
-            Log.d(TAG, "onFling: diffY = "+diffY);
+            Log.d(TAG, "onFling: diffY = " + diffY);
             if (Math.abs(diffX) > Math.abs(diffY)) {
                 if (Math.abs(diffX) > SWIPE_THRESHOLD && Math.abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
                     if (diffX > 0) {
-                        result = onSwipeRight(e1,e2,velocityX,velocityY);
+                        result = onSwipeRight(e1, e2, velocityX, velocityY);
                     } else {
-                        result = onSwipeLeft(e1,e2,velocityX,velocityY);
+                        result = onSwipeLeft(e1, e2, velocityX, velocityY);
                     }
                 }
             } else {
                 if (Math.abs(diffY) > SWIPE_THRESHOLD && Math.abs(velocityY) > SWIPE_VELOCITY_THRESHOLD) {
                     if (diffY > 0) {
-                        result = onSwipeBottom(e1,e2,velocityX,velocityY);
+                        result = onSwipeBottom(e1, e2, velocityX, velocityY);
                     } else {
-                        result = onSwipeTop(e1,e2,velocityX,velocityY);
+                        result = onSwipeTop(e1, e2, velocityX, velocityY);
                     }
                 }
             }

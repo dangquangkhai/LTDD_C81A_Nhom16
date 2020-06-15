@@ -24,12 +24,12 @@ import java.io.InputStream;
  * encoded sound files, which is one of the native formats supported by
  * Android's MediaRecorder library.  It supports files with a full 3GPP
  * header, and also files with only a basic AMR header.
- *
+ * <p>
  * While there are 8 bitrates and several other frame types in AMR,
  * this implementation currently only supports frametype=1,
  * MR515, 10.3 kbits / sec, which is the format encoded on Android 1.0
  * phones.  In the future it may be necessary to support other bitrates.
- *
+ * <p>
  * Modified by Anna Stępień <anna.stepien@semantive.com>
  */
 public class CheapAMR extends CheapSoundFile {
@@ -38,8 +38,9 @@ public class CheapAMR extends CheapSoundFile {
             public CheapSoundFile create() {
                 return new CheapAMR();
             }
+
             public String[] getSupportedExtensions() {
-                return new String[] { "3gpp", "3gp", "amr" };
+                return new String[]{"3gpp", "3gp", "amr"};
             }
         };
     }
@@ -104,7 +105,7 @@ public class CheapAMR extends CheapSoundFile {
         mOffset = 0;
 
         // No need to handle filesizes larger than can fit in a 32-bit int
-        mFileSize = (int)mInputFile.length();
+        mFileSize = (int) mInputFile.length();
 
         if (mFileSize < 128) {
             throw new java.io.IOException("File too small to parse");
@@ -278,8 +279,8 @@ public class CheapAMR extends CheapSoundFile {
                     int gFac = GAIN_FAC_MR475[index];
 
                     double log2 = Math.log(gFac) / Math.log(2);
-                    int exp = (int)log2;
-                    int frac = (int)((log2 - exp) * 32768);
+                    int exp = (int) log2;
+                    int frac = (int) ((log2 - exp) * 32768);
 
                     exp -= 12;
                     int tmp = exp * 49320;
@@ -441,8 +442,8 @@ public class CheapAMR extends CheapSoundFile {
                     enerCode = ((enerCode + 0x8000) >> 16) * 52428;
 
                     double log2 = Math.log(enerCode) / Math.log(2);
-                    int exp = (int)log2;
-                    int frac = (int)((log2 - exp) * 32768);
+                    int exp = (int) log2;
+                    int frac = (int) ((log2 - exp) * 32768);
                     enerCode = ((exp - 30) << 16) + (frac * 2);
 
                     int ener =
@@ -792,7 +793,7 @@ public class CheapAMR extends CheapSoundFile {
     // Can be used to skip over unsupported frame types.
     static private int BLOCK_SIZES[] = {
             12, 13, 15, 17, 19, 20, 26, 31,
-            5, 0, 0, 0, 0, 0, 0, 0 };
+            5, 0, 0, 0, 0, 0, 0, 0};
 
     static private int GAIN_FAC_MR515[] = {
             28753, 2785, 6594, 7413, 10444, 1269, 4423, 1556,

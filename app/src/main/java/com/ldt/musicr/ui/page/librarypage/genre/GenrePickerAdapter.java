@@ -27,12 +27,12 @@ public class GenrePickerAdapter extends PickerAdapter<Genre> {
 
     @Override
     public boolean onBindItem(PickerItem item, boolean create, int i) {
-        super.onBindItem(item,create,i);
+        super.onBindItem(item, create, i);
         Genre genre = mData.get(i);
         item.setTitle(genre.name);
         item.setRadiusUnit(genre.songCount);
         // Glide
-        ArrayList<Song> songs = GenreLoader.getSongs(mContext,genre.id);
+        ArrayList<Song> songs = GenreLoader.getSongs(mContext, genre.id);
         Glide.with(mContext).load(MusicUtil.getMediaStoreAlbumCoverUri(songs.get(0).albumId)).into(new SimpleTarget<Drawable>() {
             @Override
             public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {

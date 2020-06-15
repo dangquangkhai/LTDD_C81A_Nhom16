@@ -14,7 +14,7 @@ public class BitmapPaletteTranscoder implements ResourceTranscoder<Bitmap, Bitma
     @Override
     public Resource<BitmapPaletteWrapper> transcode(@NonNull Resource<Bitmap> bitmapResource, @NonNull Options options) {
         Bitmap bitmap = bitmapResource.get();
-        BitmapPaletteWrapper bitmapPaletteWrapper = new BitmapPaletteWrapper(bitmap,PhonographColorUtil.generatePalette(bitmap));
+        BitmapPaletteWrapper bitmapPaletteWrapper = new BitmapPaletteWrapper(bitmap, PhonographColorUtil.generatePalette(bitmap));
         return new BitmapPaletteResource(bitmapPaletteWrapper);
     }
 }

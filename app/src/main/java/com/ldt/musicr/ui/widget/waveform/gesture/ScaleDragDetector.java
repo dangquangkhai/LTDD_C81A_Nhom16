@@ -35,7 +35,8 @@ public class ScaleDragDetector implements ScaleGestureDetector.OnScaleGestureLis
         mTouchSlop = configuration.getScaledTouchSlop();
     }
 
-    @Override public boolean onScale(ScaleGestureDetector detector) {
+    @Override
+    public boolean onScale(ScaleGestureDetector detector) {
         float scaleFactor = detector.getScaleFactor();
 
         if (Float.isNaN(scaleFactor) || Float.isInfinite(scaleFactor)) {
@@ -46,12 +47,14 @@ public class ScaleDragDetector implements ScaleGestureDetector.OnScaleGestureLis
         return true;
     }
 
-    @Override public boolean onScaleBegin(ScaleGestureDetector detector) {
+    @Override
+    public boolean onScaleBegin(ScaleGestureDetector detector) {
         mScaleDragGestureListener.onScaleBegin();
         return true;
     }
 
-    @Override public void onScaleEnd(ScaleGestureDetector detector) {
+    @Override
+    public void onScaleEnd(ScaleGestureDetector detector) {
         mScaleDragGestureListener.onScaleEnd();
     }
 

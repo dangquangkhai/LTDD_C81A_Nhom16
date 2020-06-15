@@ -50,7 +50,7 @@ public class MusicUtil {
         final Uri sArtworkUri = Uri.parse("content://media/external/audio/albumart");
 
         Uri uri = ContentUris.withAppendedId(sArtworkUri, albumId);
-        Log.d(TAG, "getMediaStoreAlbumCoverUri: "+uri.toString()+", "+uri.getPath());
+        Log.d(TAG, "getMediaStoreAlbumCoverUri: " + uri.toString() + ", " + uri.getPath());
         return uri;
     }
 
@@ -114,8 +114,8 @@ public class MusicUtil {
         int songCount = artist.getSongCount();
 
         return MusicUtil.buildInfoString(
-            MusicUtil.getAlbumCountString(context, albumCount),
-            MusicUtil.getSongCountString(context, songCount)
+                MusicUtil.getAlbumCountString(context, albumCount),
+                MusicUtil.getSongCountString(context, songCount)
         );
     }
 
@@ -124,16 +124,16 @@ public class MusicUtil {
         int songCount = album.getSongCount();
 
         return MusicUtil.buildInfoString(
-            album.getArtistName(),
-            MusicUtil.getSongCountString(context, songCount)
+                album.getArtistName(),
+                MusicUtil.getSongCountString(context, songCount)
         );
     }
 
     @NonNull
     public static String getSongInfoString(@NonNull final Song song) {
         return MusicUtil.buildInfoString(
-            song.artistName,
-            song.albumName
+                song.artistName,
+                song.albumName
         );
     }
 
@@ -148,8 +148,8 @@ public class MusicUtil {
         final long duration = getTotalDuration(context, songs);
 
         return MusicUtil.buildInfoString(
-            MusicUtil.getSongCountString(context, songs.size()),
-            MusicUtil.getReadableDurationString(duration)
+                MusicUtil.getSongCountString(context, songs.size()),
+                MusicUtil.getReadableDurationString(duration)
         );
     }
 
@@ -190,17 +190,20 @@ public class MusicUtil {
         }
     }
 
-    /** 
+    /**
      * Build a concatenated string from the provided arguments
      * The intended purpose is to show extra annotations
      * to a music library item.
      * Ex: for a given album --> buildInfoString(album.artist, album.songCount)
      */
-    public static String buildInfoString(@NonNull final String string1, @NonNull final String string2)
-    {
+    public static String buildInfoString(@NonNull final String string1, @NonNull final String string2) {
         // Skip empty strings
-        if (string1.isEmpty()) {return string2;}
-        if (string2.isEmpty()) {return string1;}
+        if (string1.isEmpty()) {
+            return string2;
+        }
+        if (string2.isEmpty()) {
+            return string1;
+        }
 
         final String separator = "  •  ";
 
@@ -362,6 +365,7 @@ public class MusicUtil {
         if (musicMediaTitle.isEmpty()) return "";
         return String.valueOf(musicMediaTitle.charAt(0)).toUpperCase();
     }
+
     @Nullable
     public static String getLyrics(Song song) {
         String lyrics = null;

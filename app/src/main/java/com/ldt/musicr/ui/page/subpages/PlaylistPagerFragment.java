@@ -57,29 +57,39 @@ import butterknife.OnTouch;
 import butterknife.Unbinder;
 
 public class PlaylistPagerFragment extends BaseMusicServiceSupportFragment implements SortOrderBottomSheet.SortOrderChangedListener {
-    private static final String TAG ="PlaylistPagerFragment";
+    private static final String TAG = "PlaylistPagerFragment";
 
     @Override
     public int getPresentTransition() {
         return PresentStyle.ACCORDION_LEFT;
     }
 
-    @BindView(R.id.play_all_button) TextView mPlayAllButton;
-    @BindView(R.id.play_all_icon) ImageView mPlayAllIcon;
-    @BindView(R.id.shuffle_play_button) TextView mPlayRandomButton;
+    @BindView(R.id.play_all_button)
+    TextView mPlayAllButton;
+    @BindView(R.id.play_all_icon)
+    ImageView mPlayAllIcon;
+    @BindView(R.id.shuffle_play_button)
+    TextView mPlayRandomButton;
 
-    @BindView(R.id.playlist_big_rv) RecyclerView mRecyclerView;
+    @BindView(R.id.playlist_big_rv)
+    RecyclerView mRecyclerView;
 
-    @BindView(R.id.art) ImageView mImage;
-    @BindView(R.id.title) TextView mTitle;
-    @BindView(R.id.description) TextView mArtist;
+    @BindView(R.id.art)
+    ImageView mImage;
+    @BindView(R.id.title)
+    TextView mTitle;
+    @BindView(R.id.description)
+    TextView mArtist;
 
-    @BindView(R.id.toolbar) Toolbar toolbar;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     @BindView(R.id.background_constraint)
     BlurImageViewChildConstraintLayout back_constraint;
-    @BindView(R.id.playlist_pager_collapsing_toolbar) CollapsingToolbarLayout collapsingToolbarLayout;
-    @BindView(R.id.play_option_panel) View mPlayOptionPanel;
+    @BindView(R.id.playlist_pager_collapsing_toolbar)
+    CollapsingToolbarLayout collapsingToolbarLayout;
+    @BindView(R.id.play_option_panel)
+    View mPlayOptionPanel;
 
     @BindView(R.id.swipe_refresh)
     SwipeRefreshLayout mSwipeRefresh;
@@ -90,21 +100,21 @@ public class PlaylistPagerFragment extends BaseMusicServiceSupportFragment imple
 
     @OnClick(R.id.menu_button)
     void onClickMenu() {
-        if(mPlaylist!=null && mPlaylist.id <0)
-            OptionBottomSheet.newInstance(MenuHelper.AUTO_PLAYLIST_OPTION,mPlaylist).show(getChildFragmentManager(),"playlist_option_menu");
+        if (mPlaylist != null && mPlaylist.id < 0)
+            OptionBottomSheet.newInstance(MenuHelper.AUTO_PLAYLIST_OPTION, mPlaylist).show(getChildFragmentManager(), "playlist_option_menu");
         else
-        OptionBottomSheet.newInstance(MenuHelper.PLAYLIST_OPTION,mPlaylist).show(getChildFragmentManager(),"playlist_option_menu");
+            OptionBottomSheet.newInstance(MenuHelper.PLAYLIST_OPTION, mPlaylist).show(getChildFragmentManager(), "playlist_option_menu");
     }
 
     @OnClick(R.id.play_all_panel)
     void playAll() {
-    mAdapter.playAll(0,true);
+        mAdapter.playAll(0, true);
     }
 
     @OnTouch(R.id.art)
     boolean onTouchArt(View view, MotionEvent event) {
-        if(event.getAction()==MotionEvent.ACTION_DOWN) {
-           return false;
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            return false;
 
         }
         return false;
@@ -117,15 +127,15 @@ public class PlaylistPagerFragment extends BaseMusicServiceSupportFragment imple
     }
 
     public void setTheme() {
-        int buttonColor = ArtistAdapter.lighter(Tool.getBaseColor(),0.25f);
+        int buttonColor = ArtistAdapter.lighter(Tool.getBaseColor(), 0.25f);
         int heavyColor = Tool.getHeavyColor();
         mPlayAllButton.setTextColor(buttonColor);
         mPlayAllIcon.setColorFilter(buttonColor);
         mPlayRandomButton.setTextColor(buttonColor);
         mTitle.setTextColor(Tool.getBaseColor());
-        if(mRecyclerView instanceof FastScrollRecyclerView) {
-            ((FastScrollRecyclerView)mRecyclerView).setPopupBgColor(heavyColor);
-            ((FastScrollRecyclerView)mRecyclerView).setThumbColor(heavyColor);
+        if (mRecyclerView instanceof FastScrollRecyclerView) {
+            ((FastScrollRecyclerView) mRecyclerView).setPopupBgColor(heavyColor);
+            ((FastScrollRecyclerView) mRecyclerView).setThumbColor(heavyColor);
         }
     }
 
@@ -178,7 +188,7 @@ public class PlaylistPagerFragment extends BaseMusicServiceSupportFragment imple
 
     Bitmap mPreviewBitmap;
 
-    public static PlaylistPagerFragment newInstance(Context context,Playlist playlist,@Nullable Bitmap previewBitmap) {
+    public static PlaylistPagerFragment newInstance(Context context, Playlist playlist, @Nullable Bitmap previewBitmap) {
         PlaylistPagerFragment fragment = new PlaylistPagerFragment();
         fragment.mPlaylist = playlist;
         fragment.mPreviewBitmap = previewBitmap;
@@ -190,7 +200,7 @@ public class PlaylistPagerFragment extends BaseMusicServiceSupportFragment imple
         int[] locationInScreen = new int[2]; // view's position in scrren
         int[] parentLocationInScreen = new int[2]; // parent view's position in screen
         v.getLocationOnScreen(locationInScreen);
-        View parentView = (View)v.getParent();
+        View parentView = (View) v.getParent();
         parentView.getLocationOnScreen(parentLocationInScreen);
         float relativeX = locationInScreen[0] - parentLocationInScreen[0];
         float relativeY = locationInScreen[1] - parentLocationInScreen[1];
@@ -199,12 +209,12 @@ public class PlaylistPagerFragment extends BaseMusicServiceSupportFragment imple
 
     @Override
     public void onDestroyView() {
-        if(mLoadPlaylist!=null) mLoadPlaylist.cancel();
+        if (mLoadPlaylist != null) mLoadPlaylist.cancel();
 
 
         mAdapter.destroy();
 
-        if(mUnbinder!=null) {
+        if (mUnbinder != null) {
             mUnbinder.unbind();
             mUnbinder = null;
         }
@@ -214,7 +224,7 @@ public class PlaylistPagerFragment extends BaseMusicServiceSupportFragment imple
     @Nullable
     @Override
     protected View onCreateView(LayoutInflater inflater, ViewGroup container) {
-        return inflater.inflate(R.layout.playlist_page,container,false);
+        return inflater.inflate(R.layout.playlist_page, container, false);
     }
 
     private Unbinder mUnbinder;
@@ -222,22 +232,22 @@ public class PlaylistPagerFragment extends BaseMusicServiceSupportFragment imple
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mUnbinder = ButterKnife.bind(this,view);
+        mUnbinder = ButterKnife.bind(this, view);
         initSortOrder();
         mAdapter = new SongChildAdapter(getActivity());
         //mAdapter.MEDIA_LAYOUT_RESOURCE = R.layout.item_song_bigger;
         mAdapter.setSortOrderChangedListener(this);
         mRecyclerView.setAdapter(mAdapter);
 
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
-      //  back_constraint.setShadowDeltaRect((int)oneDp*6,(int)oneDp*4,(int)-oneDp*6,(int)oneDp*4);
-       // back_constraint.setShadowDeltaRect(0,0,0,0);
+        //  back_constraint.setShadowDeltaRect((int)oneDp*6,(int)oneDp*4,(int)-oneDp*6,(int)oneDp*4);
+        // back_constraint.setShadowDeltaRect(0,0,0,0);
 
         setupToolbar();
         setTheme();
 
-        if(mPreviewBitmap !=null) {
+        if (mPreviewBitmap != null) {
             mImage.setImageBitmap(mPreviewBitmap);
             back_constraint.setBitmapImage(mPreviewBitmap);
             mPreviewBitmap = null;
@@ -248,11 +258,12 @@ public class PlaylistPagerFragment extends BaseMusicServiceSupportFragment imple
     }
 
     public static List<Song> getPlaylistWithListId(@NonNull Context context, Playlist list, String sortOrder) {
-        Log.d(TAG, "getPlaylistWithListId: "+list.id);
-        if(list.name.equals(context.getString(R.string.playlist_last_added))) return LastAddedLoader.getLastAddedSongs(context);
-        else if(list.name.equals(context.getString(R.string.playlist_recently_played))) {
-           return TopAndRecentlyPlayedTracksLoader.getRecentlyPlayedTracks(context);
-        } else if(list.name.equals(context.getString(R.string.playlist_top_tracks))) {
+        Log.d(TAG, "getPlaylistWithListId: " + list.id);
+        if (list.name.equals(context.getString(R.string.playlist_last_added)))
+            return LastAddedLoader.getLastAddedSongs(context);
+        else if (list.name.equals(context.getString(R.string.playlist_recently_played))) {
+            return TopAndRecentlyPlayedTracksLoader.getRecentlyPlayedTracks(context);
+        } else if (list.name.equals(context.getString(R.string.playlist_top_tracks))) {
             return TopAndRecentlyPlayedTracksLoader.getTopTracks(context);
         } else {
             List<Song> songlist = new ArrayList<>(PlaylistSongLoader.getPlaylistSongList(context, list.id));
@@ -264,21 +275,24 @@ public class PlaylistPagerFragment extends BaseMusicServiceSupportFragment imple
         mTitle.setText(mPlaylist.name);
         List<Song> songs = mAdapter.getData();
         ArrayList<String> names = new ArrayList<>();
-        for(int i=0;i<songs.size()&&names.size()<5;i++) {
+        for (int i = 0; i < songs.size() && names.size() < 5; i++) {
             Song song = songs.get(i);
-            if(!names.contains(song.artistName)) names.add(song.artistName);
+            if (!names.contains(song.artistName)) names.add(song.artistName);
         }
 
-       mArtist.setText(TextUtils.join(", ", names));
+        mArtist.setText(TextUtils.join(", ", names));
     }
 
     private void refreshData() {
         refreshData(true);
-    };
+    }
+
+    ;
+
     private void refreshData(boolean b) {
         mSwipeRefresh.setRefreshing(b);
         mSwipeRefresh.post(() -> {
-            if(mLoadPlaylist!=null) mLoadPlaylist.cancel();
+            if (mLoadPlaylist != null) mLoadPlaylist.cancel();
             mLoadPlaylist = new loadPlaylist(PlaylistPagerFragment.this);
             mLoadPlaylist.execute();
         });
@@ -287,24 +301,24 @@ public class PlaylistPagerFragment extends BaseMusicServiceSupportFragment imple
     @Override
     public Animator onCreateAnimator(int transit, boolean enter, int nextAnim) {
         Animator animator = super.onCreateAnimator(transit, enter, nextAnim);
-        Log.d(TAG, "onCreateAnimator: "+transit+", "+ enter +", "+nextAnim+" | "+ animator.getDuration());
-        if(mSwipeRefresh!=null)
-        mSwipeRefresh.postDelayed(() -> refreshData(false),animator.getDuration());
+        Log.d(TAG, "onCreateAnimator: " + transit + ", " + enter + ", " + nextAnim + " | " + animator.getDuration());
+        if (mSwipeRefresh != null)
+            mSwipeRefresh.postDelayed(() -> refreshData(false), animator.getDuration());
         return animator;
     }
 
     @Override
     public void onSetStatusBarMargin(int value) {
-        ((ViewGroup.MarginLayoutParams)toolbar.getLayoutParams()).topMargin = value;
+        ((ViewGroup.MarginLayoutParams) toolbar.getLayoutParams()).topMargin = value;
         toolbar.requestLayout();
-        int padding_top_back_constraint = (int) (56*getResources().getDimension(R.dimen.oneDP) + 2*value);
+        int padding_top_back_constraint = (int) (56 * getResources().getDimension(R.dimen.oneDP) + 2 * value);
 
-        ((ViewGroup.MarginLayoutParams)mPlayOptionPanel.getLayoutParams()).topMargin = value;
-        back_constraint.setPadding(back_constraint.getPaddingLeft(),padding_top_back_constraint,back_constraint.getPaddingRight(), 0);
+        ((ViewGroup.MarginLayoutParams) mPlayOptionPanel.getLayoutParams()).topMargin = value;
+        back_constraint.setPadding(back_constraint.getPaddingLeft(), padding_top_back_constraint, back_constraint.getPaddingRight(), 0);
     }
 
     private void setupToolbar() {
-        if(getActivity() instanceof AppCompatActivity) {
+        if (getActivity() instanceof AppCompatActivity) {
             ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
 
             ActionBar ab = ((AppCompatActivity) getActivity()).getSupportActionBar();
@@ -315,26 +329,41 @@ public class PlaylistPagerFragment extends BaseMusicServiceSupportFragment imple
             }
         }
     }
+
     public static void animateAndChangeImageView(Context c, final ImageView v, final Bitmap new_image) {
         final Animation anim_out = AnimationUtils.loadAnimation(c, android.R.anim.fade_out);
-        final Animation anim_in  = AnimationUtils.loadAnimation(c, android.R.anim.fade_in);
-        anim_out.setAnimationListener(new Animation.AnimationListener()
-        {
-            @Override public void onAnimationStart(Animation animation) {}
-            @Override public void onAnimationRepeat(Animation animation) {}
-            @Override public void onAnimationEnd(Animation animation)
-            {
+        final Animation anim_in = AnimationUtils.loadAnimation(c, android.R.anim.fade_in);
+        anim_out.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
                 v.setImageBitmap(new_image);
                 anim_in.setAnimationListener(new Animation.AnimationListener() {
-                    @Override public void onAnimationStart(Animation animation) {}
-                    @Override public void onAnimationRepeat(Animation animation) {}
-                    @Override public void onAnimationEnd(Animation animation) {}
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                    }
                 });
                 v.startAnimation(anim_in);
             }
         });
         v.startAnimation(anim_out);
     }
+
     private loadPlaylist mLoadPlaylist;
 
     private int mCurrentSortOrder = 0;
@@ -342,7 +371,7 @@ public class PlaylistPagerFragment extends BaseMusicServiceSupportFragment imple
     private void initSortOrder() {
         if (mPlaylist != null && !mPlaylist.name.isEmpty()) {
             int defaultOrder = 0;
-            if(mPlaylist.name.equals(getResources().getString(R.string.playlist_last_added))) defaultOrder = 2;
+            if (mPlaylist.name.equals(getResources().getString(R.string.playlist_last_added))) defaultOrder = 2;
             mCurrentSortOrder = App.getInstance().getPreferencesUtility().getSharePreferences().getInt("sort_order_playlist_" + mPlaylist.name + "_" + mPlaylist.id, defaultOrder);
 
         }
@@ -355,9 +384,9 @@ public class PlaylistPagerFragment extends BaseMusicServiceSupportFragment imple
 
     @Override
     public void onOrderChanged(int newType, String name) {
-        if(mCurrentSortOrder!=newType) {
+        if (mCurrentSortOrder != newType) {
             mCurrentSortOrder = newType;
-            App.getInstance().getPreferencesUtility().getSharePreferences().edit().putInt("sort_order_playlist_"+mPlaylist.name+"_"+mPlaylist.id,mCurrentSortOrder).commit();
+            App.getInstance().getPreferencesUtility().getSharePreferences().edit().putInt("sort_order_playlist_" + mPlaylist.name + "_" + mPlaylist.id, mCurrentSortOrder).commit();
             refreshData();
         }
     }
@@ -372,11 +401,11 @@ public class PlaylistPagerFragment extends BaseMusicServiceSupportFragment imple
 
         @Override
         protected void onPostExecute(List<Song> songs) {
-            if(mFragment!=null) {
+            if (mFragment != null) {
                 mFragment.mAdapter.setData(songs);
                 mFragment.setName();
-                if(mLoadArtwork!=null) mLoadArtwork.cancel();
-                mLoadArtwork= new loadArtwork(mFragment);
+                if (mLoadArtwork != null) mLoadArtwork.cancel();
+                mLoadArtwork = new loadArtwork(mFragment);
                 mLoadArtwork.execute();
                 mFragment.mSwipeRefresh.setRefreshing(false);
                 mFragment.mLoadPlaylist = null;
@@ -385,25 +414,27 @@ public class PlaylistPagerFragment extends BaseMusicServiceSupportFragment imple
 
         @Override
         protected List<Song> doInBackground(Void... voids) {
-            if(mFragment==null) return null;
+            if (mFragment == null) return null;
             Context context = mFragment.getContext();
-            if(context==null) return null;
-           return getPlaylistWithListId(mFragment.getContext(),mFragment.mPlaylist, SortOrderBottomSheet.mSortOrderCodes[mFragment.mCurrentSortOrder]);
+            if (context == null) return null;
+            return getPlaylistWithListId(mFragment.getContext(), mFragment.mPlaylist, SortOrderBottomSheet.mSortOrderCodes[mFragment.mCurrentSortOrder]);
         }
 
         public void cancel() {
-            if(mLoadArtwork!=null) mLoadArtwork.cancel();
+            if (mLoadArtwork != null) mLoadArtwork.cancel();
             cancel(true);
             mFragment = null;
 
         }
     }
 
-    private static class loadArtwork extends AsyncTask<Void,Void,Bitmap> {
+    private static class loadArtwork extends AsyncTask<Void, Void, Bitmap> {
         PlaylistPagerFragment mFragment;
+
         loadArtwork(PlaylistPagerFragment fragment) {
             mFragment = fragment;
         }
+
         public void cancel() {
             cancel(true);
             mFragment = null;
@@ -411,16 +442,18 @@ public class PlaylistPagerFragment extends BaseMusicServiceSupportFragment imple
 
         @Override
         protected Bitmap doInBackground(Void... voids) {
-            if(mFragment==null) return null;
-            Bitmap bmp=null;
+            if (mFragment == null) return null;
+            Bitmap bmp = null;
             try {
                 bmp = AutoGeneratedPlaylistBitmap.getBitmap(mFragment.getContext(), mFragment.mAdapter.getData(), false, false);
-            } catch (Exception ignore) {}
-            return bmp;
+            } catch (Exception ignore) {
             }
+            return bmp;
+        }
+
         @Override
         protected void onPostExecute(Bitmap bitmap) {
-            if(mFragment!=null&&bitmap!=null) {
+            if (mFragment != null && bitmap != null) {
                 mFragment.mImage.setImageBitmap(bitmap);
                 //animateAndChangeImageView(mFragment.getContext(),mFragment.mImage,bitmap);
                 mFragment.back_constraint.setBitmapImage(bitmap);

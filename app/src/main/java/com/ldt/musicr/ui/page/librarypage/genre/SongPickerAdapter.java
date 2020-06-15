@@ -22,7 +22,7 @@ public class SongPickerAdapter extends PickerAdapter<Song> {
 
     @Override
     public boolean onBindItem(PickerItem item, boolean create, int i) {
-        super.onBindItem(item,create,i);
+        super.onBindItem(item, create, i);
         Song song = mData.get(i);
         item.setTitle(song.title);
         item.setRadiusUnit(PickerItem.SIZE_RANDOM);

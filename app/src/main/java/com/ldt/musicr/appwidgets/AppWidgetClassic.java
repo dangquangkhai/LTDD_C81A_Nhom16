@@ -90,10 +90,10 @@ public class AppWidgetClassic extends BaseAppWidget {
             @Override
             public void run() {
                 if (target != null) {
-                   // Glide.clear(target);
+                    // Glide.clear(target);
                 }
 
-                AppWidgetTarget awt = new AppWidgetTarget(appContext,R.id.image, appWidgetView, appWidgetIds) {
+                AppWidgetTarget awt = new AppWidgetTarget(appContext, R.id.image, appWidgetView, appWidgetIds) {
                     @Override
                     public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
                         super.onResourceReady(resource, transition);
@@ -105,6 +105,7 @@ public class AppWidgetClassic extends BaseAppWidget {
                         super.onLoadFailed(errorDrawable);
                         update(null, MaterialValueHelper.getSecondaryTextColor(appContext, true));
                     }
+
                     private void update(@Nullable Bitmap bitmap, int color) {
                         // Set correct drawable for pause state
                         int playPauseRes = isPlaying ? R.drawable.ic_pause_white : R.drawable.ic_play_white;
@@ -129,7 +130,6 @@ public class AppWidgetClassic extends BaseAppWidget {
             }
         });
     }
-
 
 
     /**

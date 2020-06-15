@@ -126,9 +126,10 @@ public class MusicPlayerRemote {
             musicService.setPosition(position);
         }
     }
+
     public static void playOrPause() {
-        if(musicService !=null) {
-            if(musicService.isPlaying())
+        if (musicService != null) {
+            if (musicService.isPlaying())
                 musicService.pause();
             else musicService.play();
         } else Log.d(TAG, "playOrPause: music service is null");
@@ -141,7 +142,7 @@ public class MusicPlayerRemote {
     }
 
     public static float getInAppVolume() {
-        if(musicService!=null) {
+        if (musicService != null) {
             return musicService.getInAppVolume();
         }
         return -1;
@@ -228,7 +229,8 @@ public class MusicPlayerRemote {
     }
 
     /**
-     *  Get current position of the playing song in queue
+     * Get current position of the playing song in queue
+     *
      * @return position in the queue array
      */
     public static int getPosition() {
@@ -456,9 +458,9 @@ public class MusicPlayerRemote {
             }
         }
     }
+
     @Nullable
-    private static String getFilePathFromUri(Context context, Uri uri)
-    {
+    private static String getFilePathFromUri(Context context, Uri uri) {
         Cursor cursor = null;
         final String column = "_data";
         final String[] projection = {

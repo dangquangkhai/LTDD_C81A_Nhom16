@@ -28,81 +28,85 @@ public class SupportDarkenFrameLayout extends FrameLayout {
 
     public SupportDarkenFrameLayout(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        addAttr(context,attrs);
+        addAttr(context, attrs);
         init();
     }
 
     public SupportDarkenFrameLayout(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        addAttr(context,attrs);
+        addAttr(context, attrs);
         init();
     }
-    private float darken=0f;
-    public void setDarken(float darken, boolean shouldDraw)
-    {
-        if(darken>=0&&darken<=1) {
+
+    private float darken = 0f;
+
+    public void setDarken(float darken, boolean shouldDraw) {
+        if (darken >= 0 && darken <= 1) {
             this.darken = darken;
         }
-        if(shouldDraw) invalidate();
+        if (shouldDraw) invalidate();
     }
-    public float getDarken()
-    {
+
+    public float getDarken() {
         return darken;
     }
+
     private Paint drawDarkenPaint;
-    private void init()
-    {
+
+    private void init() {
         drawDarkenPaint = new Paint();
         drawDarkenPaint.setColor(Color.BLACK);
         drawDarkenPaint.setStyle(Paint.Style.FILL);
-    //
-    //      drawDarkenPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_ATOP));
+        //
+        //      drawDarkenPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_ATOP));
 
     }
-    private void addAttr(Context context,AttributeSet attrs)
-    {
+
+    private void addAttr(Context context, AttributeSet attrs) {
         TypedArray a = context.getTheme().obtainStyledAttributes(
                 attrs,
                 R.styleable.SupportDarkenFrameLayout,
                 0, 0);
         try {
-            darken = a.getInt(R.styleable.SupportDarkenFrameLayout_how_dark, 0)/(255.0f);
+            darken = a.getInt(R.styleable.SupportDarkenFrameLayout_how_dark, 0) / (255.0f);
         } finally {
             a.recycle();
         }
-    //    Log.d("How dark ",darken+"");
+        //    Log.d("How dark ",darken+"");
     }
-    float color4Black_float=0;
+
+    float color4Black_float = 0;
 
     @Override
     protected void dispatchDraw(Canvas canvas) {
 
         super.dispatchDraw(canvas);
 
-    //    int color4White = (int)( darken* 255.0f);
-      //  if(color4White>255) color4White = 255; else if(color4White<0) color4White =0;
+        //    int color4White = (int)( darken* 255.0f);
+        //  if(color4White>255) color4White = 255; else if(color4White<0) color4White =0;
 
-        int color4Black = (int) (255.0f*darken);
-     //  canvas.drawColor(color4White<<24|0x00ffffff);
-       if(color4Black>255) color4Black=255;
-       else if(color4Black<0) color4Black =0;
-      canvas.drawColor(color4Black<<24);
+        int color4Black = (int) (255.0f * darken);
+        //  canvas.drawColor(color4White<<24|0x00ffffff);
+        if (color4Black > 255) color4Black = 255;
+        else if (color4Black < 0) color4Black = 0;
+        canvas.drawColor(color4Black << 24);
 
     }
+
     private boolean inProcess = false;
     private ValueAnimator va;
-    private void turnOnOrOffDark()
-    {
-        if(inProcess) return;
-        if(va == null) {
-            va= ValueAnimator.ofFloat(0,1);
+
+    private void turnOnOrOffDark() {
+        if (inProcess) return;
+        if (va == null) {
+            va = ValueAnimator.ofFloat(0, 1);
             va.setDuration(300);
             va.setInterpolator(Animation.getInterpolator(2));
             va.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                 @Override
                 public void onAnimationUpdate(ValueAnimator animation) {
-                   color4Black_float= (float)animation.getAnimatedValue();
-                   invalidate();
+                    color4Black_float = (float) animation.getAnimatedValue();
+                    invalidate();
                 }
             });
             va.addListener(new AnimatorListenerAdapter() {
@@ -119,8 +123,8 @@ public class SupportDarkenFrameLayout extends FrameLayout {
 
         }
         inProcess = true;
-        if(color4Black_float==0)
-        va.start();
+        if (color4Black_float == 0)
+            va.start();
         else va.reverse();
     }
 }

@@ -39,12 +39,12 @@ public class VerticalRangeSeekBar extends RangeSeekBar {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        if (orientation == DICTION_LEFT){
+        if (orientation == DICTION_LEFT) {
             canvas.rotate(-90);
             canvas.translate(-getHeight(), 0);
-        }else {
+        } else {
             canvas.rotate(90);
-            canvas.translate(0,-getWidth());
+            canvas.translate(0, -getWidth());
         }
         super.onDraw(canvas);
     }
@@ -52,18 +52,18 @@ public class VerticalRangeSeekBar extends RangeSeekBar {
 
     @Override
     protected float getEventX(MotionEvent event) {
-        if (orientation == DICTION_LEFT){
+        if (orientation == DICTION_LEFT) {
             return getHeight() - event.getY();
-        }else {
+        } else {
             return event.getY();
         }
     }
 
     @Override
     protected float getEventY(MotionEvent event) {
-        if (orientation == DICTION_LEFT){
+        if (orientation == DICTION_LEFT) {
             return event.getX();
-        }else {
+        } else {
             return -event.getX() + getWidth();
         }
     }

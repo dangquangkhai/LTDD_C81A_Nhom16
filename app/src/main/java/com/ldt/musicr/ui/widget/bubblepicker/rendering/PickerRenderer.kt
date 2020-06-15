@@ -53,29 +53,29 @@ public class PickerRenderer(val glView: View) : GLTextureView.Renderer {
         set(value) {
             field = value
             if (value != null) {
-              notifyDataSetChanged()
+                notifyDataSetChanged()
             }
         }
 
-    private fun removeItem(position : Int) {
+    private fun removeItem(position: Int) {
         PhysicsEngine.removeCircle(position)
     }
 
     @Synchronized
-    private  fun orderToRemoveAllItem() {
+    private fun orderToRemoveAllItem() {
         PhysicsEngine.orderToRemoveAllCircles()
     }
 
     @Synchronized
     private fun addAllItems() {
-        if(adapter!=null) {
+        if (adapter != null) {
             val count = (adapter as Adapter).itemCount
             if (count != 0) {
                 synchronized(renderCircles) {
                     for (i in 0 until count) {
                         val picker = PickerItem()
                         adapter?.onBindItem(picker, true, i)
-                        renderCircles.add(CircleRenderItem(picker,PhysicsEngine.createCircle(picker)))
+                        renderCircles.add(CircleRenderItem(picker, PhysicsEngine.createCircle(picker)))
                     }
                 }
                 renderCircles.forEachIndexed { index, circleRenderItem -> PhysicsEngine.addCircle(circleRenderItem.circleBody) }
@@ -95,61 +95,64 @@ public class PickerRenderer(val glView: View) : GLTextureView.Renderer {
                 backgroundColor?.blue ?: 1f, backgroundColor?.alpha ?: 0f)
         enableTransparency()
     }
+
     var width: Float = 1f
     var height: Float = 1f
 
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
         // set Viewport
-        glViewport(0,0, width, height)
+        glViewport(0, 0, width, height)
 
-       this.width = width.toFloat()
+        this.width = width.toFloat()
         this.height = height.toFloat()
-        PhysicsEngine.onViewPortSizeChanged(this.width, this.height, adapter?.getCircleRadiusUnit(this.width,this.height) ?: 0.125f)
+        PhysicsEngine.onViewPortSizeChanged(this.width, this.height, adapter?.getCircleRadiusUnit(this.width, this.height)
+                ?: 0.125f)
         recreateTextures()
     }
 
     @Synchronized
     override fun onDrawFrame(gl: GL10?) {
         val iterator = renderCircles.iterator()
-        while(iterator.hasNext()) {
+        while (iterator.hasNext()) {
             val item = iterator.next()
-            if(item.circleBody.isDeath()) {
+            if (item.circleBody.isDeath()) {
                 iterator.remove()
                 shouldRecreateTexture = true
-                Log.d("PickerRenderer","remove circle "+ item.circleBody.id)
+                Log.d("PickerRenderer", "remove circle " + item.circleBody.id)
             }
         }
 
 
         PhysicsEngine.onFrameUpdated()
-        if(shouldRecreateTexture) recreateTextures()
+        if (shouldRecreateTexture) recreateTextures()
         calculateVertices()
         drawFrame()
-        Log.d("PickerRenderer","current size = "+ renderCircles.size+", textureIDs size = "+ textureIds?.size)
+        Log.d("PickerRenderer", "current size = " + renderCircles.size + ", textureIDs size = " + textureIds?.size)
 
     }
 
     @Synchronized
-    public fun deleteTexture(textureIds: IntArray,index: Int) {
-        glDeleteTextures(1,textureIds,index*2)
-        glDeleteTextures(1,textureIds,index*2 + 1)
+    public fun deleteTexture(textureIds: IntArray, index: Int) {
+        glDeleteTextures(1, textureIds, index * 2)
+        glDeleteTextures(1, textureIds, index * 2 + 1)
     }
 
     @Synchronized
-     private fun recreateTextures() {
+    private fun recreateTextures() {
         // delete all textures
-        if(textureIds!=null && (textureIds as IntArray).size == renderCircles.size *2) {
+        if (textureIds != null && (textureIds as IntArray).size == renderCircles.size * 2) {
             (textureIds as IntArray).forEachIndexed { index, i ->
                 try {
-                deleteTexture((textureIds as IntArray),index) }
-                catch (e : Exception) {}
+                    deleteTexture((textureIds as IntArray), index)
+                } catch (e: Exception) {
+                }
             }
         }
         textureIds = null
 
         // create new textures if any
 
-        if(renderCircles.isNotEmpty()) {
+        if (renderCircles.isNotEmpty()) {
             textureIds = IntArray(renderCircles.size * 2)
             recreateArrays()
         }
@@ -171,7 +174,7 @@ public class PickerRenderer(val glView: View) : GLTextureView.Renderer {
     }
 
     private fun calculateVertices() {
-        if(renderCircles.isNotEmpty()) {
+        if (renderCircles.isNotEmpty()) {
             renderCircles.forEachIndexed { i, item -> initializeVertices(item, i) }
             vertices?.forEachIndexed { i, float -> verticesBuffer?.put(i, float) }
         }
@@ -233,13 +236,13 @@ public class PickerRenderer(val glView: View) : GLTextureView.Renderer {
         val x = it.x.convertPoint(glView.width, scaleX)
         val y = it.y.convertPoint(glView.height, scaleY)
         renderCircles.indexOfFirst { sqrt(((x - it.x).sqr() + (y - it.y).sqr()).toDouble()) <= it.radius }
-       // circles.find { Math.sqrt(((x - it.x).sqr() + (y - it.y).sqr()).toDouble()) <= it.radius }
+        // circles.find { Math.sqrt(((x - it.x).sqr() + (y - it.y).sqr()).toDouble()) <= it.radius }
     }
 
     private fun getItem(position: Vec2) = position.let {
         val x = it.x.convertPoint(glView.width, scaleX)
         val y = it.y.convertPoint(glView.height, scaleY)
-         renderCircles.find { Math.sqrt(((x - it.x).sqr() + (y - it.y).sqr()).toDouble()) <= it.radius }
+        renderCircles.find { Math.sqrt(((x - it.x).sqr() + (y - it.y).sqr()).toDouble()) <= it.radius }
     }
 
     fun onTap(x: Float, y: Float) = getItemPos(Vec2(x, glView.height - y)).apply {
@@ -273,7 +276,8 @@ public class PickerRenderer(val glView: View) : GLTextureView.Renderer {
         addAllItems()
         shouldRecreateTexture = true
     }
-    private var shouldRecreateTexture : Boolean = true
+
+    private var shouldRecreateTexture: Boolean = true
 
     @Synchronized
     fun notifyItemChanged(i: Int) {

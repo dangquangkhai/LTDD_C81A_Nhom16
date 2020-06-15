@@ -26,6 +26,10 @@ import android.widget.FrameLayout;
 import com.google.android.material.internal.FlowLayout;
 import com.ldt.musicr.App;
 import com.ldt.musicr.R;
+import com.ldt.musicr.api.customModels.ApiResponse;
+import com.ldt.musicr.api.models.Song;
+import com.ldt.musicr.api.providers.EntertainmentProvider;
+import com.ldt.musicr.api.utils.ReflectionHelper;
 import com.ldt.musicr.service.MusicPlayerRemote;
 import com.ldt.musicr.service.MusicService;
 import com.ldt.musicr.ui.intro.IntroController;
@@ -35,6 +39,15 @@ import com.ldt.musicr.ui.nowplaying.NowPlayingController;
 import com.ldt.musicr.util.NavigationUtil;
 
 import butterknife.BindView;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
+import org.jetbrains.annotations.NotNull;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class MainActivity extends BaseActivity {
     private static final String TAG = "MainActivity";
@@ -87,11 +100,13 @@ public class MainActivity extends BaseActivity {
 
     public interface PermissionListener {
         void onPermissionGranted();
+
         void onPermissionDenied();
     }
 
     private PermissionListener mPermissionListener;
-    public  void setPermissionListener(PermissionListener listener) {
+
+    public void setPermissionListener(PermissionListener listener) {
         mPermissionListener = listener;
 
     }
@@ -101,11 +116,11 @@ public class MainActivity extends BaseActivity {
     }
 
     private void onPermissionGranted() {
-        if(mPermissionListener!=null) mPermissionListener.onPermissionGranted();
+        if (mPermissionListener != null) mPermissionListener.onPermissionGranted();
     }
 
     private void onPermissionDenied() {
-        if(mPermissionListener!=null) mPermissionListener.onPermissionDenied();
+        if (mPermissionListener != null) mPermissionListener.onPermissionDenied();
     }
 
     IntroController mIntroController;
@@ -113,39 +128,39 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        if(!App.getInstance().getPreferencesUtility().isFirstTime()) {
+        if (!App.getInstance().getPreferencesUtility().isFirstTime()) {
             USE_DYNAMIC_THEME = false;
             App.getInstance().getPreferencesUtility().notFirstTime();
             setTheme(R.style.AppTheme);
             Log.d(TAG, "onCreate: not the first time");
         } else Log.d(TAG, "onCreate: the first time");
-        if(USE_DYNAMIC_THEME)
-        setTheme(R.style.AppThemeNoWallpaper);
+        if (USE_DYNAMIC_THEME)
+            setTheme(R.style.AppThemeNoWallpaper);
 
 
         App.getInstance().getPreferencesUtility().notFirstTime();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.basic_activity_layout);
-       // if(true) return;
+        // if(true) return;
         bindView();
 
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN );
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         mRootEverything.post(new Runnable() {
             @Override
             public void run() {
                 boolean isPermissionGranted = checkSelfPermission();
-                if(!isPermissionGranted) {
+                if (!isPermissionGranted) {
 
-                    if(mIntroController ==null)
-                    mIntroController = new IntroController();
+                    if (mIntroController == null)
+                        mIntroController = new IntroController();
 
-                    mIntroController.init(MainActivity.this,savedInstanceState);
+                    mIntroController.init(MainActivity.this, savedInstanceState);
                 } else startGUI();
-                if(USE_DYNAMIC_THEME)
+                if (USE_DYNAMIC_THEME)
                     mRootEverything.postDelayed(() ->
                                     getWindow().setFlags(WindowManager.LayoutParams.FLAG_SHOW_WALLPAPER, WindowManager.LayoutParams.FLAG_SHOW_WALLPAPER)
-                            ,2500);
+                            , 2500);
             }
         });
 
@@ -154,13 +169,15 @@ public class MainActivity extends BaseActivity {
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        if(mLayerController!=null) mLayerController. onConfigurationChanged(newConfig);
+        if (mLayerController != null) mLayerController.onConfigurationChanged(newConfig);
     }
 
     public void startGUI() {
+/*
       Toast.makeText(this,"Start GUI",Toast.LENGTH_SHORT).show();
+*/
         //if(true) return;
-        if(mIntroController!=null) {
+        if (mIntroController != null) {
             removePermissionListener();
             mIntroController.getNavigationController().popAllFragments();
         }
@@ -173,7 +190,7 @@ public class MainActivity extends BaseActivity {
 
         mBackStackController.attachBottomNavigationView(this);
 
-        mLayerController.init(mLayerContainer,mBackStackController,mNowPlayingController, mPlayingQueueController);
+        mLayerController.init(mLayerContainer, mBackStackController, mNowPlayingController, mPlayingQueueController);
     }
 
     @Override
@@ -194,7 +211,7 @@ public class MainActivity extends BaseActivity {
     }
 
     public boolean checkSelfPermission() {
-     return ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
+        return ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
     }
 
     public void requestPermission() {
@@ -227,36 +244,36 @@ public class MainActivity extends BaseActivity {
     @Override
     public void onServiceConnected() {
         super.onServiceConnected();
-        if(mRootEverything!=null)
-        mRootEverything.post(() -> handlePlaybackIntent(getIntent()));
+        if (mRootEverything != null)
+            mRootEverything.post(() -> handlePlaybackIntent(getIntent()));
     }
 
     @Override
-    public void onBackPressed()
-    {
-        if(mLayerController !=null&& mLayerController.onBackPressed())
+    public void onBackPressed() {
+        if (mLayerController != null && mLayerController.onBackPressed())
             return;
-       super.onBackPressed();
+        super.onBackPressed();
     }
 
     public void setTheme(boolean white) {
-        Log.d(TAG, "setTheme: "+white);
+        Log.d(TAG, "setTheme: " + white);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             View root = mRootEverything;
-            if(root!=null&&!white)
+            if (root != null && !white)
                 root.setSystemUiVisibility(0);
-            else if(root!=null)
+            else if (root != null)
                 root.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
 
     }
+
     public boolean backStackStreamOnTouchEvent(MotionEvent event) {
-        if(mBackStackController!=null) return mBackStackController.streamOnTouchEvent(event);
+        if (mBackStackController != null) return mBackStackController.streamOnTouchEvent(event);
         return false;
     }
 
     private void handlePlaybackIntent(@Nullable Intent intent) {
-        if(intent==null) {
+        if (intent == null) {
             Log.d(TAG, "handlePlaybackIntent : null intent");
             return;
         }
@@ -266,48 +283,48 @@ public class MainActivity extends BaseActivity {
         boolean handled = false;
 
         // log
-        if(uri!=null)
+        if (uri != null)
             Log.d(TAG, "handlePlaybackIntent: uri_path = " + uri.getPath());
         else
             Log.d(TAG, "handlePlaybackIntent: uri_path = null");
-        Log.d(TAG, "handlePlaybackIntent: mimeType = "+mimeType);
+        Log.d(TAG, "handlePlaybackIntent: mimeType = " + mimeType);
 
-        Log.d(TAG, "handlePlaybackIntent: action = "+intent.getAction());
+        Log.d(TAG, "handlePlaybackIntent: action = " + intent.getAction());
 
-        if(intent.getAction() !=null && intent.getAction().equals(MediaStore.INTENT_ACTION_MEDIA_PLAY_FROM_SEARCH)) {
+        if (intent.getAction() != null && intent.getAction().equals(MediaStore.INTENT_ACTION_MEDIA_PLAY_FROM_SEARCH)) {
             Log.d(TAG, "handlePlaybackIntent: type media play from search");
             handled = true;
         }
 
-        if(uri != null && uri.toString().length() > 0) {
+        if (uri != null && uri.toString().length() > 0) {
             Log.d(TAG, "handlePlaybackIntent: type play file");
             MusicPlayerRemote.playFromUri(uri);
             NavigationUtil.navigateToNowPlayingController(this);
             handled = true;
-        } else if(MediaStore.Audio.Playlists.CONTENT_TYPE.equals(mimeType)) {
+        } else if (MediaStore.Audio.Playlists.CONTENT_TYPE.equals(mimeType)) {
             Log.d(TAG, "handlePlaybackIntent: type playlist");
             handled = true;
-        } else if(MediaStore.Audio.Albums.CONTENT_TYPE.equals(mimeType)) {
+        } else if (MediaStore.Audio.Albums.CONTENT_TYPE.equals(mimeType)) {
             Log.d(TAG, "handlePlaybackIntent: type album");
             handled = true;
-        } else if(MediaStore.Audio.Artists.CONTENT_TYPE.equals(mimeType)) {
+        } else if (MediaStore.Audio.Artists.CONTENT_TYPE.equals(mimeType)) {
             Log.d(TAG, "handlePlaybackIntent: type artist");
             handled = true;
-        } else if(!handled && MusicService.ACTION_ON_CLICK_NOTIFICATION.equals(intent.getAction())) {
+        } else if (!handled && MusicService.ACTION_ON_CLICK_NOTIFICATION.equals(intent.getAction())) {
             NavigationUtil.navigateToNowPlayingController(this);
             handled = true;
-        } else if(!handled) {
-            Log.d(TAG, "handlePlaybackIntent: unhandled: "+intent.getAction());
+        } else if (!handled) {
+            Log.d(TAG, "handlePlaybackIntent: unhandled: " + intent.getAction());
         }
 
         //NavigationUtil.navigateToNowPlayingController(this);
 
-        if(handled)
-        setIntent(new Intent());
+        if (handled)
+            setIntent(new Intent());
     }
 
     public void popUpPlaylistTab() {
-        if(mPlayingQueueController !=null) mPlayingQueueController.popUp();
+        if (mPlayingQueueController != null) mPlayingQueueController.popUp();
     }
 
     public BackStackController getBackStackController() {

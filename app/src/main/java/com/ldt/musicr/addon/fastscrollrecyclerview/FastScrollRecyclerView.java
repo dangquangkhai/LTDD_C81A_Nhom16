@@ -178,7 +178,7 @@ public class FastScrollRecyclerView extends RecyclerView implements RecyclerView
      *                       all rows are the same height)
      * @param yOffset        the offset to start tracking in the recycler view (only used for all apps)
      * @see #updateThumbPositionWithMeasurableAdapter(ScrollPositionState, int) If a
-     *                       {@link MeasurableAdapter} is attached.
+     * {@link MeasurableAdapter} is attached.
      */
     protected void updateThumbPosition(ScrollPositionState scrollPosState, int rowCount, int yOffset) {
         int availableScrollHeight = getAvailableScrollHeight(rowCount, scrollPosState.rowHeight, yOffset);
@@ -326,6 +326,7 @@ public class FastScrollRecyclerView extends RecyclerView implements RecyclerView
     /**
      * Calculates the total height of the recycler view. This method should only be called when the
      * attached adapter implements {@link MeasurableAdapter}.
+     *
      * @return The total height of all rows in the RecyclerView
      */
     private int calculateAdapterHeight() {
@@ -335,6 +336,7 @@ public class FastScrollRecyclerView extends RecyclerView implements RecyclerView
     /**
      * Calculates the total height of all views above a position in the recycler view. This method
      * should only be called when the attached adapter implements {@link MeasurableAdapter}.
+     *
      * @param adapterIndex The index in the adapter to find the total height above the
      *                     corresponding view
      * @return The total height of all views above {@code adapterIndex} in pixels
@@ -480,8 +482,9 @@ public class FastScrollRecyclerView extends RecyclerView implements RecyclerView
     public interface MeasurableAdapter {
         /**
          * Gets the height of a specific view type, including item decorations
+         *
          * @param recyclerView The recyclerView that this item view will be placed in
-         * @param viewType The view type to get the height of
+         * @param viewType     The view type to get the height of
          * @return The height of a single view for the given view type in pixels
          */
         int getViewTypeHeight(RecyclerView recyclerView, int viewType);

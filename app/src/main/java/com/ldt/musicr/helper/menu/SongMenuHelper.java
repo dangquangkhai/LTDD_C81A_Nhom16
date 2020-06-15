@@ -87,7 +87,7 @@ public class SongMenuHelper {
     };
 
     @StringRes
-    public static final int[] SONG_ARTIST_OPTION= new int[]{
+    public static final int[] SONG_ARTIST_OPTION = new int[]{
             /*   R.string.play,*/
             R.string.play_next,
             R.string.play_preview,
@@ -109,12 +109,12 @@ public class SongMenuHelper {
     public static boolean handleMenuClick(@NonNull AppCompatActivity activity, @NonNull Song song, int string_res_option) {
         switch (string_res_option) {
             case R.string.play_preview:
-                if(activity instanceof MainActivity) {
-                    ((MainActivity)activity).getSongPreviewController().previewSongs(song);
+                if (activity instanceof MainActivity) {
+                    ((MainActivity) activity).getSongPreviewController().previewSongs(song);
                 }
                 break;
             case R.string.play_preview_all:
-                if(activity instanceof BaseActivity) {
+                if (activity instanceof BaseActivity) {
                     SongPreviewController preview = ((MainActivity) activity).getSongPreviewController();
                     if (preview != null) {
                         if (preview.isPlayingPreview())
@@ -124,11 +124,11 @@ public class SongMenuHelper {
                             Collections.shuffle(list);
                             int index = 0;
                             for (int i = 0; i < list.size(); i++) {
-                                if(song.id==list.get(i).id) index = i;
+                                if (song.id == list.get(i).id) index = i;
                             }
 
-                            if(index!=0)
-                            list.add(0,list.remove(index));
+                            if (index != 0)
+                                list.add(0, list.remove(index));
                             preview.previewSongs(list);
                         }
                     }
@@ -159,7 +159,7 @@ public class SongMenuHelper {
                 MusicPlayerRemote.enqueue(song);
                 return true;
             case R.string.show_lyric:
-                LyricBottomSheet.newInstance(song).show(activity.getSupportFragmentManager(),LyricBottomSheet.TAG);
+                LyricBottomSheet.newInstance(song).show(activity.getSupportFragmentManager(), LyricBottomSheet.TAG);
                 break;
             case R.string.edit_tag:
                 return true;

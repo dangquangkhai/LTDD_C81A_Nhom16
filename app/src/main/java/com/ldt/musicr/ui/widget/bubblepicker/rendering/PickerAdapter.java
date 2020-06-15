@@ -21,11 +21,11 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class PickerAdapter<T> extends Adapter implements BubblePickerListener{
+public abstract class PickerAdapter<T> extends Adapter implements BubblePickerListener {
     @Override
     public float getCircleRadiusUnit(float width, float height) {
         float minRadiusInPixel = oneDp * 50;
-        float sizePerUnit = minRadiusInPixel/ ((width>height) ? width : height);
+        float sizePerUnit = minRadiusInPixel / ((width > height) ? width : height);
         return 0.075f;
     }
 
@@ -64,7 +64,7 @@ public abstract class PickerAdapter<T> extends Adapter implements BubblePickerLi
 
     public final void setData(List<T> list) {
         mData.clear();
-        if(list!=null) mData.addAll(list);
+        if (list != null) mData.addAll(list);
         notifyDataSetChanged();
     }
 
@@ -81,23 +81,25 @@ public abstract class PickerAdapter<T> extends Adapter implements BubblePickerLi
 
     public void removeListener() {
         mListener = null;
-       BubblePicker picker = getBubblePicker();
-       if(picker!=null) picker.setListener(null);
+        BubblePicker picker = getBubblePicker();
+        if (picker != null) picker.setListener(null);
     }
 
     private PickerListener mListener;
+
     @Override
     public void onBubbleSelected(@NotNull PickerItem item, int position) {
-        if(mListener!=null) mListener.onPickerSelected(item, position, mData.get(position));
+        if (mListener != null) mListener.onPickerSelected(item, position, mData.get(position));
     }
 
     @Override
     public void onBubbleDeselected(@NotNull PickerItem item, int position) {
-        if(mListener!=null) mListener.onPickerDeselected(item, position, mData.get(position));
+        if (mListener != null) mListener.onPickerDeselected(item, position, mData.get(position));
     }
 
     public interface PickerListener {
         void onPickerSelected(PickerItem item, int position, Object o);
+
         void onPickerDeselected(PickerItem item, int position, Object o);
     }
 
@@ -109,7 +111,7 @@ public abstract class PickerAdapter<T> extends Adapter implements BubblePickerLi
 
     @Override
     public boolean onBindItem(PickerItem item, boolean create, int i) {
-        if(mColors!=null) {
+        if (mColors != null) {
             item.setGradient(new BubbleGradient(mColors[(i * 2) % mColors.length],
                     mColors[(i * 2) % 10 + 1], BubbleGradient.VERTICAL));
         }

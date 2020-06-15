@@ -10,6 +10,7 @@ import com.ldt.musicr.util.Tool;
 
 public class GetDpView extends View {
     private static final String TAG = "GettingDpView";
+
     public GetDpView(Context context) {
         super(context);
     }
@@ -25,7 +26,7 @@ public class GetDpView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        float oneDp = getWidth()/100.0f;
-        Tool.setOneDps(getWidth()/100.0f);
+        float oneDp = getWidth() / 100.0f;
+        Tool.setOneDps(getWidth() / 100.0f);
     }
 }

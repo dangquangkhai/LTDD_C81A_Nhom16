@@ -44,7 +44,7 @@ public class ToggleButton extends View {
     }
 
     private Paint solidPaint;
-    private int[] measuredSize,realSize;
+    private int[] measuredSize, realSize;
     private int[] wishingSize_InDP;
     private int[] wishingSize;
     private int color = 0;
@@ -53,32 +53,33 @@ public class ToggleButton extends View {
     private int[] wishingPos;
 
     private double canhA;
-    private double gocLech,phuGocLech;
+    private double gocLech, phuGocLech;
     private double doRongNet;
     private RectF rectF;
 
     public void setColor(int color) {
         this.color = color;
-        if(solidPaint!=null) {
+        if (solidPaint != null) {
             solidPaint.setColor(color);
             invalidate();
         }
     }
+
     public void init(AttributeSet attr) {
-        if(attr!=null) {
+        if (attr != null) {
             TypedArray t = getContext().obtainStyledAttributes(attr, R.styleable.ToggleButton);
             color = t.getColor(R.styleable.ToggleButton_maskColor, getResources().getColor(R.color.FlatWhite));
             t.recycle();
         }
         oneDp = Tool.getOneDps(getContext());
-        canhA = oneDp*20;
-        gocLech = -30*Math.PI/180; // -45 -> 45
-        phuGocLech = Math.PI/2  - Math.abs(gocLech);
-        doRongNet = oneDp*4;
+        canhA = oneDp * 20;
+        gocLech = -30 * Math.PI / 180; // -45 -> 45
+        phuGocLech = Math.PI / 2 - Math.abs(gocLech);
+        doRongNet = oneDp * 4;
 
         solidPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         solidPaint.setStyle(Paint.Style.FILL);
-        
+
         solidPaint.setColor(color);
         measuredSize = new int[2];
         realSize = new int[2];
@@ -90,14 +91,15 @@ public class ToggleButton extends View {
     Path path;
     boolean isSet = false;
     double gocDuong = 1;
-    MPoint p1 = new MPoint(),p2 = new MPoint(),p3 = new MPoint();
+    MPoint p1 = new MPoint(), p2 = new MPoint(), p3 = new MPoint();
+
     @Override
     protected void onDraw(Canvas canvas) {
-        if(rectF == null) {
-            float h = 8*oneDp;
-            float w = 40*oneDp;
-            rectF = new RectF(getWidth()/2 - w/2,getHeight()/2-h/2,getWidth()/2 + w/2,getHeight()/2+h/2);
+        if (rectF == null) {
+            float h = 8 * oneDp;
+            float w = 40 * oneDp;
+            rectF = new RectF(getWidth() / 2 - w / 2, getHeight() / 2 - h / 2, getWidth() / 2 + w / 2, getHeight() / 2 + h / 2);
         }
-        canvas.drawPath(BitmapEditor.RoundedRect(rectF.left,rectF.top,rectF.right,rectF.bottom,rectF.height()/2,rectF.height()/2,false),solidPaint);
-        }
+        canvas.drawPath(BitmapEditor.RoundedRect(rectF.left, rectF.top, rectF.right, rectF.bottom, rectF.height() / 2, rectF.height() / 2, false), solidPaint);
+    }
 }

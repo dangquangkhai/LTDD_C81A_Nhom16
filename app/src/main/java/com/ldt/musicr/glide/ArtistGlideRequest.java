@@ -63,12 +63,13 @@ public class ArtistGlideRequest {
             this.forceDownload = forceDownload;
             return this;
         }
+
         public Builder tryToLoadOriginal(boolean b) {
             this.mLoadOriginalImage = b;
             return this;
         }
 
-        public Builder whichImage(final  int whichImage) {
+        public Builder whichImage(final int whichImage) {
             this.mImageNumber = whichImage;
             return this;
         }
@@ -80,7 +81,7 @@ public class ArtistGlideRequest {
                     .transition(GenericTransitionOptions.with(DEFAULT_ANIMATION))
                     .priority(Priority.LOW)
                     //.override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
-                    .signature(createSignature(artist,mLoadOriginalImage, mImageNumber));
+                    .signature(createSignature(artist, mLoadOriginalImage, mImageNumber));
         }
     }
 
@@ -97,15 +98,16 @@ public class ArtistGlideRequest {
                     .diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
                     .priority(Priority.LOW)
                     .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
-                    .signature(createSignature(builder.artist,builder.mLoadOriginalImage, builder.mImageNumber));
+                    .signature(createSignature(builder.artist, builder.mLoadOriginalImage, builder.mImageNumber));
         }
+
         public RequestBuilder<Drawable> buildRequestDrawable() {
             //noinspection unchecked
             return createBaseRequestForDrawable(builder.requestManager, builder.artist, builder.noCustomImage, builder.forceDownload, builder.mLoadOriginalImage, builder.mImageNumber)
                     .diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
                     .priority(Priority.LOW)
                     .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
-                    .signature(createSignature(builder.artist,builder.mLoadOriginalImage, builder.mImageNumber));
+                    .signature(createSignature(builder.artist, builder.mLoadOriginalImage, builder.mImageNumber));
         }
 
     }
@@ -128,7 +130,7 @@ public class ArtistGlideRequest {
                     .transition(GenericTransitionOptions.with(DEFAULT_ANIMATION))
                     .priority(Priority.LOW)
                     .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
-                    .signature(createSignature(builder.artist,builder.mLoadOriginalImage, builder.mImageNumber));
+                    .signature(createSignature(builder.artist, builder.mLoadOriginalImage, builder.mImageNumber));
         }
 
         public RequestBuilder<Drawable> buildRequestDrawable() {
@@ -137,29 +139,29 @@ public class ArtistGlideRequest {
                     .diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
                     .priority(Priority.LOW)
                     .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
-                    .signature(createSignature(builder.artist,builder.mLoadOriginalImage, builder.mImageNumber));
+                    .signature(createSignature(builder.artist, builder.mLoadOriginalImage, builder.mImageNumber));
         }
 
     }
 
-    public static RequestBuilder<Drawable> createBaseRequestForDrawable( RequestManager requestManager, Artist artist, boolean noCustomImage, boolean forceDownload, boolean loadOriginal, int imageNumber) {
+    public static RequestBuilder<Drawable> createBaseRequestForDrawable(RequestManager requestManager, Artist artist, boolean noCustomImage, boolean forceDownload, boolean loadOriginal, int imageNumber) {
         RequestBuilder<Drawable> builder;
         boolean hasCustomImage = CustomArtistImageUtil.getInstance(App.getInstance()).hasCustomArtistImage(artist);
         if (noCustomImage || !hasCustomImage) {
             builder = requestManager.load(new ArtistImage(artist.getName(), forceDownload, loadOriginal, imageNumber));
         } else {
-            builder =  requestManager.load(CustomArtistImageUtil.getFile(artist));
+            builder = requestManager.load(CustomArtistImageUtil.getFile(artist));
         }
         return builder;
     }
 
-    public static RequestBuilder<Bitmap> createBaseRequest( RequestManager requestManager, Artist artist, boolean noCustomImage, boolean forceDownload, boolean loadOriginal, int imageNumber) {
-         RequestBuilder<Bitmap> builder;
+    public static RequestBuilder<Bitmap> createBaseRequest(RequestManager requestManager, Artist artist, boolean noCustomImage, boolean forceDownload, boolean loadOriginal, int imageNumber) {
+        RequestBuilder<Bitmap> builder;
         boolean hasCustomImage = CustomArtistImageUtil.getInstance(App.getInstance()).hasCustomArtistImage(artist);
         if (noCustomImage || !hasCustomImage) {
             builder = requestManager.asBitmap().load(new ArtistImage(artist.getName(), forceDownload, loadOriginal, imageNumber));
         } else {
-            builder =  requestManager.asBitmap().load(CustomArtistImageUtil.getFile(artist));
+            builder = requestManager.asBitmap().load(CustomArtistImageUtil.getFile(artist));
         }
         return builder;
     }

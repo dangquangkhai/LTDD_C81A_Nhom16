@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="url_backend" translatable="false">https://8r0mhcvmh3.execute-api.ap-southeast-1.amazonaws.com/dev
+    </string>
+    <string name="song_api" translatable="false">/entmt/song</string>
+</resources>

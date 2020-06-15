@@ -38,9 +38,9 @@ public class ArtistImageLoader implements ModelLoader<ArtistImage, InputStream> 
     @Nullable
     @Override
     public LoadData<InputStream> buildLoadData(@NonNull ArtistImage artistImage, int width, int height, @NonNull Options options) {
-        return new LoadData<>( ArtistSignatureUtil.getInstance(App.getInstance()).getArtistSignature(artistImage.mArtistName, artistImage.mLoadOriginal,artistImage.mImageNumber),new ArtistImageFetcher(lastFMClient,artistImage,urlLoader,width,height,options));
+        return new LoadData<>(ArtistSignatureUtil.getInstance(App.getInstance()).getArtistSignature(artistImage.mArtistName, artistImage.mLoadOriginal, artistImage.mImageNumber), new ArtistImageFetcher(lastFMClient, artistImage, urlLoader, width, height, options));
 //        return new LoadData<>(new ObjectKey(String.valueOf(artistImage.getArtistName())),new ArtistImageFetcher(lastFMClient,artistImage,urlLoader,width,height,options));
-     //   return new LoadData<>( ArtistSignatureUtil.getInstance(App.getInstance()).getArtistSignature(artistImage.getArtistName()), new ArtistImageFetcher(lastFMClient,artistImage,urlLoader,width,height, options));
+        //   return new LoadData<>( ArtistSignatureUtil.getInstance(App.getInstance()).getArtistSignature(artistImage.getArtistName()), new ArtistImageFetcher(lastFMClient,artistImage,urlLoader,width,height, options));
     }
 
     @Override
@@ -68,12 +68,12 @@ public class ArtistImageLoader implements ModelLoader<ArtistImage, InputStream> 
         @NonNull
         @Override
         public ModelLoader<ArtistImage, InputStream> build(@NonNull MultiModelLoaderFactory multiFactory) {
-            return new ArtistImageLoader(lastFMClient,okHttpFactory.build(multiFactory));
+            return new ArtistImageLoader(lastFMClient, okHttpFactory.build(multiFactory));
         }
 
         @Override
         public void teardown() {
-          //  okHttpFactory.teardown();
+            //  okHttpFactory.teardown();
         }
     }
 }

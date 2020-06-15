@@ -17,38 +17,48 @@ package com.ldt.musicr.ui.widget.soundfile;
  */
 
 
-        import android.content.Context;
-        import android.graphics.Canvas;
-        import android.graphics.Rect;
-        import android.util.AttributeSet;
-        import android.view.KeyEvent;
-        import android.view.MotionEvent;
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Rect;
+import android.util.AttributeSet;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 
 /**
  * Represents a draggable start or end marker.
- *
+ * <p>
  * Most events are passed back to the client class using a
  * listener interface.
- *
+ * <p>
  * This class directly keeps track of its own velocity, though,
  * accelerating as the user holds down the x or right arrows
  * while this control is focused.
- *
+ * <p>
  * Modified by Anna Stępień <anna.stepien@semantive.com>
  */
 public class MarkerView extends androidx.appcompat.widget.AppCompatImageView {
 
     public interface MarkerListener {
         public void markerTouchStart(MarkerView marker, float pos);
+
         public void markerTouchMove(MarkerView marker, float pos);
+
         public void markerTouchEnd(MarkerView marker);
+
         public void markerFocus(MarkerView marker);
+
         public void markerLeft(MarkerView marker, int velocity);
+
         public void markerRight(MarkerView marker, int velocity);
+
         public void markerEnter(MarkerView marker);
+
         public void markerKeyUp();
+
         public void markerDraw();
-    };
+    }
+
+    ;
 
     private int mVelocity;
     private MarkerListener mListener;
@@ -69,7 +79,7 @@ public class MarkerView extends androidx.appcompat.widget.AppCompatImageView {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        switch(event.getAction()) {
+        switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 requestFocus();
                 // We use raw x because this window itself is going to

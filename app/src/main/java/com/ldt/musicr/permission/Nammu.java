@@ -274,7 +274,7 @@ public class Nammu {
      */
     public static boolean checkPermission(String permissionName) {
         if (context == null) {
-            Log.d("MusicPlaybackService"," >> i = 5.301");
+            Log.d("MusicPlaybackService", " >> i = 5.301");
             throw new RuntimeException("Before comparing permissions you need to call Nammu.init(context)");
         }
         return PackageManager.PERMISSION_GRANTED == context.checkSelfPermission(permissionName);

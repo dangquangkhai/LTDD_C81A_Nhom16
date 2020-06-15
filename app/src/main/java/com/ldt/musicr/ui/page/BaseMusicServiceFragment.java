@@ -25,13 +25,13 @@ public abstract class BaseMusicServiceFragment extends Fragment implements Music
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Activity activity = getActivity();
-        if(activity instanceof BaseActivity) ((BaseActivity)activity).addMusicServiceEventListener(this);
+        if (activity instanceof BaseActivity) ((BaseActivity) activity).addMusicServiceEventListener(this);
     }
 
     @Override
     public void onDestroyView() {
         Activity activity = getActivity();
-        if(activity instanceof BaseActivity)((BaseActivity)activity).removeMusicServiceEventListener(this);
+        if (activity instanceof BaseActivity) ((BaseActivity) activity).removeMusicServiceEventListener(this);
         super.onDestroyView();
     }
 

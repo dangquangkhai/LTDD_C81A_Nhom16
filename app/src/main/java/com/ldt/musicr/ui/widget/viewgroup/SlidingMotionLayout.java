@@ -24,7 +24,7 @@ public class SlidingMotionLayout extends MotionLayout {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        Log.d(TAG, "onInterceptTouchEvent: ev = "+ev.getAction());
+        Log.d(TAG, "onInterceptTouchEvent: ev = " + ev.getAction());
         return super.onInterceptTouchEvent(ev);
     }
 }

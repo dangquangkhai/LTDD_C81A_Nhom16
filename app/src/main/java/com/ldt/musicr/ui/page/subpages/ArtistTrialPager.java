@@ -35,7 +35,7 @@ import butterknife.ButterKnife;
 import retrofit2.Response;
 
 public class ArtistTrialPager extends SupportFragment implements ResultCallback {
-    private static final String TAG ="ArtistTrialPager";
+    private static final String TAG = "ArtistTrialPager";
     // we need these very low values to make sure our artist image loading calls doesn't block the image loading queue
     private static final int TIMEOUT = 750;
 
@@ -44,8 +44,8 @@ public class ArtistTrialPager extends SupportFragment implements ResultCallback 
     public static ArtistTrialPager newInstance(Artist artist) {
 
         Bundle args = new Bundle();
-        if(artist!=null)
-            args.putParcelable(ARTIST,artist);
+        if (artist != null)
+            args.putParcelable(ARTIST, artist);
 
         ArtistTrialPager fragment = new ArtistTrialPager();
         fragment.setArguments(args);
@@ -64,13 +64,13 @@ public class ArtistTrialPager extends SupportFragment implements ResultCallback 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container) {
-        return inflater.inflate(R.layout.genre_child_tab,container,false);
+        return inflater.inflate(R.layout.genre_child_tab, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(this,view);
+        ButterKnife.bind(this, view);
         init();
         mSwipeRefresh.setOnRefreshListener(this::updateData);
         mSwipeRefresh.setRefreshing(true);
@@ -78,47 +78,50 @@ public class ArtistTrialPager extends SupportFragment implements ResultCallback 
     }
 
     private void updateData() {
-        if(mArtist!=null) {
-           new AsyncTask<Void,Void,Void>(){
+        if (mArtist != null) {
+            new AsyncTask<Void, Void, Void>() {
 
-               @Override
-               protected Void doInBackground(Void... voids) {
-                   tryToLoadArtistImage(mArtist,ArtistTrialPager.this);
-                   return null;
-               }
-           }.execute();
+                @Override
+                protected Void doInBackground(Void... voids) {
+                    tryToLoadArtistImage(mArtist, ArtistTrialPager.this);
+                    return null;
+                }
+            }.execute();
         } else mSwipeRefresh.setRefreshing(false);
     }
+
     Artist mArtist;
 
     LastFMRestClient mLastFmClient;
+
     private void init() {
         Bundle bundle = getArguments();
-        if(bundle!=null) {
+        if (bundle != null) {
             mArtist = bundle.getParcelable(ARTIST);
         }
-        if(mArtist!=null)
-        mLastFmClient = new LastFMRestClient(LastFMRestClient.createDefaultOkHttpClientBuilder(getContext())
-                .connectTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
-                .readTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
-                .writeTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
-                .build());
+        if (mArtist != null)
+            mLastFmClient = new LastFMRestClient(LastFMRestClient.createDefaultOkHttpClientBuilder(getContext())
+                    .connectTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
+                    .readTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
+                    .writeTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
+                    .build());
     }
+
     private boolean isCancelled = false;
     private boolean mSkipOkHttpCache = false;
     private boolean mLoadOriginal = true;
 
     public void onSuccess(String url) {
-        Log.d(TAG, "onSuccess: url = "+url);
+        Log.d(TAG, "onSuccess: url = " + url);
 
-         mText.post(new Runnable() {
-             @Override
-             public void run() {
-                 Glide.with(ArtistTrialPager.this).load(url).into(mImage);
-                 mText.setText(url);
-                 mSwipeRefresh.setRefreshing(false);
-             }
-         });
+        mText.post(new Runnable() {
+            @Override
+            public void run() {
+                Glide.with(ArtistTrialPager.this).load(url).into(mImage);
+                mText.setText(url);
+                mSwipeRefresh.setRefreshing(false);
+            }
+        });
     }
 
     @Override
@@ -128,18 +131,18 @@ public class ArtistTrialPager extends SupportFragment implements ResultCallback 
 
     @Override
     public void onFailure(Exception e) {
-        Log.d(TAG, "onFailure: e = "+ e.getMessage());
+        Log.d(TAG, "onFailure: e = " + e.getMessage());
         mSwipeRefresh.setRefreshing(false);
     }
 
     @Override
     public void onSuccess(ArrayList<String> mResult) {
-        if(mResult!=null) {
-            if(!mResult.isEmpty()) {
+        if (mResult != null) {
+            if (!mResult.isEmpty()) {
                 onSuccess(mResult.get(0));
                 for (String url :
                         mResult) {
-                    Log.d(TAG, "onSuccess: ["+url+"]");
+                    Log.d(TAG, "onSuccess: [" + url + "]");
                 }
             }
         }
@@ -152,13 +155,14 @@ public class ArtistTrialPager extends SupportFragment implements ResultCallback 
             // Try to get the group image
             String artistNames = artist.getName();
             artistNames = artistNames
-                    .replace(" ft "," & ")
-                    .replace(";"," & ")
-                    .replace(","," & ")
-                    .replaceAll("( +)"," ").trim();
-            Log.d(TAG, start + " afterArtist =["+ artistNames+"]");
-            if(null==loadThisArtist(artistNames,callback)) return;
-            if(null == loadThisArtist(artistNames.replace("&",", ").replaceAll("( +)"," ").trim().replaceAll("\\s+(?=[),])", ""),callback)) return;
+                    .replace(" ft ", " & ")
+                    .replace(";", " & ")
+                    .replace(",", " & ")
+                    .replaceAll("( +)", " ").trim();
+            Log.d(TAG, start + " afterArtist =[" + artistNames + "]");
+            if (null == loadThisArtist(artistNames, callback)) return;
+            if (null == loadThisArtist(artistNames.replace("&", ", ").replaceAll("( +)", " ").trim().replaceAll("\\s+(?=[),])", ""), callback))
+                return;
 
             // if not, try to get one of artist image
             Exception e = null;
@@ -167,9 +171,9 @@ public class ArtistTrialPager extends SupportFragment implements ResultCallback 
             String log = "";
             for (String a :
                     artists) {
-                log += " ["+a+"] ";
+                log += " [" + a + "] ";
             }
-            Log.d(TAG, start+" afterSplit ="+log);
+            Log.d(TAG, start + " afterSplit =" + log);
 
             if (artists.length == 0) {
                 callback.onFailure(new NullPointerException("Artist is empty"));
@@ -190,18 +194,18 @@ public class ArtistTrialPager extends SupportFragment implements ResultCallback 
         Response<LastFmArtist> response;
         try {
             response = mLastFmClient.getApiService().getArtistInfo(artistName, null, mSkipOkHttpCache ? "no-cache" : null).execute();
-            Log.d(TAG, "loadData: artistName = ["+artistName+"] : succeed");
+            Log.d(TAG, "loadData: artistName = [" + artistName + "] : succeed");
         } catch (Exception e) {
-            Log.d(TAG, "loadData: artistName = ["+artistName+"] : exception");
+            Log.d(TAG, "loadData: artistName = [" + artistName + "] : exception");
             return e;
         }
 
-        if(!response.isSuccessful())
+        if (!response.isSuccessful())
             return new IOException("Request failed with code: " + response.code());
         else {
-            Log.d(TAG, "loadThisArtist: "+response.toString());
+            Log.d(TAG, "loadThisArtist: " + response.toString());
             LastFmArtist lastFmArtist = response.body();
-            Log.d(TAG, "loadData: "+lastFmArtist);
+            Log.d(TAG, "loadData: " + lastFmArtist);
 
             if (isCancelled) {
                 return new Exception("Cancelled");
@@ -212,7 +216,7 @@ public class ArtistTrialPager extends SupportFragment implements ResultCallback 
             }
 
             String largestArtistImageUrl = LastFMUtil.getLargestArtistImageUrl(lastFmArtist.getArtist().getImage());
-            if(largestArtistImageUrl!=null&&!largestArtistImageUrl.isEmpty()) {
+            if (largestArtistImageUrl != null && !largestArtistImageUrl.isEmpty()) {
 
          /*     Response<String> photoPage = null;
                 try {
@@ -222,26 +226,26 @@ public class ArtistTrialPager extends SupportFragment implements ResultCallback 
                     return e;
                 }
                 Log.d(TAG, "loadThisArtist: "+photoPage.body());*/
-              //  if(photoPage.body()!=null) {
+                //  if(photoPage.body()!=null) {
                 Document document = null;
                 try {
-                    document = Jsoup.connect(lastFmArtist.getArtist().getUrl()+"/+images").get();
+                    document = Jsoup.connect(lastFmArtist.getArtist().getUrl() + "/+images").get();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                if(document!=null) {
-                Element imageList = document.getElementsByClass("image-list").first();
+                if (document != null) {
+                    Element imageList = document.getElementsByClass("image-list").first();
                     if (imageList != null) {
                         Elements imageListItem = document.getElementsByClass("image-list-item");
-                        if(imageListItem!=null) {
-                            ArrayList<String > mResult = new ArrayList<>();
+                        if (imageListItem != null) {
+                            ArrayList<String> mResult = new ArrayList<>();
                             for (Element imageItem :
                                     imageListItem) {
-                               Element image =  imageItem.selectFirst("img");
-                               if(image!=null) {
-                                  String url =  image.absUrl("src");
-                                  mResult.add(url);
-                               }
+                                Element image = imageItem.selectFirst("img");
+                                if (image != null) {
+                                    String url = image.absUrl("src");
+                                    mResult.add(url);
+                                }
                             }
                             callback.onSuccess(mResult);
                             return null;
@@ -253,7 +257,7 @@ public class ArtistTrialPager extends SupportFragment implements ResultCallback 
                 if(mLoadOriginal) largestArtistImageUrl = ArtistImageFetcher.findAndReplaceToGetOriginal(largestArtistImageUrl);
                 Log.d(TAG, "loadThisArtist: url = ["+largestArtistImageUrl+"]");
                 callback.onSuccess(largestArtistImageUrl);*/
-            } else return new Exception("No Artist Image is available : \n"+lastFmArtist.toString());
+            } else return new Exception("No Artist Image is available : \n" + lastFmArtist.toString());
         }
     }
 }

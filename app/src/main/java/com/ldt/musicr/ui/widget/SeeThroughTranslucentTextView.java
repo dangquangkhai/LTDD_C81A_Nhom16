@@ -17,7 +17,7 @@ import android.util.AttributeSet;
  * Created by trung on 8/27/2017.
  */
 
-public class SeeThroughTranslucentTextView extends AppCompatTextView{
+public class SeeThroughTranslucentTextView extends AppCompatTextView {
     private static final String TAG = "SeeThroughTTextView";
     private Bitmap mMaskBitmap;
     private Canvas mMaskCanvas;
@@ -108,7 +108,7 @@ public class SeeThroughTranslucentTextView extends AppCompatTextView{
             return;
         }
         drawMask();
-       drawBackground();
+        drawBackground();
         canvas.drawBitmap(mBackgroundBitmap, 0.f, 0.f, null);
     }
 
@@ -127,20 +127,20 @@ public class SeeThroughTranslucentTextView extends AppCompatTextView{
 
     private void drawBackground() {
         clear(mBackgroundCanvas);
-   // Cái này thực hiện vẽ Nội dung ( Chữ ) Lên mBackgroundCanvas
-       mBackground.draw(mBackgroundCanvas);   // vẽ nền
+        // Cái này thực hiện vẽ Nội dung ( Chữ ) Lên mBackgroundCanvas
+        mBackground.draw(mBackgroundCanvas);   // vẽ nền
         mBackgroundCanvas.drawBitmap(mMaskBitmap, 0.f, 0.f, mPaint); // vẽ chữ
 
         super.setTextColor(getTextColors());
         drawMask();
         mBackgroundCanvas.drawBitmap(mMaskBitmap, 0.f, 0.f, mPaint); // vẽ chữ
         //   backgroundCloudEffectPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.ADD));
-       // mBackgroundCanvas.drawBitmap(mMaskBitmap, 0.f, 0.f, backgroundCloudEffectPaint); // vẽ chữ
+        // mBackgroundCanvas.drawBitmap(mMaskBitmap, 0.f, 0.f, backgroundCloudEffectPaint); // vẽ chữ
 
 
-       // Paint paint = new Paint();
-      //  mBackgroundCanvas.drawBitmap(mMaskBitmap, 0.f, 0.f, paint);
-    //    mBackground.drawVisualWave(mBackgroundCanvas);
+        // Paint paint = new Paint();
+        //  mBackgroundCanvas.drawBitmap(mMaskBitmap, 0.f, 0.f, paint);
+        //    mBackground.drawVisualWave(mBackgroundCanvas);
 
     }
 

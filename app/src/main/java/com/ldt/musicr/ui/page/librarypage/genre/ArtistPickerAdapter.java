@@ -25,14 +25,14 @@ public class ArtistPickerAdapter extends PickerAdapter<Artist> {
     public boolean onBindItem(PickerItem item, boolean create, int i) {
         Artist artist = mData.get(i);
         item.setTitle(artist.getName());
-        item.setRadiusUnit(PhysicsEngine.INSTANCE.interpolate(1,2f,((float) artist.getSongCount())/getItemCount()));
+        item.setRadiusUnit(PhysicsEngine.INSTANCE.interpolate(1, 2f, ((float) artist.getSongCount()) / getItemCount()));
         // Glide
         ArtistGlideRequest.Builder.from(GlideApp.with(mContext), artist)
                 // .tryToLoadOriginal(true)
                 .generateBuilder(mContext)
                 .buildRequestDrawable()
                 .centerCrop()
-               // .error(R.drawable.music_style)
+                // .error(R.drawable.music_style)
                 .into(new SimpleTarget<Drawable>() {
                     @Override
                     public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {

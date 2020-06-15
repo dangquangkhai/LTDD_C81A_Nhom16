@@ -36,18 +36,18 @@ import es.dmoral.toasty.Toasty;
 
 public class NavigationUtil {
 
-    public static void navigateToBackStackController(@NonNull final  MainActivity activity) {
+    public static void navigateToBackStackController(@NonNull final MainActivity activity) {
         final LayerController.Attr playingQueueAttr = activity.getLayerController().getMyAttr(activity.getPlayingQueueController());
         final LayerController.Attr nowPlayingAttr = activity.getLayerController().getMyAttr(activity.getNowPlayingController());
 
-        if(playingQueueAttr.getState()!= LayerController.Attr.MINIMIZED&&nowPlayingAttr.getState()!= LayerController.Attr.MINIMIZED) {
+        if (playingQueueAttr.getState() != LayerController.Attr.MINIMIZED && nowPlayingAttr.getState() != LayerController.Attr.MINIMIZED) {
             // 2 layer is maximized
             playingQueueAttr.animateToMin();
-            playingQueueAttr.getParent().postDelayed(nowPlayingAttr::animateToMin,550);
-        } else if(playingQueueAttr.getState()!= LayerController.Attr.MINIMIZED) {
+            playingQueueAttr.getParent().postDelayed(nowPlayingAttr::animateToMin, 550);
+        } else if (playingQueueAttr.getState() != LayerController.Attr.MINIMIZED) {
             // only playing queue
             playingQueueAttr.animateToMin();
-        } else if(nowPlayingAttr.getState()!= LayerController.Attr.MINIMIZED) {
+        } else if (nowPlayingAttr.getState() != LayerController.Attr.MINIMIZED) {
             // only now playing
             nowPlayingAttr.animateToMin();
         }
@@ -57,14 +57,14 @@ public class NavigationUtil {
         final LayerController.Attr playingQueueAttr = activity.getLayerController().getMyAttr(activity.getPlayingQueueController());
         final LayerController.Attr nowPlayingAttr = activity.getLayerController().getMyAttr(activity.getNowPlayingController());
 
-        if(playingQueueAttr.getState()!= LayerController.Attr.MINIMIZED && nowPlayingAttr.getState() != LayerController.Attr.MINIMIZED) {
+        if (playingQueueAttr.getState() != LayerController.Attr.MINIMIZED && nowPlayingAttr.getState() != LayerController.Attr.MINIMIZED) {
             // 2 layer is maximized
             playingQueueAttr.animateToMin();
-        } else if(playingQueueAttr.getState()!= LayerController.Attr.MINIMIZED) {
+        } else if (playingQueueAttr.getState() != LayerController.Attr.MINIMIZED) {
             // playing queue is maximize, while now playing is minimize
             playingQueueAttr.animateToMin();
-            playingQueueAttr.getParent().postDelayed(nowPlayingAttr::animateToMax,550);
-        } else if(nowPlayingAttr.getState()== LayerController.Attr.MINIMIZED) {
+            playingQueueAttr.getParent().postDelayed(nowPlayingAttr::animateToMax, 550);
+        } else if (nowPlayingAttr.getState() == LayerController.Attr.MINIMIZED) {
             // both are minimized
             nowPlayingAttr.animateToMax();
         }
@@ -92,9 +92,9 @@ public class NavigationUtil {
         }
     }
 
-    public static LibraryTabFragment getLibraryTab( Activity activity) {
-        if(activity instanceof  MainActivity) {
-            final  MainActivity mainActivity = (MainActivity) activity;
+    public static LibraryTabFragment getLibraryTab(Activity activity) {
+        if (activity instanceof MainActivity) {
+            final MainActivity mainActivity = (MainActivity) activity;
             return mainActivity.getBackStackController().navigateToLibraryTab(false);
         }
         return null;
@@ -114,7 +114,7 @@ public class NavigationUtil {
 
             LibraryTabFragment fragment = mainActivity.getBackStackController().navigateToLibraryTab(true);
             if (fragment != null)
-                fragment.getNavigationController().presentFragment(PlaylistPagerFragment.newInstance(activity,playlist,null));
+                fragment.getNavigationController().presentFragment(PlaylistPagerFragment.newInstance(activity, playlist, null));
             navigateToBackStackController(mainActivity);
         }
     }

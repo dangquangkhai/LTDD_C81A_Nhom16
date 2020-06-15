@@ -23,20 +23,20 @@ public class PlayingQueueAdapter extends AbsSongAdapter {
     @Override
     protected void onMenuItemClick(int positionInData) {
         OptionBottomSheet
-                .newInstance(SongMenuHelper.SONG_QUEUE_OPTION,getData().get(positionInData))
-                .show(((AppCompatActivity)mContext).getSupportFragmentManager(), "song_popup_menu");
+                .newInstance(SongMenuHelper.SONG_QUEUE_OPTION, getData().get(positionInData))
+                .show(((AppCompatActivity) mContext).getSupportFragmentManager(), "song_popup_menu");
     }
 
     @NotNull
     @Override
     public AbsBindAbleHolder onCreateViewHolder(@NotNull ViewGroup viewGroup, int viewType) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_song_big,viewGroup,false);
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_song_big, viewGroup, false);
         return new AbsSongAdapter.SongHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull AbsBindAbleHolder absBindAbleHolder, int i) {
-        if(absBindAbleHolder instanceof AbsSongAdapter.SongHolder)
-        absBindAbleHolder.bind(getData().get(getDataPosition(i)));
+        if (absBindAbleHolder instanceof AbsSongAdapter.SongHolder)
+            absBindAbleHolder.bind(getData().get(getDataPosition(i)));
     }
 }

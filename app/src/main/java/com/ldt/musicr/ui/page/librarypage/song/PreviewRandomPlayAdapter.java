@@ -24,7 +24,7 @@ import java.util.Random;
 import butterknife.OnClick;
 
 public class PreviewRandomPlayAdapter extends RecyclerView.Adapter<PreviewRandomPlayAdapter.ItemHolder> {
-    private static final String TAG ="PreviewRandomPlayAdapter";
+    private static final String TAG = "PreviewRandomPlayAdapter";
     private Context mContext;
 
     private ArrayList<Song> mBackUp = new ArrayList<>();
@@ -41,10 +41,10 @@ public class PreviewRandomPlayAdapter extends RecyclerView.Adapter<PreviewRandom
     public void shuffle() {
         final Handler handler = new Handler();
         handler.postDelayed(() -> {
-            MusicPlayerRemote.openQueue(mData,0,true);
+            MusicPlayerRemote.openQueue(mData, 0, true);
             //MusicPlayer.playAll(mContext, getRealSongIds(), 0, -1, Util.IdType.NA, false);
             randommize();
-        },100);
+        }, 100);
     }
 
     public interface FirstItemCallBack {
@@ -52,6 +52,7 @@ public class PreviewRandomPlayAdapter extends RecyclerView.Adapter<PreviewRandom
     }
 
     public FirstItemCallBack mCallBack;
+
     public void setFirstItemCallBack(FirstItemCallBack callBack) {
         mCallBack = callBack;
     }
@@ -62,7 +63,7 @@ public class PreviewRandomPlayAdapter extends RecyclerView.Adapter<PreviewRandom
 
     public void setData(ArrayList<Song> songs) {
         mBackUp.clear();
-        if(songs!=null) mBackUp.addAll(songs);
+        if (songs != null) mBackUp.addAll(songs);
         randommize();
     }
 
@@ -78,7 +79,7 @@ public class PreviewRandomPlayAdapter extends RecyclerView.Adapter<PreviewRandom
 
         this.songIDs = getSongIds();
 
-        if(mCallBack!=null&&mData.size()>0) mCallBack.onFirstItemCreated(mData.get(mData.size()-1));
+        if (mCallBack != null && mData.size() > 0) mCallBack.onFirstItemCreated(mData.get(mData.size() - 1));
         notifyDataSetChanged();
 
     }
@@ -95,7 +96,7 @@ public class PreviewRandomPlayAdapter extends RecyclerView.Adapter<PreviewRandom
     @NonNull
     @Override
     public ItemHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_preview_random_play,viewGroup,false);
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_preview_random_play, viewGroup, false);
         return new ItemHolder(v);
     }
 
@@ -106,13 +107,14 @@ public class PreviewRandomPlayAdapter extends RecyclerView.Adapter<PreviewRandom
 
     @Override
     public int getItemCount() {
-        return  Math.max(0,mData.size() - 1);
+        return Math.max(0, mData.size() - 1);
     }
+
     private long[] getRealSongIds() {
         long[] real = new long[songIDs.length];
-        if(real.length!=0) real[0] = songIDs[songIDs.length-1];
+        if (real.length != 0) real[0] = songIDs[songIDs.length - 1];
         for (int i = 0; i < songIDs.length - 1; i++) {
-            real[i+1] = songIDs[i];
+            real[i + 1] = songIDs[i];
         }
         return real;
     }
@@ -128,9 +130,9 @@ public class PreviewRandomPlayAdapter extends RecyclerView.Adapter<PreviewRandom
 
         public void bind(Song song) {
             RequestManager requestManager;
-            if(mCallBack instanceof Fragment)
-               requestManager =  Glide.with((Fragment) mCallBack);
-            else if(mContext !=null)
+            if (mCallBack instanceof Fragment)
+                requestManager = Glide.with((Fragment) mCallBack);
+            else if (mContext != null)
                 requestManager = Glide.with(mContext);
             else requestManager = Glide.with(itemView.getContext());
 
@@ -144,10 +146,10 @@ public class PreviewRandomPlayAdapter extends RecyclerView.Adapter<PreviewRandom
         public void onClick(View v) {
             final Handler handler = new Handler();
             handler.postDelayed(() -> {
-                MusicPlayerRemote.openQueue(mData,getAdapterPosition(),true);
+                MusicPlayerRemote.openQueue(mData, getAdapterPosition(), true);
                 //MusicPlayer.playAll(mContext, getRealSongIds(), getAdapterPosition(), -1, Util.IdType.NA, false);
                 randommize();
-            },100);
+            }, 100);
         }
     }
 }

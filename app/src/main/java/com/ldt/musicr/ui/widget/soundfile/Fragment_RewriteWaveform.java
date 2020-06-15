@@ -17,14 +17,16 @@ import com.ldt.musicr.R;
 public class Fragment_RewriteWaveform extends Fragment {
     private View rootView;
     private View_RewriteWaveform rewriteWaveform;
+
     private void MergeUI() {
-        rewriteWaveform = (View_RewriteWaveform)rootView.findViewById(R.id.waveform);
+        rewriteWaveform = (View_RewriteWaveform) rootView.findViewById(R.id.waveform);
     }
-    public void setMediaPath(String mediaPath)
-    {
+
+    public void setMediaPath(String mediaPath) {
         // Get Property of file
-     // call setMediaPath in WaveForm View
+        // call setMediaPath in WaveForm View
     }
+
     private void SetAllTouch() {
         View[] views = new View[]
                 {  // put views here
@@ -32,6 +34,7 @@ public class Fragment_RewriteWaveform extends Fragment {
 
         for (View va : views) va.setOnTouchListener(OnTouch);
     }
+
     private View.OnTouchListener OnTouch = new View.OnTouchListener() {
 
         @Override
@@ -40,6 +43,7 @@ public class Fragment_RewriteWaveform extends Fragment {
         }
 
     };
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);

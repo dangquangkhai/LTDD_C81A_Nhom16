@@ -173,7 +173,7 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            if (action!=null && action.equals(AudioManager.ACTION_AUDIO_BECOMING_NOISY)) {
+            if (action != null && action.equals(AudioManager.ACTION_AUDIO_BECOMING_NOISY)) {
                 pause();
             }
         }
@@ -603,7 +603,7 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
                     .checkIgnoreMediaStore(MusicService.this)
                     .asBitmap().build();
             if (PreferenceUtil.getInstance(this).blurredAlbumArt()) {
-               request.transform(new BlurTransformation.Builder(MusicService.this).build());
+                request.transform(new BlurTransformation.Builder(MusicService.this).build());
             }
             runOnUiThread(new Runnable() {
                 @Override
@@ -611,7 +611,7 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
                     request.into(new SimpleTarget<Bitmap>(screenSize.x, screenSize.y) {
                         @Override
                         public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                            metaData.putBitmap(MediaMetadataCompat.METADATA_KEY_ALBUM_ART,copy(resource));
+                            metaData.putBitmap(MediaMetadataCompat.METADATA_KEY_ALBUM_ART, copy(resource));
                             mediaSession.setMetadata(metaData.build());
                         }
 
@@ -965,8 +965,8 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
     public void notifyVolumePrefChanged() {
         synchronized (this) {
             float volume = App.getInstance().getPreferencesUtility().getInAppVolume();
-            if(volume<0) volume = 0;
-            else if(volume>1) volume = 1;
+            if (volume < 0) volume = 0;
+            else if (volume > 1) volume = 1;
             mInAppVolume = volume;
         }
 
@@ -976,13 +976,13 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
     public void notifyBalanceChanged() {
         synchronized (this) {
             float balance = App.getInstance().getPreferencesUtility().getBalanceValue();
-            if(balance<0) balance = 0;
-            else if(balance>1) balance = 1;
-            if(balance<0.5f) {
-                mRightBalanceValue =2*balance;
+            if (balance < 0) balance = 0;
+            else if (balance > 1) balance = 1;
+            if (balance < 0.5f) {
+                mRightBalanceValue = 2 * balance;
                 mLeftBalanceValue = 1;
             } else {
-                mLeftBalanceValue = 2 - 2*balance;
+                mLeftBalanceValue = 2 - 2 * balance;
                 mRightBalanceValue = 1;
             }
         }
@@ -996,10 +996,12 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
         mCurrentVolume = volume;
         updateVolume();
     }
+
     public void updateVolume() {
         try {
-            playback.setVolume(mCurrentVolume*mInAppVolume*mLeftBalanceValue,mCurrentVolume*mInAppVolume*mRightBalanceValue);
-        } catch (Exception ignored) {}
+            playback.setVolume(mCurrentVolume * mInAppVolume * mLeftBalanceValue, mCurrentVolume * mInAppVolume * mRightBalanceValue);
+        } catch (Exception ignored) {
+        }
     }
 
     public void cycleRepeatMode() {
@@ -1240,7 +1242,7 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
                     } else {
                         currentDuckVolume = 1f;
                     }
-                   // service.playback.setVolume(currentDuckVolume);
+                    // service.playback.setVolume(currentDuckVolume);
                     service.setVolumeCallingByHandler(currentDuckVolume);
 
                     break;

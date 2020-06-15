@@ -43,7 +43,8 @@ public class FastScrollPopup {
     private ObjectAnimator mAlphaAnimator;
     private boolean mVisible;
 
-    @FastScroller.FastScrollerPopupPosition private int mPosition;
+    @FastScroller.FastScrollerPopupPosition
+    private int mPosition;
 
     public FastScrollPopup(Resources resources, FastScrollRecyclerView recyclerView) {
 

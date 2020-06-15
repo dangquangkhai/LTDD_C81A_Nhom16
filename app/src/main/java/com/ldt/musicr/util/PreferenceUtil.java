@@ -112,6 +112,7 @@ public final class PreferenceUtil {
         }
         return sInstance;
     }
+
     public static PreferenceUtil getInstance() {
         if (sInstance == null) {
             sInstance = new PreferenceUtil(App.getInstance().getApplicationContext());
@@ -172,7 +173,6 @@ public final class PreferenceUtil {
     public final int getLastMusicChooser() {
         return mPreferences.getInt(LAST_MUSIC_CHOOSER, 0);
     }
-
 
 
     public final boolean coloredNotification() {
@@ -294,7 +294,7 @@ public final class PreferenceUtil {
                 interval = calendarUtil.getElapsedWeek();
                 break;
 
-             case "past_seven_days":
+            case "past_seven_days":
                 interval = calendarUtil.getElapsedDays(7);
                 break;
 
@@ -331,8 +331,8 @@ public final class PreferenceUtil {
             case "this_week":
                 return context.getString(R.string.this_week);
 
-             case "past_seven_days":
-                 return context.getString(R.string.past_seven_days);
+            case "past_seven_days":
+                return context.getString(R.string.past_seven_days);
 
             case "past_three_months":
                 return context.getString(R.string.past_three_months);
@@ -383,7 +383,6 @@ public final class PreferenceUtil {
     }
 
 
-
     public void setLastChangeLogVersion(int version) {
         mPreferences.edit().putInt(LAST_CHANGELOG_VERSION, version).apply();
     }
@@ -410,11 +409,11 @@ public final class PreferenceUtil {
         return mPreferences.getString(AUTO_DOWNLOAD_IMAGES_POLICY, "only_wifi");
     }
 
- /*
-        public final File getStartDirectory() {
-        return new File(mPreferences.getString(START_DIRECTORY, FoldersFragment.getDefaultStartDirectory().getPath()));
-    }
-*/
+    /*
+           public final File getStartDirectory() {
+           return new File(mPreferences.getString(START_DIRECTORY, FoldersFragment.getDefaultStartDirectory().getPath()));
+       }
+   */
     public void setStartDirectory(File file) {
         final SharedPreferences.Editor editor = mPreferences.edit();
         editor.putString(START_DIRECTORY, FileUtil.safeGetCanonicalPath(file));
@@ -437,7 +436,7 @@ public final class PreferenceUtil {
 
 
     public final int getSongChildSortOrder() {
-        return mPreferences.getInt(SONG_CHILD_SORT_ORDER,1);
+        return mPreferences.getInt(SONG_CHILD_SORT_ORDER, 1);
     }
 
     public final void setSongChildSortOrder(int value) {
@@ -448,35 +447,36 @@ public final class PreferenceUtil {
 
     public final void setIsUsingArtistImageAsBackground(boolean value) {
         final SharedPreferences.Editor editor = mPreferences.edit();
-        editor.putBoolean(USE_ARTIST_IMAGE_AS_BACKGROUND,value);
-        editor.apply();;
+        editor.putBoolean(USE_ARTIST_IMAGE_AS_BACKGROUND, value);
+        editor.apply();
+        ;
     }
 
     public final boolean isUsingArtistImageAsBackground() {
-        return mPreferences.getBoolean(USE_ARTIST_IMAGE_AS_BACKGROUND,true);
+        return mPreferences.getBoolean(USE_ARTIST_IMAGE_AS_BACKGROUND, true);
     }
 
     public final void setInAppVolume(float value) {
-        if(value<0) value = 0;
-        else if(value>1) value = 1;
+        if (value < 0) value = 0;
+        else if (value > 1) value = 1;
         final SharedPreferences.Editor editor = mPreferences.edit();
         editor.putFloat(IN_APP_VOLUME, value);
         editor.apply();
     }
 
     public final float getInAppVolume() {
-        return mPreferences.getFloat(IN_APP_VOLUME,1);
+        return mPreferences.getFloat(IN_APP_VOLUME, 1);
     }
 
     public final void setMinDuration(int value) {
-        if(value<0) value = 0;
+        if (value < 0) value = 0;
         final SharedPreferences.Editor editor = mPreferences.edit();
         editor.putFloat(AUDIO_MIN_DURATION, value);
         editor.apply();
     }
 
     public final int getMinDuration() {
-        return mPreferences.getInt(AUDIO_MIN_DURATION,10000);
+        return mPreferences.getInt(AUDIO_MIN_DURATION, 10000);
     }
 
     public SharedPreferences getSharePreferences() {
@@ -488,25 +488,25 @@ public final class PreferenceUtil {
     }
 
     public float getBalanceValue() {
-        return mPreferences.getFloat(BALANCE_VALUE,0.5f);
+        return mPreferences.getFloat(BALANCE_VALUE, 0.5f);
     }
 
     public final void setBalanceValue(float value) {
-        if(value<0) value = 0;
-        else if(value>1) value = 1;
+        if (value < 0) value = 0;
+        else if (value > 1) value = 1;
         final SharedPreferences.Editor editor = mPreferences.edit();
         editor.putFloat(BALANCE_VALUE, value);
         editor.apply();
     }
 
     public final void setThreadNumber(int value) {
-        if(value<=0) return;
+        if (value <= 0) return;
         final SharedPreferences.Editor editor = mPreferences.edit();
-        editor.putFloat(THREAD_NUMBER,value);
+        editor.putFloat(THREAD_NUMBER, value);
         editor.apply();
     }
 
     public final int getThreadNumber() {
-        return mPreferences.getInt(THREAD_NUMBER,6);
+        return mPreferences.getInt(THREAD_NUMBER, 6);
     }
 }

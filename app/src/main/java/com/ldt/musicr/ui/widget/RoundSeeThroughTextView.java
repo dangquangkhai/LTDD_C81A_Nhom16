@@ -15,6 +15,7 @@ import com.ldt.musicr.R;
 
 public class RoundSeeThroughTextView extends SeeThroughTranslucentTextView {
     private static final String TAG = "RoundSeeThroughTextView";
+
     public RoundSeeThroughTextView(Context context) {
         super(context);
         init();
@@ -29,22 +30,29 @@ public class RoundSeeThroughTextView extends SeeThroughTranslucentTextView {
         super(context, attrs, defStyleAttr);
         init();
     }
-    float oneDp =1;
+
+    float oneDp = 1;
+
     private void init() {
         oneDp = getResources().getDimension(R.dimen.oneDP);
         setWillNotDraw(false);
     }
+
     RoundDrawable drawable;
+
     class RoundDrawable extends Drawable {
-        Path path=null;
+        Path path = null;
         Paint paint;
         int color;
+
         public void setColor(int color) {
             this.color = color;
         }
-        RoundDrawable(int color ) {
+
+        RoundDrawable(int color) {
             this.color = color;
         }
+
         @Override
         public void draw(@NonNull Canvas canvas) {
 //            if(data ==null) {
@@ -57,7 +65,7 @@ public class RoundSeeThroughTextView extends SeeThroughTranslucentTextView {
             paint.setStyle(Paint.Style.FILL);
             paint.setColor(color);
 //            canvas.drawPath(data,paint);
-            canvas.drawRoundRect(0,0,getBounds().width(),getBounds().height(),4*oneDp,4*oneDp,paint);
+            canvas.drawRoundRect(0, 0, getBounds().width(), getBounds().height(), 4 * oneDp, 4 * oneDp, paint);
         }
 
         @Override
@@ -75,13 +83,13 @@ public class RoundSeeThroughTextView extends SeeThroughTranslucentTextView {
             return PixelFormat.UNKNOWN;
         }
     }
+
     @Override
     public void setBackgroundColor(int color) {
-        if(drawable==null) {
+        if (drawable == null) {
             drawable = new RoundDrawable(color);
-        }
-        else drawable.setColor(color);
-       setBackgroundDrawable(drawable);
+        } else drawable.setColor(color);
+        setBackgroundDrawable(drawable);
     }
 
 }

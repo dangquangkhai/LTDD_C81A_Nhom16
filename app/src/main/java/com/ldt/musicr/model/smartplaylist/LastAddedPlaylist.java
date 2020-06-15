@@ -28,8 +28,8 @@ public class LastAddedPlaylist extends AbsSmartPlaylist {
         String cutoff = PreferenceUtil.getInstance(context).getLastAddedCutoffText(context);
 
         return MusicUtil.buildInfoString(
-            cutoff,
-            super.getInfoString(context)
+                cutoff,
+                super.getInfoString(context)
         );
     }
 

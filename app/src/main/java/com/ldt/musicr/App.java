@@ -5,7 +5,6 @@ import android.app.Application;
 import com.ldt.musicr.util.PreferenceUtil;
 
 
-
 public class App extends Application {
     private static App mInstance;
 
@@ -22,7 +21,7 @@ public class App extends Application {
         super.onCreate();
         mInstance = this;
 
-    //    Nammu.init(this);
+        //    Nammu.init(this);
 
     }
 

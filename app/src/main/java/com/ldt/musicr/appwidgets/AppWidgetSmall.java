@@ -95,13 +95,13 @@ public class AppWidgetSmall extends BaseAppWidget {
             @Override
             public void run() {
                 if (target != null) {
-                  //  Glide.clear(target);
+                    //  Glide.clear(target);
                 }
                 target = SongGlideRequest.Builder.from(Glide.with(appContext), song)
                         .checkIgnoreMediaStore(appContext)
                         .generatePalette(service).build()
                         .centerCrop()
-                        .into(new AppWidgetTarget(appContext,R.id.image, appWidgetView, appWidgetIds) {
+                        .into(new AppWidgetTarget(appContext, R.id.image, appWidgetView, appWidgetIds) {
                             @Override
                             public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
                                 update(resource, MaterialValueHelper.getSecondaryTextColor(appContext, true));

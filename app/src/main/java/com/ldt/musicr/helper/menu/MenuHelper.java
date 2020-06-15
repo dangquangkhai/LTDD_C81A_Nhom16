@@ -51,7 +51,7 @@ public class MenuHelper {
     };
 
     @StringRes
-    public static final int[] ARTIST_OPTION = new int[] {
+    public static final int[] ARTIST_OPTION = new int[]{
             R.string.play,
             R.string.play_preview,
             R.string.play_next,
@@ -62,13 +62,13 @@ public class MenuHelper {
     public static boolean handleMenuClick(@NonNull AppCompatActivity activity, @NonNull Artist artist, int string_res_option) {
         switch (string_res_option) {
             case R.string.play:
-                MusicPlayerRemote.openAndShuffleQueue(artist.getSongs(),true);
+                MusicPlayerRemote.openAndShuffleQueue(artist.getSongs(), true);
                 return true;
             case R.string.play_next:
                 MusicPlayerRemote.playNext(artist.getSongs());
                 return true;
             case R.string.play_preview:
-                if(activity instanceof BaseActivity) {
+                if (activity instanceof BaseActivity) {
                     SongPreviewController preview = ((MainActivity) activity).getSongPreviewController();
                     if (preview != null) {
                         if (preview.isPlayingPreview())
@@ -95,17 +95,17 @@ public class MenuHelper {
     public static boolean handleMenuClick(@NonNull AppCompatActivity activity, @NonNull Playlist playlist, int string_res_option) {
         switch (string_res_option) {
             case R.string.play_next:
-                MusicPlayerRemote.playNext(new ArrayList<>(PlaylistPagerFragment.getPlaylistWithListId(activity, playlist,"")));
+                MusicPlayerRemote.playNext(new ArrayList<>(PlaylistPagerFragment.getPlaylistWithListId(activity, playlist, "")));
                 return true;
             case R.string.play_preview:
-                if(activity instanceof MainActivity) {
-                    SongPreviewController preview =((MainActivity) activity).getSongPreviewController();
-                    if(preview!=null) {
+                if (activity instanceof MainActivity) {
+                    SongPreviewController preview = ((MainActivity) activity).getSongPreviewController();
+                    if (preview != null) {
                         if (preview.isPlayingPreview())
                             preview.cancelPreview();
                         else {
 
-                            ArrayList<Song> list = new ArrayList<>(PlaylistPagerFragment.getPlaylistWithListId(activity, playlist,""));
+                            ArrayList<Song> list = new ArrayList<>(PlaylistPagerFragment.getPlaylistWithListId(activity, playlist, ""));
                             Collections.shuffle(list);
                             preview.previewSongs(list);
                         }
@@ -113,10 +113,10 @@ public class MenuHelper {
                 }
                 return true;
             case R.string.add_to_queue:
-                MusicPlayerRemote.enqueue(new ArrayList<>(PlaylistPagerFragment.getPlaylistWithListId(activity, playlist,"")));
+                MusicPlayerRemote.enqueue(new ArrayList<>(PlaylistPagerFragment.getPlaylistWithListId(activity, playlist, "")));
                 return true;
             case R.string.add_playlist_to_playlist:
-                AddToPlaylistDialog.create(new ArrayList<>(PlaylistPagerFragment.getPlaylistWithListId(activity, playlist,""))).show(activity.getSupportFragmentManager(), "ADD_PLAYLIST");
+                AddToPlaylistDialog.create(new ArrayList<>(PlaylistPagerFragment.getPlaylistWithListId(activity, playlist, ""))).show(activity.getSupportFragmentManager(), "ADD_PLAYLIST");
                 return true;
             case R.string.rename:
                 RenamePlaylistDialog.create(playlist.id).show(activity.getSupportFragmentManager(), "RENAME_PLAYLIST");
@@ -158,12 +158,12 @@ public class MenuHelper {
     }
 
     public static boolean handleMenuClick(@NonNull AppCompatActivity activity, @NonNull Object object, int string_res_option) {
-        if(object instanceof Song) {
-            return SongMenuHelper.handleMenuClick(activity,(Song)object,string_res_option);
+        if (object instanceof Song) {
+            return SongMenuHelper.handleMenuClick(activity, (Song) object, string_res_option);
         } else if (object instanceof Playlist)
-            return handleMenuClick(activity,(Playlist) object,string_res_option);
-          else if(object instanceof Artist)
-              return handleMenuClick(activity,(Artist)object,string_res_option);
+            return handleMenuClick(activity, (Playlist) object, string_res_option);
+        else if (object instanceof Artist)
+            return handleMenuClick(activity, (Artist) object, string_res_option);
         return false;
     }
 }

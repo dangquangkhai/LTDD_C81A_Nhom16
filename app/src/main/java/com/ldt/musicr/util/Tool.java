@@ -32,7 +32,7 @@ import es.dmoral.toasty.Toasty;
 import static android.content.Context.VIBRATOR_SERVICE;
 
 public class Tool {
-    private static final String TAG="Tool";
+    private static final String TAG = "Tool";
 
     private static Tool tool;
     private Context context;
@@ -43,14 +43,14 @@ public class Tool {
     public static float AlphaTwo = 1;
 
     public static void init(Context context) {
-        if(tool==null) tool = new Tool();
+        if (tool == null) tool = new Tool();
         tool.context = context;
         Tool.getScreenSize(context);
 
     }
 
     public static void vibrate(Context context) {
-        if(context==null) return;
+        if (context == null) return;
         Vibrator vibrator = (Vibrator) context.getSystemService(VIBRATOR_SERVICE);
 
         if (Build.VERSION.SDK_INT >= 26) {
@@ -66,41 +66,45 @@ public class Tool {
         context = null;
         tool = null;
     }
+
     public static Tool getInstance() {
         return tool;
     }
 
     private ArrayList<WallpaperChangedNotifier> notifiers = new ArrayList<>();
     private ArrayList<Boolean> CallFirstTime = new ArrayList<>();
+
     public void AddWallpaperChangedNotifier(WallpaperChangedNotifier notifier) {
         notifiers.add(notifier);
         CallFirstTime.add(false);
     }
+
     public void clear() {
         notifiers.clear();
     }
+
     public void remove(WallpaperChangedNotifier notifier) {
         notifiers.remove(notifier);
     }
 
     public interface WallpaperChangedNotifier {
-        void onWallpaperChanged(Bitmap original, Bitmap blur) ;
+        void onWallpaperChanged(Bitmap original, Bitmap blur);
     }
 
     private Bitmap originalWallPaper;
     private Bitmap blurWallPaper;
-    private Bitmap getActiveWallPaper()
-    {
+
+    private Bitmap getActiveWallPaper() {
         final WallpaperManager wallpaperManager = WallpaperManager.getInstance(context);
         final Drawable wallpaperDrawable = wallpaperManager.getDrawable();
 
-        Bitmap bmp = ((BitmapDrawable)wallpaperDrawable).getBitmap();
-        if(bmp.getWidth()>0) return bmp.copy(bmp.getConfig(),true);
-        return Bitmap.createBitmap(150,150, Bitmap.Config.ARGB_8888);
+        Bitmap bmp = ((BitmapDrawable) wallpaperDrawable).getBitmap();
+        if (bmp.getWidth() > 0) return bmp.copy(bmp.getConfig(), true);
+        return Bitmap.createBitmap(150, 150, Bitmap.Config.ARGB_8888);
     }
 
     private Bitmap blurWallBitmap() {
-        return BitmapEditor.getBlurredWithGoodPerformance(context,originalWallPaper,1,12,1.6f);
+        return BitmapEditor.getBlurredWithGoodPerformance(context, originalWallPaper, 1, 12, 1.6f);
     }
     /*private Bitmap getCropCenterScreenBitmap(Bitmap source_bitmap) {
         Rectangle rect_parent_in_bitmap = new Rectangle();
@@ -142,12 +146,15 @@ public class Tool {
 
     private boolean mDarkWallpaper = false;
     private int mAverageColor = Color.WHITE;
+
     public int getAverageColor() {
         return mAverageColor;
     }
+
     public boolean isDarkWallpaper() {
         return mDarkWallpaper;
     }
+
     public static int getContrastVersionForColor(int color) {
         float[] hsv = new float[3];
         Color.RGBToHSV(Color.red(color), Color.green(color), Color.blue(color),
@@ -163,85 +170,105 @@ public class Tool {
 
 
     private static int GlobalColor = 0xffff4081;
-    private static int SurfaceColor =0xff007AFF;
+    private static int SurfaceColor = 0xff007AFF;
+
     public static void setSurfaceColor(int globalColor) {
         SurfaceColor = ColorReferTo(globalColor);
 
     }
 
     /**
-     *  A color get in 7 basic color, nearly the global color
+     * A color get in 7 basic color, nearly the global color
+     *
      * @return a color which nearly the global color
      */
     public static boolean WHITE_TEXT_THEME = true;
+
     public static int getBaseColor() {
         return SurfaceColor;
     }
-    public static void setMostCommonColor(int globalColor)
-    {
+
+    public static void setMostCommonColor(int globalColor) {
         GlobalColor = globalColor;
     }
 
     /**
      * The most common color get from the art song.
+     *
      * @return integer value of color
      */
-    public static int getMostCommonColor()
-    {
+    public static int getMostCommonColor() {
         return GlobalColor;
     }
 
     public static void setOneDps(float width) {
-        oneDPs =width;
+        oneDPs = width;
         Log.d(TAG, "oneDps = " + oneDPs);
     }
+
     public static int getHeavyColor() {
         switch (SurfaceColor) {
-            case 0xffFF3B30 : return 0xff770000;
-            case 0xffFF9500 : return 0xff923C00;
-            case 0xffFFCC00 : return  0xffAF8700;
-            case 0xff4CD964 :return 0xff005800;
-            case 0xff5AC8FA: return 0xff0058AA;
-            case 0xff007AFF: return 0xff00218B;
-            case 0xff5855D6: return 0xff162EA6;
+            case 0xffFF3B30:
+                return 0xff770000;
+            case 0xffFF9500:
+                return 0xff923C00;
+            case 0xffFFCC00:
+                return 0xffAF8700;
+            case 0xff4CD964:
+                return 0xff005800;
+            case 0xff5AC8FA:
+                return 0xff0058AA;
+            case 0xff007AFF:
+                return 0xff00218B;
+            case 0xff5855D6:
+                return 0xff162EA6;
             default: //0xffFB2C57
-                return  0xffb60024;
+                return 0xffb60024;
         }
     }
+
     public static int getHeavyColor(int color_in7_basic) {
         switch (color_in7_basic) {
-            case 0xffFF3B30 : return 0xff770000;
-            case 0xffFF9500 : return 0xff923C00;
-            case 0xffFFCC00 : return  0xff802D00;
-            case 0xff4CD964 :return 0xff005800;
-            case 0xff5AC8FA: return 0xff0058AA;
-            case 0xff007AFF: return 0xff00218B;
-            case 0xff5855D6: return 0xff162EA6;
+            case 0xffFF3B30:
+                return 0xff770000;
+            case 0xffFF9500:
+                return 0xff923C00;
+            case 0xffFFCC00:
+                return 0xff802D00;
+            case 0xff4CD964:
+                return 0xff005800;
+            case 0xff5AC8FA:
+                return 0xff0058AA;
+            case 0xff007AFF:
+                return 0xff00218B;
+            case 0xff5855D6:
+                return 0xff162EA6;
             default: //0xffFB2C57
-                return  0xffb60024;
+                return 0xffb60024;
         }
     }
+
     public static class Avatar {
         public static int getDevideSize(int sizeUWant, Bitmap original) {
-            float sizeYouWant= sizeUWant;
+            float sizeYouWant = sizeUWant;
             int original_width = original.getWidth();
             int original_height = original.getHeight();
             int sizeOriginal = (original_height < original_width) ? original_width : original_height; // lấy cái lớn hơn
-            float devided = (sizeOriginal/sizeYouWant);
+            float devided = (sizeOriginal / sizeYouWant);
             //     System.out.printf(devided+" ");
-            int i=1;
-            while (true)
-            {
-                if(devided<i)
+            int i = 1;
+            while (true) {
+                if (devided < i)
                     break;
-                else i*=2;
+                else i *= 2;
             }
             //   System.out.printf(i+" ");
-            if((devided-i/2)<(1/6.0f*i))
-                i/=2;
+            if ((devided - i / 2) < (1 / 6.0f * i))
+                i /= 2;
             return i;
         }
     }
+
     public static int ColorReferTo(int cmc) {
         float[] hsv = new float[3];
         Color.colorToHSV(cmc, hsv);
@@ -257,18 +284,19 @@ public class Tool {
         if (toEight <= 7) return 0xff5855D6;
         return 0xffFF2D55;
     }
-    public static int Path_Is_Exist(String dir_path)
-    {
+
+    public static int Path_Is_Exist(String dir_path) {
         File dir = new File(dir_path);
-        if(!dir.exists()) return -1;
-        if(dir.isDirectory()) return 1;
-        if(dir.isFile()) return  2;
+        if (!dir.exists()) return -1;
+        if (dir.isDirectory()) return 1;
+        if (dir.isFile()) return 2;
         return 0;
     }
+
     public static int StatusHeight = -1;
-    public static int getStatusHeight(Resources myR)
-    {
-        if(StatusHeight!=-1) return StatusHeight;
+
+    public static int getStatusHeight(Resources myR) {
+        if (StatusHeight != -1) return StatusHeight;
         int height;
         int idSbHeight = myR.getIdentifier("status_bar_height", "dimen", "android");
         if (idSbHeight > 0) {
@@ -278,10 +306,11 @@ public class Tool {
             height = 0;
             //        Toast.makeText(this,"Resources NOT found",Toast.LENGTH_LONG).show();
         }
-        StatusHeight =height;
+        StatusHeight = height;
         return StatusHeight;
     }
-    public static float getPixelsFromDPs(Context activity, int dps){
+
+    public static float getPixelsFromDPs(Context activity, int dps) {
         /*
             public abstract Resources getResources ()
 
@@ -329,53 +358,55 @@ public class Tool {
         return (TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_DIP, dps, r.getDisplayMetrics()));
     }
-    public static float getOneDps(Context context)
-    {
-        if(oneDPs !=-1) return oneDPs;
+
+    public static float getOneDps(Context context) {
+        if (oneDPs != -1) return oneDPs;
         //      oneDPs = context.getResources().getDimensionPixelOffset(R.dimen.oneDP);
-        oneDPs = getPixelsFromDPs(context,1);
+        oneDPs = getPixelsFromDPs(context, 1);
         return oneDPs;
     }
-    public static float oneDPs =-1;
-    public static int getDpsFromPixel(Activity activity,int px) {
+
+    public static float oneDPs = -1;
+
+    public static int getDpsFromPixel(Activity activity, int px) {
         DisplayMetrics displayMetrics = activity.getResources().getDisplayMetrics();
         return Math.round(px / (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
     }
+
     static int[] screenSize;
     static float[] screenSizeInDp;
     public static boolean HAD_GOT_SCREEN_SIZE = false;
-    public static int[] getScreenSize(Context context)
-    {
-        if(!HAD_GOT_SCREEN_SIZE) {
+
+    public static int[] getScreenSize(Context context) {
+        if (!HAD_GOT_SCREEN_SIZE) {
             Point p = new Point();
             Display d = ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay(); // this will get the view of screen
             d.getRealSize(p);
             int width = p.x;
             int height = p.y;
-            screenSize = new int[] {width,height};
-            screenSizeInDp = new float[] {(width+0.0f)/getOneDps(context),(height+0.0f)/getOneDps(context)};
+            screenSize = new int[]{width, height};
+            screenSizeInDp = new float[]{(width + 0.0f) / getOneDps(context), (height + 0.0f) / getOneDps(context)};
             HAD_GOT_SCREEN_SIZE = true;
         }
         return screenSize;
     }
+
     public static int[] getScreenSize(boolean sure) {
         return screenSize;
     }
 
-    public static int[] getRefreshScreenSize(Context context)
-    {
+    public static int[] getRefreshScreenSize(Context context) {
         HAD_GOT_SCREEN_SIZE = false;
         return getScreenSize(context);
     }
 
-    public static float[] getScreenSizeInDp(Context context)
-    {
-        if(!HAD_GOT_SCREEN_SIZE) getScreenSize(context);
+    public static float[] getScreenSizeInDp(Context context) {
+        if (!HAD_GOT_SCREEN_SIZE) getScreenSize(context);
         return screenSizeInDp;
     }
 
 
-    public static boolean hasSoftKeys(WindowManager windowManager){
+    public static boolean hasSoftKeys(WindowManager windowManager) {
         Display d = windowManager.getDefaultDisplay();
 
         DisplayMetrics realDisplayMetrics = new DisplayMetrics();
@@ -394,34 +425,34 @@ public class Tool {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
-    public static int getNavigationHeight(Activity activity)
-    {
+    public static int getNavigationHeight(Activity activity) {
 
         int navigationBarHeight = 0;
         int resourceId = activity.getResources().getIdentifier("navigation_bar_height", "dimen", "android");
         if (resourceId > 0) {
             navigationBarHeight = activity.getResources().getDimensionPixelSize(resourceId);
         }
-        if(!hasSoftKeys(activity.getWindowManager())) return 0;
-        return  navigationBarHeight;
+        if (!hasSoftKeys(activity.getWindowManager())) return 0;
+        return navigationBarHeight;
     }
-    public static String convertByteArrayToString(byte[] b)
-    {
-        String r ="";
+
+    public static String convertByteArrayToString(byte[] b) {
+        String r = "";
         int len = b.length;
-        for(int i=0;i<len;i++)
-            if(i!=len-1) r+=Integer.toHexString(b[i])+":";
-            else r+=b[i];
-        return  r;
+        for (int i = 0; i < len; i++)
+            if (i != len - 1) r += Integer.toHexString(b[i]) + ":";
+            else r += b[i];
+        return r;
     }
-    public static void showToast(Context context,String text, int time)
-    {
-      final Toast toast;
-      //toast =  Toasty.warning(context,text,time);
-      toast = Toasty.custom(context,text, R.drawable.emoticon_excited,R.color.library_back_color,time,true,true);
-     // toast.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER_VERTICAL,0,0);
+
+    public static void showToast(Context context, String text, int time) {
+        final Toast toast;
+        //toast =  Toasty.warning(context,text,time);
+        toast = Toasty.custom(context, text, R.drawable.emoticon_excited, R.color.library_back_color, time, true, true);
+        // toast.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER_VERTICAL,0,0);
         toast.show();
     }
+
     private static boolean drawn = false;
 
     public static boolean isDrawn() {
@@ -431,6 +462,7 @@ public class Tool {
     public static void setDrawn(boolean Drawn) {
         drawn = Drawn;
     }
+
     private static boolean splashGone = false;
 
     public static boolean isSplashGone() {
@@ -440,7 +472,8 @@ public class Tool {
     public static void setSplashGone(boolean splashGone) {
         Tool.splashGone = splashGone;
     }
-    public static String getStringTagForView(View v){
+
+    public static String getStringTagForView(View v) {
         //   Log.d("Sticky","getStringTagForView");
 
         Object tagObject = v.getTag();

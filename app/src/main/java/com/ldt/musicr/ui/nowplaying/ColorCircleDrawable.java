@@ -15,7 +15,8 @@ public class ColorCircleDrawable extends Drawable {
         this.mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         this.mPaint.setColor(color);
     }
-    public void setColor(int color){
+
+    public void setColor(int color) {
         this.mPaint.setColor(color);
         this.invalidateSelf();
     }
@@ -29,7 +30,7 @@ public class ColorCircleDrawable extends Drawable {
     @Override
     protected void onBoundsChange(final Rect bounds) {
         super.onBoundsChange(bounds);
-        mRadius = (int) (Math.min(bounds.width(), bounds.height()) / 2f*0.85f);
+        mRadius = (int) (Math.min(bounds.width(), bounds.height()) / 2f * 0.85f);
     }
 
     @Override

@@ -30,20 +30,21 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class NowPlayingAdapter extends RecyclerView.Adapter<NowPlayingAdapter.ItemHolder> implements Callback {
-    private static final String TAG ="NowPlayingAdapter";
+    private static final String TAG = "NowPlayingAdapter";
     private ArrayList<Song> mData = new ArrayList<>();
     private Context mContext;
+
     public NowPlayingAdapter(Context context) {
         mContext = context;
     }
 
     public void setData(List<Song> data) {
-        if(mData.equals(data)) {
+        if (mData.equals(data)) {
             Log.d(TAG, "setData: equal");
             return;
         }
         mData.clear();
-        if(data!=null) {
+        if (data != null) {
             mData.addAll(data);
         }
         this.notifyDataSetChanged();
@@ -52,7 +53,7 @@ public class NowPlayingAdapter extends RecyclerView.Adapter<NowPlayingAdapter.It
     @NonNull
     @Override
     public ItemHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_art_now_playing,viewGroup,false);
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_art_now_playing, viewGroup, false);
         return new ItemHolder(v);
     }
 
@@ -82,8 +83,9 @@ public class NowPlayingAdapter extends RecyclerView.Adapter<NowPlayingAdapter.It
 
         public ItemHolder(@NonNull View itemView) {
             super(itemView);
-            ButterKnife.bind(this,itemView);
+            ButterKnife.bind(this, itemView);
         }
+
         private void bind(Song song) {
  /*           Picasso.get().load(Util.getAlbumArtUri(song.albumId))
                     .error(R.drawable.speaker2)
@@ -91,7 +93,7 @@ public class NowPlayingAdapter extends RecyclerView.Adapter<NowPlayingAdapter.It
                     .stableKey("album_id="+song.albumId+"_"+song.dateModified)
                     .into(mImage,NowPlayingAdapter.this);*/
 
-            Artist artist = ArtistLoader.getArtist(mContext,song.artistId);
+            Artist artist = ArtistLoader.getArtist(mContext, song.artistId);
             int[] screen = Tool.getScreenSize(mContext);
 
             Glide.with(mContext)
@@ -100,8 +102,8 @@ public class NowPlayingAdapter extends RecyclerView.Adapter<NowPlayingAdapter.It
                     .placeholder(R.drawable.speaker2)
                     .error(
                             ArtistGlideRequest.Builder.from(GlideApp.with(mContext), artist).tryToLoadOriginal(true).whichImage(1).generateBuilder(mContext).buildRequestDrawable()
-                                    .error(ArtistGlideRequest.Builder.from(GlideApp.with(mContext),artist).tryToLoadOriginal(false).whichImage(1).generateBuilder(mContext).buildRequestDrawable().error(R.drawable.speaker2)
-                    ))
+                                    .error(ArtistGlideRequest.Builder.from(GlideApp.with(mContext), artist).tryToLoadOriginal(false).whichImage(1).generateBuilder(mContext).buildRequestDrawable().error(R.drawable.speaker2)
+                                    ))
                     .into(mImage);
      /*       ArtistGlideRequest.Builder.from(GlideApp.with(getContext()), mArtist)
                     .tryToLoadOriginal(true)

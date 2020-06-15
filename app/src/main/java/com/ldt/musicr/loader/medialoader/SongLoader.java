@@ -15,14 +15,21 @@ import android.util.Log;
 import android.webkit.MimeTypeMap;
 
 import com.ldt.musicr.App;
+import com.ldt.musicr.api.customModels.ApiResponse;
+import com.ldt.musicr.api.providers.EntertainmentProvider;
+import com.ldt.musicr.api.utils.ReflectionHelper;
 import com.ldt.musicr.model.Song;
 import com.ldt.musicr.provider.BlacklistStore;
 import com.ldt.musicr.util.PreferenceUtil;
 
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 import org.jaudiotagger.audio.AudioFile;
 import org.jaudiotagger.audio.AudioFileIO;
 import org.jaudiotagger.tag.FieldKey;
 import org.jaudiotagger.tag.Tag;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -32,6 +39,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -76,9 +84,9 @@ public class SongLoader {
         String extension = "";
 
         try {
-            if (path!=null) {
+            if (path != null) {
                 String name = path.toString();
-                extension = name.substring(name.lastIndexOf(".") +1);
+                extension = name.substring(name.lastIndexOf(".") + 1);
             }
         } catch (Exception e) {
             extension = "";
@@ -92,13 +100,15 @@ public class SongLoader {
         ArrayList<File> files = new ArrayList<>();
         ArrayList<File> noMedias = new ArrayList<>();
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O&&!forceOldWay) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && !forceOldWay) {
 
             String root = Environment.getExternalStorageDirectory().getAbsolutePath();
 
             try {
                 Files.walk(Paths.get(root)).filter(path -> NO_MEDIA_TAG.equals(path.getFileName().toString())).map(Path::toFile).collect(Collectors.toCollection(() -> noMedias));
-            } catch (Exception ignored) {};
+            } catch (Exception ignored) {
+            }
+            ;
             for (int i = 0, noMediaPathsSize = noMedias.size(); i < noMediaPathsSize; i++) {
 
                 try {
@@ -108,10 +118,10 @@ public class SongLoader {
             }
         } else {
             File root = Environment.getExternalStorageDirectory();
-            getAllNoMediaDirectories(noMedias,root);
+            getAllNoMediaDirectories(noMedias, root);
             for (File f :
                     noMedias) {
-                getAllMp3FileBelow26(files,f);
+                getAllMp3FileBelow26(files, f);
             }
         }
 
@@ -125,22 +135,18 @@ public class SongLoader {
             Log.d(TAG, "find " + file.getAbsolutePath());
         }
 
-        return new long[] {files.size(),end-start};
-     }
+        return new long[]{files.size(), end - start};
+    }
 
     private static void getAllMp3FileBelow26(ArrayList<File> list, File directory) {
 
         File[] files = directory.listFiles();
 
-        for (File file : files)
-        {
-            if (file.isFile()&&isAudioExtension(file.getAbsolutePath()))
-            {
+        for (File file : files) {
+            if (file.isFile() && isAudioExtension(file.getAbsolutePath())) {
                 list.add(file);
-            }
-            else if (file.isDirectory())
-            {
-               getAllMp3FileBelow26(list, file);
+            } else if (file.isDirectory()) {
+                getAllMp3FileBelow26(list, file);
             }
         }
     }
@@ -149,29 +155,25 @@ public class SongLoader {
 
         File[] files = directory.listFiles();
 
-        for (File file : files)
-        {
-            if (file.isFile()&&NO_MEDIA_TAG.equals(file.getName()))
-            {
+        for (File file : files) {
+            if (file.isFile() && NO_MEDIA_TAG.equals(file.getName())) {
                 File parent = file.getParentFile();
                 list.add(parent);
                 break;
-            }
-            else if (file.isDirectory())
-            {
+            } else if (file.isDirectory()) {
                 getAllNoMediaDirectories(list, file);
             }
         }
     }
 
     private static boolean isAudioExtension(Path path) {
-        if(path==null) return false;
+        if (path == null) return false;
         String mime = MimeTypeMap.getSingleton().getMimeTypeFromExtension(getFileExtension(path.toString()));
         return mime != null && mime.contains("audio");
     }
 
     private static boolean isAudioExtension(String path) {
-        if(path==null) return false;
+        if (path == null) return false;
         String mime = MimeTypeMap.getSingleton().getMimeTypeFromExtension(getFileExtension(path));
         return mime != null && mime.contains("audio");
     }
@@ -182,7 +184,7 @@ public class SongLoader {
         ArrayList<Path> audioPaths = new ArrayList<>();
         List<Path> noMediaPaths = new ArrayList<>();
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             try {
                 Files.walk(Paths.get(root)).filter(path -> NO_MEDIA_TAG.equals(path.getFileName().toString())).collect(Collectors.toCollection(() -> noMediaPaths));
             } catch (IOException e) {
@@ -194,23 +196,24 @@ public class SongLoader {
                 noMediaPaths.set(i, parent);
             }
 
-                try {
-               Files.walk(Paths.get(root)).filter(path -> !Files.isDirectory(path) && noMediaPaths.contains(path.getParent()) && isAudioExtension(path)).collect(Collectors.toCollection(() -> audioPaths));
-            } catch (Exception ignored) {}
+            try {
+                Files.walk(Paths.get(root)).filter(path -> !Files.isDirectory(path) && noMediaPaths.contains(path.getParent()) && isAudioExtension(path)).collect(Collectors.toCollection(() -> audioPaths));
+            } catch (Exception ignored) {
+            }
         }
         long end = System.nanoTime();
 
         for (Path path : audioPaths) {
-            Log.d(TAG, "find "+path);
+            Log.d(TAG, "find " + path);
         }
 
-        return new long[]{audioPaths.size(),end -start};
+        return new long[]{audioPaths.size(), end - start};
     }
 
     public static void doSomething(@NonNull Context context) {
         Log.d(TAG, "find way one");
 
-        long[] w1,w2;
+        long[] w1, w2;
         w1 = doFindAudioWayOne(true);
         w1 = doFindAudioWayOne(true);
         Log.d(TAG, "find way two");
@@ -232,17 +235,17 @@ public class SongLoader {
 
         w2[1]/=100;*/
 
-        Log.d(TAG, "way 1 find "+w1[0]+" files in "+w1[1]);
-        Log.d(TAG, "way 2 find "+w2[0]+" files in "+w2[1]);
+        Log.d(TAG, "way 1 find " + w1[0] + " files in " + w1[1]);
+        Log.d(TAG, "way 2 find " + w2[0] + " files in " + w2[1]);
 
-        if(true) return;
-        String where = MediaStore.Files.FileColumns.MIME_TYPE  +" = 'audio/mpeg'" +// MediaStore.Files.FileColumns.MEDIA_TYPE_NONE + " AND " +
-               // MediaStore.Files.FileColumns.TITLE + " LIKE %"+"50MB"+"%";
-               // MediaStore.Files.FileColumns.
-                " AND " +MediaStore.Files.FileColumns.MEDIA_TYPE +" != " +MediaStore.Files.FileColumns.MEDIA_TYPE_AUDIO +
+        if (true) return;
+        String where = MediaStore.Files.FileColumns.MIME_TYPE + " = 'audio/mpeg'" +// MediaStore.Files.FileColumns.MEDIA_TYPE_NONE + " AND " +
+                // MediaStore.Files.FileColumns.TITLE + " LIKE %"+"50MB"+"%";
+                // MediaStore.Files.FileColumns.
+                " AND " + MediaStore.Files.FileColumns.MEDIA_TYPE + " != " + MediaStore.Files.FileColumns.MEDIA_TYPE_AUDIO +
                 "";
-        Log.d(TAG, "find in: "+MediaStore.Files.getContentUri("external").getPath());
-        Log.d(TAG, "find in:"+ Environment.getExternalStorageDirectory().getAbsolutePath());
+        Log.d(TAG, "find in: " + MediaStore.Files.getContentUri("external").getPath());
+        Log.d(TAG, "find in:" + Environment.getExternalStorageDirectory().getAbsolutePath());
         FilenameFilter filenameFilter = new FilenameFilter() {
             @Override
             public boolean accept(File file, String name) {
@@ -251,44 +254,47 @@ public class SongLoader {
         };
         File root = new File(Environment.getExternalStorageDirectory().getAbsolutePath());
 
-        String[] list = root.list (filenameFilter);
-        Log.d(TAG, "find list :"+ Arrays.toString(list));
+        String[] list = root.list(filenameFilter);
+        Log.d(TAG, "find list :" + Arrays.toString(list));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             try {
                 //Files.walk(Paths.get(root.getAbsolutePath())).filter(path -> Files.isRegularFile(path)&&"audio/mpeg".equals(MimeTypeMap.getSingleton().getMimeTypeFromExtension(getFileExtension(path)))).forEach(x -> Log.d(TAG, "find file "+x.toAbsolutePath()));
-                Files.walk(Paths.get(root.getAbsolutePath())).filter(path -> NO_MEDIA_TAG.equals(path.getFileName().toString())).forEach(x -> Log.d(TAG, "find file "+x.toAbsolutePath()));
-            } catch (Exception ignored) {}
+                Files.walk(Paths.get(root.getAbsolutePath())).filter(path -> NO_MEDIA_TAG.equals(path.getFileName().toString())).forEach(x -> Log.d(TAG, "find file " + x.toAbsolutePath()));
+            } catch (Exception ignored) {
+            }
         }
-        if(true) return;
-        Log.d(TAG, "find where ["+where+"]");
+        if (true) return;
+        Log.d(TAG, "find where [" + where + "]");
         ContentResolver resolver = context.getContentResolver();
-        if(resolver!=null) {
+        if (resolver != null) {
             Cursor cursor = context.getContentResolver().query(MediaStore.Files.getContentUri("external"),
                     new String[]{MediaStore.Files.FileColumns.DATA}, where, null, null);
 
-            if(cursor!=null) Log.d(TAG, "find "+cursor.getCount()+" hidden folders");
+            if (cursor != null) Log.d(TAG, "find " + cursor.getCount() + " hidden folders");
             if (cursor != null && cursor.moveToFirst()) {
                 String path;
                 File file;
                 do {
                     path = cursor.getString(cursor.getColumnIndex(MediaStore.Files.FileColumns.DATA));
-                  //  Log.d(TAG, "find hidden files: \""+path+"\"");
+                    //  Log.d(TAG, "find hidden files: \""+path+"\"");
                     file = new File(path);
-                    if(file.exists()) {
+                    if (file.exists()) {
                         AudioFile audioFile = null;
 
                         try {
                             audioFile = AudioFileIO.read(file);
-                        } catch (Exception ignored) {};
+                        } catch (Exception ignored) {
+                        }
+                        ;
 
-                        if(audioFile!=null) {
+                        if (audioFile != null) {
                             Tag tag = audioFile.getTag();
-                            if(tag!=null) {
-                              String artist =  tag.getFirst(FieldKey.ARTIST);
-                              String title = tag.getFirst(FieldKey.TITLE);
-                              String album = tag.getFirst(FieldKey.ALBUM);
-                              String genre = tag.getFirst(FieldKey.GENRE);
-                                Log.d(TAG, "find hidden song: title = "+title+", artist = "+artist+", album = "+album+", genre = "+genre);
+                            if (tag != null) {
+                                String artist = tag.getFirst(FieldKey.ARTIST);
+                                String title = tag.getFirst(FieldKey.TITLE);
+                                String album = tag.getFirst(FieldKey.ALBUM);
+                                String genre = tag.getFirst(FieldKey.GENRE);
+                                Log.d(TAG, "find hidden song: title = " + title + ", artist = " + artist + ", album = " + album + ", genre = " + genre);
                             }
                         }
                     }
@@ -304,8 +310,36 @@ public class SongLoader {
         return getSongs(cursor);
     }
 
+    public static ArrayList<Song> getAllSongsV2(Context context, String sortOrder) {
+        EntertainmentProvider _provider = new EntertainmentProvider();
+        List<com.ldt.musicr.api.models.Song> lstSong = _provider.getAllSongSync();
+/*        _provider.getAllSong(new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                Log.e("Callbacl Exception", e.getMessage());
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                List<com.ldt.musicr.api.models.Song> lstSong = new ArrayList<>();
+                ApiResponse _res = ReflectionHelper._mapper().readValue(response.body().string().toString(), ApiResponse.class);
+                lstSong = ReflectionHelper._mapper().convertValue(_res.getData(), lstSong.getClass());
+            }
+        });*/
+        Cursor cursor = makeSongCursor(context, null, null, sortOrder);
+        List<Song> lstLocalSong = getSongs(cursor);
+        for (com.ldt.musicr.api.models.Song item : lstSong ) {
+            Song newSongLocal = new Song(item.getId(), item.getName(), 0, 2020, 0, "https://8r0mhcvmh3.execute-api.ap-southeast-1.amazonaws.com/dev" + item.getPath(), 0, 0, "Hello", item.getArtist().getId(), item.getArtist().getFirstname() + " " + item.getArtist().getLastname());
+            newSongLocal.image = item.getImage();
+            newSongLocal.path = item.getPath();
+            newSongLocal.isWeb = true;
+            lstLocalSong.add(newSongLocal);
+        }
+        return (ArrayList<Song>) lstLocalSong;
+    }
+
     public static ArrayList<Song> getAllSongs(Context context, String sortOrder) {
-        Cursor  cursor = makeSongCursor(context, null, null,sortOrder);
+        Cursor cursor = makeSongCursor(context, null, null, sortOrder);
         return getSongs(cursor);
     }
 
@@ -375,7 +409,7 @@ public class SongLoader {
     public static Cursor makeSongCursor(@NonNull final Context context, @Nullable String selection, String[] selectionValues, final String sortOrder) {
 
         if (selection != null && !selection.trim().equals("")) {
-            selection = addMinDurationFilter(BASE_SELECTION)  + " AND " + selection;
+            selection = addMinDurationFilter(BASE_SELECTION) + " AND " + selection;
         } else {
             selection = addMinDurationFilter(BASE_SELECTION);
         }
@@ -386,14 +420,14 @@ public class SongLoader {
             selection = generateBlacklistSelection(selection, paths.size());
             selectionValues = addBlacklistSelectionValues(selectionValues, paths);
 
-            Log.d(TAG, "makeSongCursor: selection ["+selection+"]");
+            Log.d(TAG, "makeSongCursor: selection [" + selection + "]");
 
             String values = "";
             for (String value :
                     selectionValues) {
                 values += "[" + value + "], ";
             }
-            Log.d(TAG, "makeSongCursor: values = "+ values);
+            Log.d(TAG, "makeSongCursor: values = " + values);
         }
 
         try {
@@ -405,7 +439,7 @@ public class SongLoader {
     }
 
     private static String addMinDurationFilter(String selection) {
-        return selection + " AND "+ AudioColumns.DURATION+" > " + App.getInstance().getPreferencesUtility().getMinDuration();
+        return selection + " AND " + AudioColumns.DURATION + " > " + App.getInstance().getPreferencesUtility().getMinDuration();
     }
 
     private static String generateBlacklistSelection(String selection, int pathCount) {

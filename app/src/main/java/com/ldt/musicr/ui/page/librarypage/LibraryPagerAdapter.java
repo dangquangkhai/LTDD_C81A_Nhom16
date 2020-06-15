@@ -21,6 +21,7 @@ public class LibraryPagerAdapter extends FragmentPagerAdapter {
     }
 
     private ArrayList<Fragment> mData = new ArrayList<>();
+
     private void initData() {
         mData.add(new SongChildTab());
         mData.add(new PlaylistChildTab());
@@ -52,12 +53,18 @@ public class LibraryPagerAdapter extends FragmentPagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         switch (position) {
-            case 0: return mContext.getResources().getString(R.string.songs);
-            case 1: return mContext.getResources().getString(R.string.playlists);
-            case 2: return mContext.getResources().getString(R.string.artists);
-            case 3: return mContext.getResources().getString(R.string.genres);
-            case 4: return mContext.getResources().getString(R.string.folders);
-            default: return null;
+            case 0:
+                return mContext.getResources().getString(R.string.songs);
+            case 1:
+                return mContext.getResources().getString(R.string.playlists);
+            case 2:
+                return mContext.getResources().getString(R.string.artists);
+            case 3:
+                return mContext.getResources().getString(R.string.genres);
+            case 4:
+                return mContext.getResources().getString(R.string.folders);
+            default:
+                return null;
         }
 
     }

@@ -45,7 +45,7 @@ public class MoreOptionFragment extends BaseMusicServiceSupportFragment {
     @Nullable
     @Override
     protected View onCreateView(LayoutInflater inflater, ViewGroup container) {
-        return inflater.inflate(R.layout.more_options_layout,container, false);
+        return inflater.inflate(R.layout.more_options_layout, container, false);
     }
 
     private Unbinder mUnbinder;
@@ -53,13 +53,13 @@ public class MoreOptionFragment extends BaseMusicServiceSupportFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mUnbinder = ButterKnife.bind(this,view);
+        mUnbinder = ButterKnife.bind(this, view);
         onPaletteChanged();
     }
 
     @Override
     public void onDestroyView() {
-        if(mUnbinder!=null) {
+        if (mUnbinder != null) {
             mUnbinder.unbind();
             mUnbinder = null;
         }
@@ -80,32 +80,33 @@ public class MoreOptionFragment extends BaseMusicServiceSupportFragment {
     public void onPaletteChanged() {
         super.onPaletteChanged();
         int color = Tool.getBaseColor();
-        ((TextView)mRoot.findViewById(R.id.title)).setTextColor(color);
-        ((ImageView)mRoot.findViewById(R.id.back_button)).setColorFilter(color);
+        ((TextView) mRoot.findViewById(R.id.title)).setTextColor(color);
+        ((ImageView) mRoot.findViewById(R.id.back_button)).setColorFilter(color);
 
     }
 
     @OnClick(R.id.button_one)
     void ButtonOneClick() {
-        if(getContext()!=null) {
+        if (getContext() != null) {
             ArrayList<Song> songs = SongLoader.getAllSongs(getContext());
             MediaPlayer mediaPlayer = new MediaPlayer();
             try {
                 mediaPlayer.setDataSource(songs.get(new Random().nextInt(songs.size())).data);
                 mediaPlayer.prepare();
-                mediaPlayer.seekTo(1000*25);
+                mediaPlayer.seekTo(1000 * 25);
                 mRoot.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         try {
                             mediaPlayer.release();
-                        } catch (Exception ignored) {}
+                        } catch (Exception ignored) {
+                        }
                     }
-                },20*1000);
+                }, 20 * 1000);
                 mediaPlayer.start();
             } catch (Exception e) {
                 e.printStackTrace();
-                Toasty.error(getContext(),"Couldn't play songs").show();
+                Toasty.error(getContext(), "Couldn't play songs").show();
             }
         }
     }

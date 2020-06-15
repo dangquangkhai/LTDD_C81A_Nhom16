@@ -16,7 +16,8 @@ import com.ldt.musicr.ui.widget.bubblepicker.model.PickerItem
 class BubblePicker : GLTextureView {
 
     // Background variable
-    @ColorInt var background: Int = 0
+    @ColorInt
+    var background: Int = 0
         set(value) {
             field = value
             renderer.backgroundColor = Color(value)

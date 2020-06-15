@@ -95,44 +95,44 @@ public class SeekBar {
         initBitmap();
     }
 
-    private void initAttrs(AttributeSet attrs){
+    private void initAttrs(AttributeSet attrs) {
         TypedArray t = getContext().obtainStyledAttributes(attrs, R.styleable.RangeSeekBar);
-        if (t == null)return;
+        if (t == null) return;
         indicatorMargin = (int) t.getDimension(R.styleable.RangeSeekBar_rsb_indicator_margin, 0);
         indicatorDrawableId = t.getResourceId(R.styleable.RangeSeekBar_rsb_indicator_drawable, 0);
         indicatorShowMode = t.getInt(R.styleable.RangeSeekBar_rsb_indicator_show_mode, INDICATOR_MODE_ALWAYS_HIDE);
-        indicatorHeight = (int)t.getDimension(R.styleable.RangeSeekBar_rsb_indicator_height, 0);
-        indicatorWidth = (int)t.getDimension(R.styleable.RangeSeekBar_rsb_indicator_width, 0);
-        indicatorTextSize = (int)t.getDimension(R.styleable.RangeSeekBar_rsb_indicator_text_size, Utils.dp2px(getContext(), 14));
-        indicatorTextColor =  t.getColor(R.styleable.RangeSeekBar_rsb_indicator_text_color, Color.WHITE);
+        indicatorHeight = (int) t.getDimension(R.styleable.RangeSeekBar_rsb_indicator_height, 0);
+        indicatorWidth = (int) t.getDimension(R.styleable.RangeSeekBar_rsb_indicator_width, 0);
+        indicatorTextSize = (int) t.getDimension(R.styleable.RangeSeekBar_rsb_indicator_text_size, Utils.dp2px(getContext(), 14));
+        indicatorTextColor = t.getColor(R.styleable.RangeSeekBar_rsb_indicator_text_color, Color.WHITE);
         indicatorBackgroundColor = t.getColor(R.styleable.RangeSeekBar_rsb_indicator_background_color, ContextCompat.getColor(getContext(), R.color.colorAccent));
-        indicatorPaddingLeft = (int)t.getDimension(R.styleable.RangeSeekBar_rsb_indicator_padding_left, 0);
-        indicatorPaddingRight = (int)t.getDimension(R.styleable.RangeSeekBar_rsb_indicator_padding_right, 0);
-        indicatorPaddingTop = (int)t.getDimension(R.styleable.RangeSeekBar_rsb_indicator_padding_top, 0);
-        indicatorPaddingBottom = (int)t.getDimension(R.styleable.RangeSeekBar_rsb_indicator_padding_bottom, 0);
-        indicatorArrowSize = (int)t.getDimension(R.styleable.RangeSeekBar_rsb_indicator_arrow_size, 0);
+        indicatorPaddingLeft = (int) t.getDimension(R.styleable.RangeSeekBar_rsb_indicator_padding_left, 0);
+        indicatorPaddingRight = (int) t.getDimension(R.styleable.RangeSeekBar_rsb_indicator_padding_right, 0);
+        indicatorPaddingTop = (int) t.getDimension(R.styleable.RangeSeekBar_rsb_indicator_padding_top, 0);
+        indicatorPaddingBottom = (int) t.getDimension(R.styleable.RangeSeekBar_rsb_indicator_padding_bottom, 0);
+        indicatorArrowSize = (int) t.getDimension(R.styleable.RangeSeekBar_rsb_indicator_arrow_size, 0);
         thumbDrawableId = t.getResourceId(R.styleable.RangeSeekBar_rsb_thumb_drawable, R.drawable.rsb_default_thumb);
         thumbInactivatedDrawableId = t.getResourceId(R.styleable.RangeSeekBar_rsb_thumb_inactivated_drawable, 0);
-        thumbSize = (int) t.getDimension(R.styleable.RangeSeekBar_rsb_thumb_size, Utils.dp2px(getContext(),26));
+        thumbSize = (int) t.getDimension(R.styleable.RangeSeekBar_rsb_thumb_size, Utils.dp2px(getContext(), 26));
         thumbScaleRatio = t.getFloat(R.styleable.RangeSeekBar_rsb_thumb_scale_ratio, 1f);
         indicatorRadius = t.getDimension(R.styleable.RangeSeekBar_rsb_indicator_radius, 0f);
         t.recycle();
     }
 
-    private void initVariables(){
-        if (indicatorHeight <= 0 && indicatorShowMode != INDICATOR_MODE_ALWAYS_HIDE){
+    private void initVariables() {
+        if (indicatorHeight <= 0 && indicatorShowMode != INDICATOR_MODE_ALWAYS_HIDE) {
             throw new IllegalArgumentException("if you want to show indicator, the indicatorHeight must > 0");
         }
-        if (indicatorArrowSize <= 0){
+        if (indicatorArrowSize <= 0) {
             indicatorArrowSize = thumbSize / 4;
         }
     }
 
-    private Context getContext(){
+    private Context getContext() {
         return rangeSeekBar.getContext();
     }
 
-    private Resources getResources(){
+    private Resources getResources() {
         if (getContext() != null) return getContext().getResources();
         return null;
     }
@@ -150,8 +150,8 @@ public class SeekBar {
      * 计算每个按钮的位置和尺寸
      * Calculates the position and size of each button
      *
-     * @param x position x
-     * @param y position y
+     * @param x               position x
+     * @param y               position y
      * @param parentLineWidth the RangSeerBar progress line width
      */
     protected void onSizeChanged(int x, int y, int parentLineWidth) {
@@ -169,19 +169,20 @@ public class SeekBar {
     /**
      * This method will draw the indicator background dynamically according to the text.
      * you can use to set padding
-     * @param canvas Canvas
+     *
+     * @param canvas    Canvas
      * @param text2Draw Indicator text
      */
-    private void drawIndicator(Canvas canvas, String text2Draw){
+    private void drawIndicator(Canvas canvas, String text2Draw) {
         paint.setStyle(Paint.Style.FILL);
         paint.setColor(indicatorBackgroundColor);
         int contentWidth = indicatorTextRect.width() + indicatorPaddingLeft + indicatorPaddingRight;
         int realIndicatorWidth;
         if (indicatorWidth <= 0) {
             realIndicatorWidth = contentWidth;
-        }else if (indicatorWidth < contentWidth) {
+        } else if (indicatorWidth < contentWidth) {
             realIndicatorWidth = contentWidth;
-        }else {
+        } else {
             realIndicatorWidth = indicatorWidth;
         }
 
@@ -190,7 +191,7 @@ public class SeekBar {
         indicatorRect.right = indicatorRect.left + realIndicatorWidth;
         indicatorRect.bottom = indicatorRect.top + indicatorHeight;
         //draw default indicator arrow
-        if (indicatorBitmap == null){
+        if (indicatorBitmap == null) {
             //arrow three point
             //  b   c
             //    a
@@ -213,38 +214,38 @@ public class SeekBar {
         int defaultPaddingOffset = Utils.dp2px(getContext(), 1);
         int leftOffset = indicatorRect.width() / 2 - (int) (lineWidth * currPercent) - rangeSeekBar.getLineLeft() + defaultPaddingOffset;
         int rightOffset = indicatorRect.width() / 2 - (int) (lineWidth * (1 - currPercent)) - rangeSeekBar.getLinePaddingRight() + defaultPaddingOffset;
-        if (leftOffset > 0){
+        if (leftOffset > 0) {
             indicatorRect.left += leftOffset;
             indicatorRect.right += leftOffset;
-        }else if (rightOffset > 0){
+        } else if (rightOffset > 0) {
             indicatorRect.left -= rightOffset;
             indicatorRect.right -= rightOffset;
         }
 
         //draw indicator background
-        if (indicatorBitmap != null){
+        if (indicatorBitmap != null) {
             Utils.drawNinePath(canvas, indicatorBitmap, indicatorRect);
-        }else if (indicatorRadius > 0f){
+        } else if (indicatorRadius > 0f) {
             canvas.drawRoundRect(new RectF(indicatorRect), indicatorRadius, indicatorRadius, paint);
-        }else {
+        } else {
             canvas.drawRect(indicatorRect, paint);
         }
 
         //draw indicator content text
         int tx, ty;
-        if (indicatorPaddingLeft > 0){
+        if (indicatorPaddingLeft > 0) {
             tx = indicatorRect.left + indicatorPaddingLeft;
-        }else if (indicatorPaddingRight > 0){
+        } else if (indicatorPaddingRight > 0) {
             tx = indicatorRect.right - indicatorPaddingRight - indicatorTextRect.width();
         } else {
             tx = indicatorRect.left + (realIndicatorWidth - indicatorTextRect.width()) / 2;
         }
 
-        if (indicatorPaddingTop > 0){
+        if (indicatorPaddingTop > 0) {
             ty = indicatorRect.top + indicatorTextRect.height() + indicatorPaddingTop;
-        }else if (indicatorPaddingBottom > 0){
+        } else if (indicatorPaddingBottom > 0) {
             ty = indicatorRect.bottom - indicatorTextRect.height() - indicatorPaddingBottom;
-        }else {
+        } else {
             ty = indicatorRect.bottom - (indicatorHeight - indicatorTextRect.height()) / 2 + 1;
         }
 
@@ -267,22 +268,22 @@ public class SeekBar {
         String text2Draw = userText2Draw;
         if (isLeft) {
             if (userText2Draw == null) {
-                if (indicatorTextDecimalFormat != null){
+                if (indicatorTextDecimalFormat != null) {
                     text2Draw = indicatorTextDecimalFormat.format(states[0].value);
-                }else {
+                } else {
                     text2Draw = states[0].indicatorText;
                 }
             }
         } else {
             if (userText2Draw == null) {
-                if (indicatorTextDecimalFormat != null){
+                if (indicatorTextDecimalFormat != null) {
                     text2Draw = indicatorTextDecimalFormat.format(states[1].value);
-                }else {
+                } else {
                     text2Draw = states[1].indicatorText;
                 }
             }
         }
-        if (indicatorTextStringFormat != null){
+        if (indicatorTextStringFormat != null) {
             text2Draw = String.format(indicatorTextStringFormat, text2Draw);
         }
         paint.setTextSize(indicatorTextSize);
@@ -309,9 +310,9 @@ public class SeekBar {
      * @param canvas canvas
      */
     private void drawThumb(Canvas canvas) {
-        if (thumbInactivatedBitmap != null && !isActivate){
-                canvas.drawBitmap(thumbInactivatedBitmap, 0, rangeSeekBar.getLineTop() + (rangeSeekBar.getProgressHeight() - thumbSize) / 2, null);
-        }else if (thumbBitmap != null){
+        if (thumbInactivatedBitmap != null && !isActivate) {
+            canvas.drawBitmap(thumbInactivatedBitmap, 0, rangeSeekBar.getLineTop() + (rangeSeekBar.getProgressHeight() - thumbSize) / 2, null);
+        } else if (thumbBitmap != null) {
             canvas.drawBitmap(thumbBitmap, 0, rangeSeekBar.getLineTop() + (rangeSeekBar.getProgressHeight() - thumbSize) / 2, null);
         }
     }
@@ -372,7 +373,7 @@ public class SeekBar {
         userText2Draw = text;
     }
 
-    public void setIndicatorTextDecimalFormat(String formatPattern){
+    public void setIndicatorTextDecimalFormat(String formatPattern) {
         indicatorTextDecimalFormat = new DecimalFormat(formatPattern);
     }
 
@@ -380,7 +381,7 @@ public class SeekBar {
         return indicatorTextDecimalFormat;
     }
 
-    public void setIndicatorTextStringFormat(String formatPattern){
+    public void setIndicatorTextStringFormat(String formatPattern) {
         indicatorTextStringFormat = formatPattern;
     }
 
@@ -496,7 +497,7 @@ public class SeekBar {
     }
 
     public void setThumbInactivatedDrawableId(int thumbInactivatedDrawableId) {
-        if (thumbInactivatedDrawableId != 0 && getResources() != null){
+        if (thumbInactivatedDrawableId != 0 && getResources() != null) {
             this.thumbInactivatedDrawableId = thumbInactivatedDrawableId;
             thumbInactivatedBitmap = Utils.drawableToBitmap(thumbSize, getResources().getDrawable(thumbInactivatedDrawableId));
         }
@@ -529,13 +530,14 @@ public class SeekBar {
         isActivate = activate;
     }
 
-    public void setTypeface(Typeface typeFace){
+    public void setTypeface(Typeface typeFace) {
         paint.setTypeface(typeFace);
     }
 
 
     /**
      * when you touch or move, the thumb will scale, default not scale
+     *
      * @return default 1.0f
      */
     public float getThumbScaleRatio() {

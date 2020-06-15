@@ -97,9 +97,9 @@ public class AppWidgetCard extends BaseAppWidget {
             @Override
             public void run() {
                 if (target != null) {
-                  //  Glide.clear(target);
+                    //  Glide.clear(target);
                 }
-                AppWidgetTarget awt = new AppWidgetTarget(service,R.id.image, appWidgetView, appWidgetIds) {
+                AppWidgetTarget awt = new AppWidgetTarget(service, R.id.image, appWidgetView, appWidgetIds) {
                     @Override
                     public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
                         super.onResourceReady(resource, transition);
@@ -112,6 +112,7 @@ public class AppWidgetCard extends BaseAppWidget {
                         update(null, MaterialValueHelper.getSecondaryTextColor(service, true));
 
                     }
+
                     private void update(@Nullable Bitmap bitmap, int color) {
                         // Set correct drawable for pause state
                         int playPauseRes = isPlaying ? R.drawable.ic_pause_white : R.drawable.ic_play_white;

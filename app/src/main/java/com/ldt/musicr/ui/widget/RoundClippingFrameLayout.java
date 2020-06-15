@@ -63,10 +63,12 @@ public class RoundClippingFrameLayout extends SupportDarkenFrameLayout implement
         ROUND_ALL,
         ROUND_TOP
     }
+
     protected ROUND_TYPE round_type = ROUND_TYPE.ROUND_ALL;
+
     public void setRoundType(ROUND_TYPE type, boolean shouldInvalidate) {
         round_type = type;
-        if(shouldInvalidate) invalidate();
+        if (shouldInvalidate) invalidate();
     }
 
     protected void _onSizeChanged(int w, int h, int oldw, int oldh) {
@@ -81,74 +83,79 @@ public class RoundClippingFrameLayout extends SupportDarkenFrameLayout implement
     Canvas c;
     private float number = 0;
     private boolean drawRound = false;
+
     @Override
     public void setRoundNumber(float number, boolean shouldDraw) {
-        if(number>1) number=1;
-        else if(number<0) number = 0;
+        if (number > 1) number = 1;
+        else if (number < 0) number = 0;
 
         if (this.number != number) {
             this.number = number;
-       //     Log.d(TAG, "number = " + number);
-            if(
-                    (number==0&&drawRound)  ||
-                    (number!=0&&!drawRound)) {
+            //     Log.d(TAG, "number = " + number);
+            if (
+                    (number == 0 && drawRound) ||
+                            (number != 0 && !drawRound)) {
                 drawRound = !drawRound;
                 shouldDraw = true;
             }
         }
-        if(shouldDraw) invalidate();
+        if (shouldDraw) invalidate();
     }
+
     @Override
-    protected void onDraw(Canvas canvas)
-    {
-      // canvas.drawColor(backColor);
-       // canvas.drawPath(BitmapEditor.RoundedRect(0,0,getWidth(),getHeight(),maxRx*eachDP*number,maxRy*eachDP*number,false),paint);
+    protected void onDraw(Canvas canvas) {
+        // canvas.drawColor(backColor);
+        // canvas.drawPath(BitmapEditor.RoundedRect(0,0,getWidth(),getHeight(),maxRx*eachDP*number,maxRy*eachDP*number,false),paint);
     }
-    int backColor =0xff111111;
+
+    int backColor = 0xff111111;
+
     @Override
-    public void setBackColor(int color)
-    {
+    public void setBackColor(int color) {
         backColor = color;
     }
 
     private float maxRx = 18;
     private float eachDP = 0;
+
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        if(bitmap==null) {
-            bitmap = Bitmap.createBitmap(getWidth(),getHeight(), Bitmap.Config.ARGB_8888);
+        if (bitmap == null) {
+            bitmap = Bitmap.createBitmap(getWidth(), getHeight(), Bitmap.Config.ARGB_8888);
             c = new Canvas(bitmap);
             p = new Paint(Paint.ANTI_ALIAS_FLAG);
             p.setColor(0xff1ED760);
             p.setStyle(Paint.Style.STROKE);
-            p.setStrokeWidth(getWidth()/16);
+            p.setStrokeWidth(getWidth() / 16);
 
             //    c.drawColor(Color.BLACK);
             p.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_OUT));
-        }
-        else {
+        } else {
             c.setBitmap(null);
             bitmap.recycle();
-            bitmap = Bitmap.createBitmap(getWidth(),getHeight(), Bitmap.Config.ARGB_8888);
+            bitmap = Bitmap.createBitmap(getWidth(), getHeight(), Bitmap.Config.ARGB_8888);
             c.setBitmap(bitmap);
         }
     }
+
     private void dispatchNormalDraw(Canvas canvas) {
         super.dispatchDraw(canvas);
     }
 
     Paint p;
-     @Override
-     protected void dispatchDraw(Canvas canvas) {
-         if(drawRound) dispatchSupportRoundedDraw(canvas);
-         else
-             dispatchNormalDraw(canvas);
-     }
+
+    @Override
+    protected void dispatchDraw(Canvas canvas) {
+        if (drawRound) dispatchSupportRoundedDraw(canvas);
+        else
+            dispatchNormalDraw(canvas);
+    }
+
     protected void dispatchSupportRoundedDraw(Canvas canvas) {
-        if(eachDP==0) eachDP = Tool.getOneDps(getContext());
+        if (eachDP == 0) eachDP = Tool.getOneDps(getContext());
         //   Log.d(TAG, "dispatchDraw");
-        if(bitmap==null) {
+        if (bitmap == null) {
             bitmap = Bitmap.createBitmap(getWidth(), getHeight(), Bitmap.Config.ARGB_8888);
             c = new Canvas(bitmap);
             p = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -158,8 +165,7 @@ public class RoundClippingFrameLayout extends SupportDarkenFrameLayout implement
 
             //    c.drawColor(Color.BLACK);
             p.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_OUT));
-        }
-        else
+        } else
             bitmap.eraseColor(0);
         super.dispatchDraw(c);
         // Bitmap bitmap1 =  Bitmap.createBitmap(canvas.getWidth(),canvas.getHeight(),Bitmap.Config.ARGB_8888);
@@ -167,14 +173,14 @@ public class RoundClippingFrameLayout extends SupportDarkenFrameLayout implement
 
 //        c.drawPath(BitmapEditor.RoundedRect(-getWidth()/32,-getWidth()/32,getWidth()+getWidth()/32,getHeight()+getWidth()/32,getWidth()/16,getWidth()/16,false),p);
 
-        float value = maxRx*eachDP*number;
+        float value = maxRx * eachDP * number;
         p.setStrokeWidth(value);
-        c.drawPath(BitmapEditor.RoundedRect(-value/2,-value/2,getWidth()+value/2,getHeight()+value/2,value,value,false),p);
+        c.drawPath(BitmapEditor.RoundedRect(-value / 2, -value / 2, getWidth() + value / 2, getHeight() + value / 2, value, value, false), p);
 
 //        canvas.drawPath(BitmapEditor.RoundedRect(0,0,canvas.getWidth(),canvas.getHeight(),maxRx*eachDP*number,maxRy*eachDP*number,true),paint);
 
         //   c.drawBitmap(bitmap,0,0,p);
-        canvas.drawBitmap(bitmap,0,0,null);
+        canvas.drawBitmap(bitmap, 0, 0, null);
     }
 
     public float getNumber() {

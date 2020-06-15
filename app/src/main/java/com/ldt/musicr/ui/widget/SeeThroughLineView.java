@@ -125,7 +125,7 @@ public class SeeThroughLineView extends View {
     private void drawBackground() {
         clear(mBackgroundCanvas);
         mBackground.draw(mBackgroundCanvas);
-     //   mBackgroundCanvas.drawBitmap(mMaskBitmap, 0.f, 0.f, backgroundCloudEffectPaint);
+        //   mBackgroundCanvas.drawBitmap(mMaskBitmap, 0.f, 0.f, backgroundCloudEffectPaint);
 
         int padding[] = new int[]
                 {
@@ -135,23 +135,23 @@ public class SeeThroughLineView extends View {
                         getPaddingBottom()
                 };
 
-        mBackgroundCanvas.drawRect(getRectSupportPadding(padding,0,0,-1,padding[3]),mPaint);
+        mBackgroundCanvas.drawRect(getRectSupportPadding(padding, 0, 0, -1, padding[3]), mPaint);
     }
+
     // -1 meaning match parent
-private Rect getRectSupportPadding(int[] padding,int left,int top,int width , int height )
-{
-    int canvasW = mBackgroundCanvas.getWidth();
-    int canvasH = mBackgroundCanvas.getHeight();
+    private Rect getRectSupportPadding(int[] padding, int left, int top, int width, int height) {
+        int canvasW = mBackgroundCanvas.getWidth();
+        int canvasH = mBackgroundCanvas.getHeight();
 
-    if(width==-1) width = canvasW;
-    if(height==-1) width = canvasH;
-    int Left = padding[0] +left,Top=padding[1] +top,Right = Left+width,Bottom = Top +height;
+        if (width == -1) width = canvasW;
+        if (height == -1) width = canvasH;
+        int Left = padding[0] + left, Top = padding[1] + top, Right = Left + width, Bottom = Top + height;
 
 
-   if(Right>canvasW-padding[2]) Right = canvasW-padding[2];
-    if(Bottom>canvasH-padding[3]) Bottom = canvasH - padding[3];
-    return new Rect(Left,Top,Right,Bottom);
-}
+        if (Right > canvasW - padding[2]) Right = canvasW - padding[2];
+        if (Bottom > canvasH - padding[3]) Bottom = canvasH - padding[3];
+        return new Rect(Left, Top, Right, Bottom);
+    }
 
 
     private static void clear(Canvas canvas) {

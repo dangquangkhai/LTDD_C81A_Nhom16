@@ -74,6 +74,7 @@ public class Util {
     public static Uri getAlbumArtUri(long albumId) {
         return ContentUris.withAppendedId(Uri.parse("content://media/external/audio/albumart"), albumId);
     }
+
     public static String getAlbumArtForFile(String filePath) {
         MediaMetadataRetriever mmr = new MediaMetadataRetriever();
         mmr.setDataSource(filePath);
@@ -342,6 +343,7 @@ public class Util {
         display.getSize(size);
         return size;
     }
+
     public static void hideSoftKeyboard(@Nullable Activity activity) {
         if (activity != null) {
             View currentFocus = activity.getCurrentFocus();

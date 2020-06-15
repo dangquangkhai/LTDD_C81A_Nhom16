@@ -29,7 +29,7 @@ public class UpdateToastMediaScannerCompletionListener implements MediaScannerCo
         this.toBeScanned = toBeScanned;
         scannedFiles = activity.getString(R.string.scanned_files);
         couldNotScanFiles = activity.getString(R.string.could_not_scan_files);
-       // toast = Toast.makeText(activity.getApplicationContext(), "", Toast.LENGTH_SHORT);
+        // toast = Toast.makeText(activity.getApplicationContext(), "", Toast.LENGTH_SHORT);
         activityWeakReference = new WeakReference<>(activity);
     }
 
@@ -44,7 +44,7 @@ public class UpdateToastMediaScannerCompletionListener implements MediaScannerCo
                     scanned++;
                 }
                 String text = " " + String.format(scannedFiles, scanned, toBeScanned.length) + (failed > 0 ? " " + String.format(couldNotScanFiles, failed) : "");
-                Toasty.normal(activity,text).show();
+                Toasty.normal(activity, text).show();
             });
         }
     }

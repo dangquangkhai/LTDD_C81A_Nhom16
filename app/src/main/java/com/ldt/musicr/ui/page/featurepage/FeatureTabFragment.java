@@ -23,7 +23,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class FeatureTabFragment extends BaseMusicServiceSupportFragment implements FeaturePlaylistAdapter.PlaylistClickListener, MusicServiceEventListener {
-    private static final String TAG ="FeatureTabFragment";
+    private static final String TAG = "FeatureTabFragment";
 
     @BindView(R.id.status_bar)
     View mStatusView;
@@ -45,11 +45,11 @@ public class FeatureTabFragment extends BaseMusicServiceSupportFragment implemen
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(this,view);
+        ButterKnife.bind(this, view);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.flatOrange);
         mSwipeRefreshLayout.setOnRefreshListener(this::refreshData);
 
-        mFeatureLinearHolder = new FeatureLinearHolder(getActivity(),mNestedScrollView);
+        mFeatureLinearHolder = new FeatureLinearHolder(getActivity(), mNestedScrollView);
         mFeatureLinearHolder.setPlaylistItemClick(this);
 
         refreshData();
@@ -57,7 +57,7 @@ public class FeatureTabFragment extends BaseMusicServiceSupportFragment implemen
 
     private void refreshData() {
 
-        if(getActivity()!=null) {
+        if (getActivity() != null) {
             mFeatureLinearHolder.setSuggestedPlaylists(PlaylistLoader.getAllPlaylistsWithAuto(getActivity()));
             mFeatureLinearHolder.setSuggestedSongs(SongLoader.getAllSongs(getActivity()));
         }
@@ -68,7 +68,7 @@ public class FeatureTabFragment extends BaseMusicServiceSupportFragment implemen
 
     @Override
     public void onSetStatusBarMargin(int value) {
-        if(mStatusView!=null) {
+        if (mStatusView != null) {
             mStatusView.getLayoutParams().height = value;
             mStatusView.requestLayout();
         }
@@ -76,7 +76,7 @@ public class FeatureTabFragment extends BaseMusicServiceSupportFragment implemen
 
     @Override
     public void onClickPlaylist(Playlist playlist, @org.jetbrains.annotations.Nullable Bitmap bitmap) {
-        SupportFragment sf = PlaylistPagerFragment.newInstance(getContext(),playlist,bitmap);
+        SupportFragment sf = PlaylistPagerFragment.newInstance(getContext(), playlist, bitmap);
         getNavigationController().presentFragment(sf);
     }
 

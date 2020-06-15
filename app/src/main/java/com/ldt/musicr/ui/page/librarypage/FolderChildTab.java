@@ -16,13 +16,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class FolderChildTab extends Fragment {
-    public static final String TAG ="FolderChildTab";
+    public static final String TAG = "FolderChildTab";
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.folder_child_tab,container,false);
+        return inflater.inflate(R.layout.folder_child_tab, container, false);
     }
 
     @Override

@@ -46,5 +46,10 @@
       <option name="name" value="D:\Android-Sdk\extras\google\m2repository" />
       <option name="url" value="file:/$PROJECT_DIR$/../../../Android-Sdk/extras/google/m2repository" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven2" />
+      <option name="name" value="maven2" />
+      <option name="url" value="https://oss.jfrog.org/libs-snapshot" />
+    </remote-repository>
   </component>
 </project>

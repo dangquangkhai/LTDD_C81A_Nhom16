@@ -25,6 +25,7 @@ import com.ldt.musicr.ui.bottomsheet.SortOrderBottomSheet;
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
 
 import org.jetbrains.annotations.NotNull;
+
 import java.util.Random;
 
 import butterknife.BindView;
@@ -66,15 +67,16 @@ public class SongChildAdapter extends AbsSongAdapter
     @Override
     protected void onMenuItemClick(int positionInData) {
         OptionBottomSheet
-                .newInstance(mOptionRes,getData().get(positionInData))
-                .show(((AppCompatActivity)mContext).getSupportFragmentManager(), "song_popup_menu");
+                .newInstance(mOptionRes, getData().get(positionInData))
+                .show(((AppCompatActivity) mContext).getSupportFragmentManager(), "song_popup_menu");
     }
+
     public int MEDIA_LAYOUT_RESOURCE = R.layout.item_song_normal;
 
     @Override
     public int getItemViewType(int position) {
-       if(position==0) return R.layout.item_sort_song_child;
-       return MEDIA_LAYOUT_RESOURCE;
+        if (position == 0) return R.layout.item_sort_song_child;
+        return MEDIA_LAYOUT_RESOURCE;
     }
 
     @Override
@@ -94,30 +96,33 @@ public class SongChildAdapter extends AbsSongAdapter
 
     @Override
     public int getSavedOrder() {
-        if(mSortOrderListener!=null)
+        if (mSortOrderListener != null)
             return mSortOrderListener.getSavedOrder();
         return 0;
     }
 
     @Override
     public void onOrderChanged(int newType, String name) {
-        if(mSortOrderListener!=null) {
+        if (mSortOrderListener != null) {
             mSortOrderListener.onOrderChanged(newType, name);
             notifyItemChanged(0);
         }
     }
+
     private SortOrderBottomSheet.SortOrderChangedListener mSortOrderListener;
+
     public void setSortOrderChangedListener(SortOrderBottomSheet.SortOrderChangedListener listener) {
         mSortOrderListener = listener;
     }
+
     public void removeOrderListener() {
         mSortOrderListener = null;
     }
 
     private void sortHolderClicked() {
-        if(mContext instanceof AppCompatActivity) {
+        if (mContext instanceof AppCompatActivity) {
             SortOrderBottomSheet bs = SortOrderBottomSheet.newInstance(this);
-            bs.show(((AppCompatActivity)mContext).getSupportFragmentManager(),TAG);
+            bs.show(((AppCompatActivity) mContext).getSupportFragmentManager(), TAG);
         }
     }
 
@@ -125,25 +130,26 @@ public class SongChildAdapter extends AbsSongAdapter
     @NotNull
     @Override
     public AbsBindAbleHolder onCreateViewHolder(@NotNull ViewGroup viewGroup, int viewType) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(viewType,viewGroup,false);
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(viewType, viewGroup, false);
 
-        if(viewType==R.layout.item_sort_song_child)
+        if (viewType == R.layout.item_sort_song_child)
             return new SortHolder(v);
 
         return new ItemHolder(v);
     }
+
     @Override
     public void onBindViewHolder(@NotNull AbsBindAbleHolder itemHolder, int position) {
-        if(itemHolder instanceof ItemHolder)
-            ((ItemHolder)itemHolder).bind(getData().get(getDataPosition(position)));
-        else ((SortHolder)itemHolder).bind(null);
+        if (itemHolder instanceof ItemHolder)
+            ((ItemHolder) itemHolder).bind(getData().get(getDataPosition(position)));
+        else ((SortHolder) itemHolder).bind(null);
     }
 
 
     public void randomize() {
-        if(getData().isEmpty()) return;
+        if (getData().isEmpty()) return;
         mRandomItem = mRandom.nextInt(getData().size());
-        if(mCallBack!=null) mCallBack.onFirstItemCreated(getData().get(mRandomItem));
+        if (mCallBack != null) mCallBack.onFirstItemCreated(getData().get(mRandomItem));
     }
 
     public SongChildAdapter setCallBack(PreviewRandomPlayAdapter.FirstItemCallBack callBack) {
@@ -160,26 +166,26 @@ public class SongChildAdapter extends AbsSongAdapter
     public void shuffle() {
         final Handler handler = new Handler();
         handler.postDelayed(() -> {
-            MusicPlayerRemote.openQueue(getData(), mRandomItem,true);
+            MusicPlayerRemote.openQueue(getData(), mRandomItem, true);
             //MusicPlayer.playAll(mContext, mSongIDs, mRandomItem, -1, Util.IdType.NA, false);
-            Handler handler1 = new Handler() ;
+            Handler handler1 = new Handler();
             handler1.postDelayed(() -> {
                 notifyItemChanged(getMediaHolderPosition(mMediaPlayDataItem));
                 notifyItemChanged(getMediaHolderPosition(mRandomItem));
                 mMediaPlayDataItem = mRandomItem;
                 randomize();
-            },50);
-        },100);
+            }, 50);
+        }, 100);
     }
 
 
     @NonNull
     @Override
     public String getSectionName(int position) {
-        if(position==0) return "A";
-        if(getData().get(position-1).title.isEmpty())
-        return "A";
-        return getData().get(position-1).title.substring(0,1);
+        if (position == 0) return "A";
+        if (getData().get(position - 1).title.isEmpty())
+            return "A";
+        return getData().get(position - 1).title.substring(0, 1);
     }
 
     public int getViewTypeHeight(RecyclerView recyclerView, @Nullable RecyclerView.ViewHolder viewHolder, int viewType) {
@@ -197,7 +203,9 @@ public class SongChildAdapter extends AbsSongAdapter
     }
 
     public class SortHolder extends AbsBindAbleHolder {
-        @BindView(R.id.sort_text) TextView mSortText;
+        @BindView(R.id.sort_text)
+        TextView mSortText;
+
         @OnClick(R.id.sort_parent)
         void sortClicked() {
             sortHolderClicked();
@@ -205,17 +213,17 @@ public class SongChildAdapter extends AbsSongAdapter
 
         public SortHolder(View view) {
             super(view);
-            ButterKnife.bind(this,view);
+            ButterKnife.bind(this, view);
         }
 
         @Override
         public void bind(Object object) {
-            if(mSortOrderListener!=null) {
-              String str =  mContext.getResources().getString(
+            if (mSortOrderListener != null) {
+                String str = mContext.getResources().getString(
                         SortOrderBottomSheet.mSortStringRes[mSortOrderListener.getSavedOrder()]);
-              mSortText.setText(str);
+                mSortText.setText(str);
             }
-            }
+        }
     }
 
     public class ItemHolder extends AbsSongAdapter.SongHolder {

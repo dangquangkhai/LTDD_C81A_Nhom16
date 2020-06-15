@@ -23,13 +23,14 @@ public class CustomAudioWaveView extends WaveformFragment {
     protected String getFileName() {
         return audioPath;
     }
+
     String audioPath;
-public static CustomAudioWaveView Initialize(String AudioPath)
-   {
-     CustomAudioWaveView cawv = new CustomAudioWaveView();
-     cawv.audioPath = AudioPath;
-     return cawv;
-   }
+
+    public static CustomAudioWaveView Initialize(String AudioPath) {
+        CustomAudioWaveView cawv = new CustomAudioWaveView();
+        cawv.audioPath = AudioPath;
+        return cawv;
+    }
 
     /**
      * Optional - provide list of segments (start and stop values in seconds) and their corresponding colors

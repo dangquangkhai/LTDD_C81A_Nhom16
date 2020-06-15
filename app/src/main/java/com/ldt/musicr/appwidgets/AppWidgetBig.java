@@ -98,7 +98,7 @@ public class AppWidgetBig extends BaseAppWidget {
                 if (target != null) {
                     //Glide.clear(target);
                 }
-                AppWidgetTarget awt = new AppWidgetTarget(appContext,R.id.image, appWidgetView, appWidgetIds) {
+                AppWidgetTarget awt = new AppWidgetTarget(appContext, R.id.image, appWidgetView, appWidgetIds) {
                     @Override
                     public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
                         super.onResourceReady(resource, transition);
@@ -131,6 +131,7 @@ public class AppWidgetBig extends BaseAppWidget {
 
 
             }
+
             private void update(@Nullable Bitmap bitmap) {
                 if (bitmap == null) {
                     appWidgetView.setImageViewResource(R.id.image, R.drawable.music_style);

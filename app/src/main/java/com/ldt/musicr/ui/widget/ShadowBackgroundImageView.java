@@ -17,8 +17,10 @@ public class ShadowBackgroundImageView extends androidx.appcompat.widget.AppComp
     public ShadowBackgroundImageView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
+
     private Bitmap mMaskBitmap;
     private Canvas mMaskCanvas;
+
     private void createBitmaps(int w, int h) {
         mMaskBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
         mMaskCanvas = new Canvas(mMaskBitmap);
@@ -41,25 +43,29 @@ public class ShadowBackgroundImageView extends androidx.appcompat.widget.AppComp
             freeBitmaps();
             return;
         }
-        createBitmaps(w,h);
+        createBitmaps(w, h);
     }
+
     private void freeBitmaps() {
         mMaskCanvas = null;
         mMaskBitmap = null;
     }
+
     public ShadowBackgroundImageView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
+
     @Override
     protected void dispatchDraw(Canvas canvas) {
-       // canvas.drawColor(Color.RED);
+        // canvas.drawColor(Color.RED);
         super.dispatchDraw(canvas);
     }
+
     @Override
     protected void onDraw(Canvas canvas) {
-  //   Rect rect =    getClipBounds();
-    // rect.inset((int)(-50* oneDP),(int)(-50*oneDP));
-     //  super.onDraw(mMaskCanvas);
+        //   Rect rect =    getClipBounds();
+        // rect.inset((int)(-50* oneDP),(int)(-50*oneDP));
+        //  super.onDraw(mMaskCanvas);
         super.onDraw(canvas);
     }
 

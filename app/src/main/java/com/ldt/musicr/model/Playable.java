@@ -21,20 +21,20 @@ public class Playable {
     }
 
     public void setPlayableType(boolean isAllSong) {
-        if(isAllSong) {
+        if (isAllSong) {
             mPlayableType = ALL_SONGS;
         }
     }
 
     public Playable setTitle(String title) {
-        if(title!=null)  mTitle = title;
+        if (title != null) mTitle = title;
         else mTitle = "";
         return this;
     }
 
     public String getTitle(Context context) {
-        if(mPlayableType==ALL_SONGS) return context.getString(R.string.all_songs);
-        else if(mTitle.isEmpty()) return context.getString(R.string.unknown_playlist);
+        if (mPlayableType == ALL_SONGS) return context.getString(R.string.all_songs);
+        else if (mTitle.isEmpty()) return context.getString(R.string.unknown_playlist);
         else return mTitle;
     }
 }

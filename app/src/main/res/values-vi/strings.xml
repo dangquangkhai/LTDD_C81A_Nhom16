@@ -28,21 +28,58 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Cài đặt</string>
     <string name="trade_mark">Âm nhạc ®</string>
-    <string name="count_song"><xliff:g id="count">%d</xliff:g> song</string>
-    <string name="count_songs"><xliff:g id="count">%d</xliff:g> songs</string>
-    <string name="count_album"><xliff:g id="count">%d</xliff:g> album</string>
-    <string name="count_albums"><xliff:g id="count">%d</xliff:g> albums</string>
-    <string name="count_artist"><xliff:g id="count">%d</xliff:g> artist</string>
-    <string name="count_artists"><xliff:g id="count">%d</xliff:g> artists</string>
-    <string name="number_song_add_queue"><xliff:g example="1" id="number">%d</xliff:g> song added to the queue.</string>
-    <string name="number_songs_add_queue"><xliff:g example="1" id="number">%d</xliff:g> songs added to the queue.</string>
-    <string name="number_song_add_playlist"><xliff:g example="1" id="number">%d</xliff:g> song added to playlist.</string>
-    <string name="number_songs_add_playlist"><xliff:g example="1" id="number">%d</xliff:g> songs added to playlist.</string>
+    <string name="count_song">
+        <xliff:g id="count">%d</xliff:g>
+        song
+    </string>
+    <string name="count_songs">
+        <xliff:g id="count">%d</xliff:g>
+        songs
+    </string>
+    <string name="count_album">
+        <xliff:g id="count">%d</xliff:g>
+        album
+    </string>
+    <string name="count_albums">
+        <xliff:g id="count">%d</xliff:g>
+        albums
+    </string>
+    <string name="count_artist">
+        <xliff:g id="count">%d</xliff:g>
+        artist
+    </string>
+    <string name="count_artists">
+        <xliff:g id="count">%d</xliff:g>
+        artists
+    </string>
+    <string name="number_song_add_queue">
+        <xliff:g example="1" id="number">%d</xliff:g>
+        song added to the queue.
+    </string>
+    <string name="number_songs_add_queue">
+        <xliff:g example="1" id="number">%d</xliff:g>
+        songs added to the queue.
+    </string>
+    <string name="number_song_add_playlist">
+        <xliff:g example="1" id="number">%d</xliff:g>
+        song added to playlist.
+    </string>
+    <string name="number_songs_add_playlist">
+        <xliff:g example="1" id="number">%d</xliff:g>
+        songs added to playlist.
+    </string>
     <string name="combine_two_strings" translatable="false">%1$s | %2$s</string>
-    <string name="duration_format" translatable="false"><xliff:g id="hours">%1$s</xliff:g> <xliff:g id="minutes">%2$s</xliff:g></string>
-    <string name="durationformatshort" translatable="false"><xliff:g id="format">%2$d:%3$02d</xliff:g></string>
-    <string name="durationformatlong" translatable="false"><xliff:g id="format">%1$d:%2$02d:%3$02d</xliff:g></string>
-    <string name="playlist_last_added"> Mới thêm gần đây</string>
+    <string name="duration_format" translatable="false">
+        <xliff:g id="hours">%1$s</xliff:g>
+        <xliff:g id="minutes">%2$s</xliff:g>
+    </string>
+    <string name="durationformatshort" translatable="false">
+        <xliff:g id="format">%2$d:%3$02d</xliff:g>
+    </string>
+    <string name="durationformatlong" translatable="false">
+        <xliff:g id="format">%1$d:%2$02d:%3$02d</xliff:g>
+    </string>
+    <string name="playlist_last_added">Mới thêm gần đây</string>
     <string name="playlist_recently_played">Đã phát gần đây</string>
     <string name="playlist_top_tracks">Tuyển tập yêu thích</string>
     <string name="this_is_name_of_the_song">Đây là tên bài hát</string>
@@ -50,9 +87,6 @@
     <string name="the_artist_of_the_song">Đây là tên nghệ sỹ</string>
     <string name="this_is_artist_of_the_song">Đây là tên nghệ sỹ</string>
     <string name="error_playing_track">Error Playing Track</string>
-
-
-
 
 
     <string name="accessibility_play">Chơi</string>
@@ -82,8 +116,11 @@
     <string name="sort_order_entry_filename">Filename</string>
 
 
-    <string name="timber_source">Report any bugs <u> here </u> </string>
-    <string name="timber_feature_request">Specify any feature request in the Google+ community <u> here </u></string>
+    <string name="timber_source">Report any bugs <u>here</u>
+    </string>
+    <string name="timber_feature_request">Specify any feature request in the Google+ community
+        <u>here</u>
+    </string>
 
     <string name="menu_show_as">View As</string>
     <string name="menu_show_as_entry_list">List</string>
@@ -127,7 +164,9 @@
     <string name="timber_about_opensource">Timber is a open source Music Player developed by Naman Dwivedi.</string>
     <string name="summary_pause_detach">Toggle for pausing playback when headphone is detached</string>
     <string name="pause_detach">Pause on Detach</string>
-    <string name="summary_xposed_trackselector">Requires Xposed and XMediaNotificationTrackSelector Xposed module to be installed. This will provide access to playing queue from the notification bar itself.</string>
+    <string name="summary_xposed_trackselector">Requires Xposed and XMediaNotificationTrackSelector Xposed module to be
+        installed. This will provide access to playing queue from the notification bar itself.
+    </string>
     <string name="xposed_trackselector">Playing queue support in notification</string>
     <string name="currently_selected">Currently Selected</string>
 
@@ -220,7 +259,8 @@
     <string name="saved_playlist_to">Đã lưu danh sách phát tới %s</string>
     <string name="saving_changes">Đang lưu thay đổi</string>
     <string name="scanned_files">Đã quét xong</string>
-    <string name="some_files_are_not_listed_in_the_media_store">Một vài tập tin không tìm thấy trong Media Store</string>
+    <string name="some_files_are_not_listed_in_the_media_store">Một vài tập tin không tìm thấy trong Media Store
+    </string>
     <string name="sort_by_favor_asc">Sắp theo độ yêu thích</string>
     <string name="sort_by_favor_desc">Sắp theo độ yêu thích (ngược)</string>
     <string name="sort_by_name_asc">Sắp theo tên</string>
@@ -253,7 +293,9 @@
     <string name="allow_access">Cho phép truy cập</string>
     <string name="delete">Xóa</string>
     <string name="rename">Đổi tên</string>
-    <string name="grant_permission_order_description">Music ® cần quyền bộ nhớ để có thể truy cập vào thư viện nhạc. Nếu không có quyền này, ứng dụng sẽ không hoạt động đúng.</string>
+    <string name="grant_permission_order_description">Music ® cần quyền bộ nhớ để có thể truy cập vào thư viện nhạc. Nếu
+        không có quyền này, ứng dụng sẽ không hoạt động đúng.
+    </string>
     <string name="see_more_about">Xem thêm về</string>
     <string name="specific_playlist">Danh sách phát tùy chỉnh</string>
     <string name="show_lyric">Hiện lời bài hát</string>
@@ -264,8 +306,12 @@
     <string name="customization">Tùy biến giao diện</string>
     <string name="artist_image_background">Sử dụng ảnh nền là hình nghệ sỹ</string>
     <string name="in_app_volume">Âm lượng ứng dụng</string>
-    <string name="specific_playlist_note">Những bài hát xuất hiện trong những sách phát này sẽ không xuất hiện trong bất kỳ danh sách phát nào, kể cả Tất cả bài hát. Hãy tạo một vài danh sách để chứa các âm thanh như Danh sách đen, Sách nói…</string>
-    <string name="change_languague_note">Yêu cầu ứng dụng khởi động lại, nhanh thôi. Nhạc đang phát sẽ không bị tắt.</string>
+    <string name="specific_playlist_note">Những bài hát xuất hiện trong những sách phát này sẽ không xuất hiện trong bất
+        kỳ danh sách phát nào, kể cả Tất cả bài hát. Hãy tạo một vài danh sách để chứa các âm thanh như Danh sách đen,
+        Sách nói…
+    </string>
+    <string name="change_languague_note">Yêu cầu ứng dụng khởi động lại, nhanh thôi. Nhạc đang phát sẽ không bị tắt.
+    </string>
     <string name="more_setting">Cài đặt khác</string>
     <string name="back_description">Trở về trang trước</string>
     <string name="left_right_audio_balance">Cân bằng âm trái phải</string>

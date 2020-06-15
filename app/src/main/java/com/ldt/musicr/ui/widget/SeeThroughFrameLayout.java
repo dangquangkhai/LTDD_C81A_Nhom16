@@ -26,7 +26,7 @@ public class SeeThroughFrameLayout extends FrameLayout {
     private Bitmap mMaskBitmap;
     private Canvas mMaskCanvas;
     private Paint mPaint;
-    private Paint src_inPaint,standardPaint;
+    private Paint src_inPaint, standardPaint;
     private Drawable mBackgroundDrawable;
     private Bitmap mBackgroundBitmap;
     private Canvas mBackgroundCanvas;
@@ -40,7 +40,6 @@ public class SeeThroughFrameLayout extends FrameLayout {
         super(context, attrs);
         init();
     }
-
 
 
     @Override
@@ -100,18 +99,18 @@ public class SeeThroughFrameLayout extends FrameLayout {
 
     @Override
     protected void dispatchDraw(final Canvas canvas) {
-      //  Log.d("dispatchDraw called","stfl");
+        //  Log.d("dispatchDraw called","stfl");
         super.dispatchDraw(canvas);
 
-      //  if (isNothingToDraw()) {
-     //       return;
-     //   }
+        //  if (isNothingToDraw()) {
+        //       return;
+        //   }
         //drawMask();
-       // drawBackground();
+        // drawBackground();
         //canvas.drawBitmap(mBackgroundBitmap, 0.f, 0.f, standardPaint);
 
         standardPaint.setAlpha(100);
-        canvas.drawCircle(canvas.getWidth()/2,canvas.getHeight()/2,canvas.getWidth()/4,standardPaint);
+        canvas.drawCircle(canvas.getWidth() / 2, canvas.getHeight() / 2, canvas.getWidth() / 4, standardPaint);
     }
 
     private boolean isNothingToDraw() {
@@ -127,14 +126,15 @@ public class SeeThroughFrameLayout extends FrameLayout {
         super.onDraw(mMaskCanvas);
 
     }
+
     public ImageView applyDrawableView;
 
     private void drawBackground() {
         clear(mBackgroundCanvas);
         mBackgroundDrawable.draw(mBackgroundCanvas);
-       //  Drawable drawable = mBackgroundDrawable.mutate().getConstantState().newDrawable();
-       //  drawable.drawVisualWave(mBackgroundCanvas);
-      //  mBackgroundCanvas.drawBitmap(mMaskBitmap, 0.f, 0.f, backgroundCloudEffectPaint);
+        //  Drawable drawable = mBackgroundDrawable.mutate().getConstantState().newDrawable();
+        //  drawable.drawVisualWave(mBackgroundCanvas);
+        //  mBackgroundCanvas.drawBitmap(mMaskBitmap, 0.f, 0.f, backgroundCloudEffectPaint);
 
         int padding[] = new int[]
                 {
@@ -145,28 +145,28 @@ public class SeeThroughFrameLayout extends FrameLayout {
                 };
 
         //mBackgroundCanvas.drawRect(getRectSupportPadding(padding,0,0,-1,padding[3]),backgroundCloudEffectPaint);
-        mBackgroundCanvas.drawCircle(mBackgroundCanvas.getWidth()/2, mBackgroundCanvas.getHeight()/2, mBackgroundCanvas.getWidth()/4,
+        mBackgroundCanvas.drawCircle(mBackgroundCanvas.getWidth() / 2, mBackgroundCanvas.getHeight() / 2, mBackgroundCanvas.getWidth() / 4,
                 mPaint);
-     //   if(applyDrawableView!=null)
+        //   if(applyDrawableView!=null)
         //    applyDrawableView.setImageDrawable(mBackgroundDrawable.mutate().getConstantState().newDrawable());
     }
 
     // -1 meaning match parent
     @NonNull
-    private Rect getRectSupportPadding(int[] padding, int left, int top, int width , int height )
-    {
+    private Rect getRectSupportPadding(int[] padding, int left, int top, int width, int height) {
         int canvasW = mBackgroundCanvas.getWidth();
         int canvasH = mBackgroundCanvas.getHeight();
 
-        if(width==-1) width = canvasW;
-        if(height==-1) width = canvasH;
-        int Left = padding[0] +left,Top=padding[1] +top,Right = Left+width,Bottom = Top +height;
+        if (width == -1) width = canvasW;
+        if (height == -1) width = canvasH;
+        int Left = padding[0] + left, Top = padding[1] + top, Right = Left + width, Bottom = Top + height;
 
 
-        if(Right>canvasW-padding[2]) Right = canvasW-padding[2];
-        if(Bottom>canvasH-padding[3]) Bottom = canvasH - padding[3];
-        return new Rect(Left,Top,Right,Bottom);
+        if (Right > canvasW - padding[2]) Right = canvasW - padding[2];
+        if (Bottom > canvasH - padding[3]) Bottom = canvasH - padding[3];
+        return new Rect(Left, Top, Right, Bottom);
     }
+
     private void init() {
         src_inPaint = new Paint();
         src_inPaint.setColor(0x70000000);

@@ -81,7 +81,7 @@ public final class SortOrder {
 
         /* Song sort order artist */
         String SONG_ARTIST = MediaStore.Audio.Media.ARTIST;
-        String SONG_ARTIST_DESC = MediaStore.Audio.Media.ARTIST +" DESC";
+        String SONG_ARTIST_DESC = MediaStore.Audio.Media.ARTIST + " DESC";
 
         /* Song sort order album */
         String SONG_ALBUM = MediaStore.Audio.Media.ALBUM;

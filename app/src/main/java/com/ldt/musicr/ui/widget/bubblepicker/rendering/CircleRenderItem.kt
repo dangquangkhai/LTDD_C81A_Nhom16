@@ -36,23 +36,24 @@ data class CircleRenderItem(val pickerItem: PickerItem, val circleBody: CircleBo
     val currentPosition: Vec2
         get() = circleBody.physicalBody.position
 
-    private val isVisible : Boolean
+    private val isVisible: Boolean
         get() = circleBody.isVisible
     private var texture: Int = 0
     private var imageTexture: Int = 0
     private val currentTexture: Int
         get() = if (circleBody.isEnhanced()) imageTexture else texture
+
     public companion object {
         var bitmapSize = 64f
 
-        var textSizeRatio = 40f/256
-        set(value) {
-            field = textSizeRatio
-        }
+        var textSizeRatio = 40f / 256
+            set(value) {
+                field = textSizeRatio
+            }
 
         var textSize = textSizeRatio * bitmapSize
             get() {
-               return textSizeRatio * (bitmapSize)
+                return textSizeRatio * (bitmapSize)
             }
     }
 
@@ -174,11 +175,10 @@ data class CircleRenderItem(val pickerItem: PickerItem, val circleBody: CircleBo
     }
 
 
-
     private fun bindTexture(textureIds: IntArray, index: Int, withImage: Boolean): Int {
         glGenTextures(1, textureIds, index)
         val bitmap = createBitmap(withImage)
-                bitmap.toTexture(textureIds[index])
+        bitmap.toTexture(textureIds[index])
         return textureIds[index]
     }
 

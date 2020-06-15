@@ -16,6 +16,7 @@ public class BaseMediaLoader {
     private static final String TAG = "BaseMediaStoreManager";
 
     private Context mContext;
+
     public BaseMediaLoader() {
     }
 
@@ -25,7 +26,7 @@ public class BaseMediaLoader {
     public void init(@NonNull Context context) {
         mContext = context;
         mThreadNumber = PreferenceUtil.getInstance().getThreadNumber();
-        if(mExecutor != null) {
+        if (mExecutor != null) {
             ThreadFactory factory = new PriorityThreadFactory(Process.THREAD_PRIORITY_BACKGROUND);
             mExecutor = new ThreadPoolExecutor(
                     mThreadNumber,
@@ -40,8 +41,8 @@ public class BaseMediaLoader {
 
     public void destroy() {
         mContext = null;
-        if(mExecutor!=null)
-        mExecutor.shutdown();
-        mExecutor  = null;
+        if (mExecutor != null)
+            mExecutor.shutdown();
+        mExecutor = null;
     }
 }

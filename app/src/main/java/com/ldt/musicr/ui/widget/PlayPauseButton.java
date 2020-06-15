@@ -163,10 +163,10 @@ public class PlayPauseButton extends View {
      */
     @Override
     protected void onDraw(Canvas canvas) {
-        mPoint.setHeight(getHeight()- getPaddingTop()-getPaddingBottom());
-        mPoint.setWidth(getWidth()-getPaddingRight()-getPaddingLeft());
+        mPoint.setHeight(getHeight() - getPaddingTop() - getPaddingBottom());
+        mPoint.setWidth(getWidth() - getPaddingRight() - getPaddingLeft());
         canvas.save();
-        canvas.translate(getPaddingLeft(),getPaddingTop());
+        canvas.translate(getPaddingLeft(), getPaddingTop());
 
         mLeftPath.reset();
         mRightPath.reset();

@@ -21,17 +21,17 @@ package com.ldt.musicr.ui.widget.soundfile;
  */
 
 
-        import java.io.File;
-        import java.io.FileInputStream;
-        import java.io.InputStream;
-        import java.util.HashMap;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.util.HashMap;
 
 /**
  * CheapAAC is a CheapSoundFile implementation for AAC (Advanced Audio
  * Codec) encoded sound files.  It supports files with an MP4 header,
  * including unencrypted files encoded by Apple iTunes, and also
  * files with a more basic ADTS header.
- *
+ * <p>
  * Modified by Anna Stępień <anna.stepien@semantive.com>
  */
 public class CheapAAC extends CheapSoundFile {

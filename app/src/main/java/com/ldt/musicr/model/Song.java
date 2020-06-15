@@ -20,6 +20,9 @@ public class Song extends Media implements Parcelable {
     public final String albumName;
     public final int artistId;
     public final String artistName;
+    public Boolean isWeb = false;
+    public String image = "No Data";
+    public String path = "No Data";
 
     public Song(int id, String title, int trackNumber, int year, long duration, String data, long dateModified, int albumId, String albumName, int artistId, String artistName) {
         this.id = id;

@@ -1,6 +1,7 @@
 package com.ldt.musicr.helper;
 
 import java.util.concurrent.ThreadFactory;
+
 import android.os.Process;
 
 public class PriorityThreadFactory implements ThreadFactory {

@@ -32,7 +32,7 @@ public class BubblePicker extends TextureView implements TextureView.SurfaceText
     }
 
     private void init(AttributeSet attrs) {
-        if(attrs!=null) {
+        if (attrs != null) {
 
         }
         Log.d(TAG, "init");

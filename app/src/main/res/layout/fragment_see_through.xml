@@ -1,37 +1,37 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
 
-    android:background="@android:color/white"
-    android:alpha="0">
+             android:background="@android:color/white"
+             android:alpha="0">
     <LinearLayout
-        android:id="@+id/back_wall_drawn_on"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:visibility="gone">
-            <LinearLayout
+            android:id="@+id/back_wall_drawn_on"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+        <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-               >
-                <FrameLayout
+        >
+            <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:background="@color/backward_color">
-                    <ImageView
+                <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="80dp"
                         android:layout_gravity="bottom"
                         android:padding="12dp"
                         android:layout_marginBottom="3dp"
-                        android:src="@drawable/splash_icon_mini" />
-                </FrameLayout>
-                <FrameLayout
+                        android:src="@drawable/splash_icon_mini"/>
+            </FrameLayout>
+            <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                    <TextView
+                <TextView
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_gravity="bottom|center"
@@ -40,7 +40,7 @@
                         android:gravity="center"
                         android:textSize="18sp"
                         android:textStyle="bold"/>
-                    <com.ldt.musicr.ui.widget.SeeThroughTextView
+                <com.ldt.musicr.ui.widget.SeeThroughTextView
                         android:id="@+id/trade_mark"
                         android:background="@color/backward_color"
                         android:layout_width="match_parent"
@@ -50,8 +50,8 @@
                         android:gravity="center"
                         android:textSize="18sp"
                         android:textStyle="bold"/>
-                </FrameLayout>
-                <com.ldt.musicr.ui.widget.SeeThroughLineView
+            </FrameLayout>
+            <com.ldt.musicr.ui.widget.SeeThroughLineView
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:paddingTop="25dp"
@@ -59,28 +59,28 @@
                     android:paddingRight="100dp"
                     android:paddingBottom="1dp"
                     android:layout_gravity="center"
-                    android:background="@color/backward_color" />
-                <LinearLayout
+                    android:background="@color/backward_color"/>
+            <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:weightSum="1"
                     android:background="#10ffffff">
-                    <View
+                <View
                         android:layout_width="30dp"
                         android:layout_height="match_parent"
                         android:background="@color/backward_color"/>
-                    <LinearLayout
+                <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:orientation="vertical">
-                        <LinearLayout
+                    <LinearLayout
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:layout_height="30dp"
                             android:weightSum="2">
-                            <com.ldt.musicr.ui.widget.SeeThroughTextView
+                        <com.ldt.musicr.ui.widget.SeeThroughTextView
                                 android:layout_width="0dp"
                                 android:layout_weight="1"
                                 android:layout_height="match_parent"
@@ -88,13 +88,13 @@
                                 android:text="Total Songs"
                                 android:gravity="center"
                                 android:paddingRight="15dp"/>
-                            <com.ldt.musicr.ui.widget.SeeThroughTextView
+                        <com.ldt.musicr.ui.widget.SeeThroughTextView
                                 android:layout_height="match_parent"
                                 android:layout_width="wrap_content"
                                 android:text="•"
                                 android:gravity="center"
                                 android:background="@color/backward_color"/>
-                            <com.ldt.musicr.ui.widget.SeeThroughTextView
+                        <com.ldt.musicr.ui.widget.SeeThroughTextView
                                 android:layout_width="0dp"
                                 android:layout_weight="1"
                                 android:layout_height="match_parent"
@@ -102,13 +102,13 @@
                                 android:text="50"
                                 android:gravity="center"
                                 android:paddingLeft="20dp"/>
-                        </LinearLayout>
-                        <LinearLayout
+                    </LinearLayout>
+                    <LinearLayout
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:layout_height="30dp"
                             android:weightSum="2">
-                            <com.ldt.musicr.ui.widget.SeeThroughTextView
+                        <com.ldt.musicr.ui.widget.SeeThroughTextView
                                 android:layout_width="0dp"
                                 android:layout_weight="1"
                                 android:layout_height="match_parent"
@@ -116,13 +116,13 @@
                                 android:text="Total Artists"
                                 android:gravity="center"
                                 android:paddingRight="15dp"/>
-                            <com.ldt.musicr.ui.widget.SeeThroughTextView
+                        <com.ldt.musicr.ui.widget.SeeThroughTextView
                                 android:layout_height="match_parent"
                                 android:layout_width="wrap_content"
                                 android:text="•"
                                 android:gravity="center"
                                 android:background="@color/backward_color"/>
-                            <com.ldt.musicr.ui.widget.SeeThroughTextView
+                        <com.ldt.musicr.ui.widget.SeeThroughTextView
                                 android:layout_width="0dp"
                                 android:layout_weight="1"
                                 android:layout_height="match_parent"
@@ -130,13 +130,13 @@
                                 android:text="23"
                                 android:gravity="center"
                                 android:paddingLeft="15dp"/>
-                        </LinearLayout>
-                        <LinearLayout
+                    </LinearLayout>
+                    <LinearLayout
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:layout_height="30dp"
                             android:weightSum="2">
-                            <com.ldt.musicr.ui.widget.SeeThroughTextView
+                        <com.ldt.musicr.ui.widget.SeeThroughTextView
                                 android:layout_width="0dp"
                                 android:layout_weight="1"
                                 android:layout_height="match_parent"
@@ -144,13 +144,13 @@
                                 android:text="Initialized Playlists"
                                 android:gravity="center"
                                 android:paddingRight="15dp"/>
-                            <com.ldt.musicr.ui.widget.SeeThroughTextView
+                        <com.ldt.musicr.ui.widget.SeeThroughTextView
                                 android:layout_height="match_parent"
                                 android:layout_width="wrap_content"
                                 android:text="•"
                                 android:gravity="center"
                                 android:background="@color/backward_color"/>
-                            <com.ldt.musicr.ui.widget.SeeThroughTextView
+                        <com.ldt.musicr.ui.widget.SeeThroughTextView
                                 android:layout_width="0dp"
                                 android:layout_weight="1"
                                 android:layout_height="match_parent"
@@ -158,13 +158,13 @@
                                 android:text="47"
                                 android:gravity="center"
                                 android:paddingLeft="15dp"/>
-                        </LinearLayout>
-                        <LinearLayout
+                    </LinearLayout>
+                    <LinearLayout
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:layout_height="30dp"
                             android:weightSum="2">
-                            <com.ldt.musicr.ui.widget.SeeThroughTextView
+                        <com.ldt.musicr.ui.widget.SeeThroughTextView
                                 android:layout_width="0dp"
                                 android:layout_weight="1"
                                 android:layout_height="match_parent"
@@ -172,13 +172,13 @@
                                 android:text="Total Playing Time"
                                 android:gravity="center"
                                 android:paddingRight="15dp"/>
-                            <com.ldt.musicr.ui.widget.SeeThroughTextView
+                        <com.ldt.musicr.ui.widget.SeeThroughTextView
                                 android:layout_height="match_parent"
                                 android:layout_width="wrap_content"
                                 android:text="•"
                                 android:gravity="center"
                                 android:background="@color/backward_color"/>
-                            <com.ldt.musicr.ui.widget.SeeThroughTextView
+                        <com.ldt.musicr.ui.widget.SeeThroughTextView
                                 android:layout_width="0dp"
                                 android:layout_weight="1"
                                 android:layout_height="match_parent"
@@ -186,13 +186,13 @@
                                 android:text="1459s"
                                 android:gravity="center"
                                 android:paddingLeft="15dp"/>
-                        </LinearLayout>
-                        <LinearLayout
+                    </LinearLayout>
+                    <LinearLayout
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:layout_height="30dp"
                             android:weightSum="2">
-                            <com.ldt.musicr.ui.widget.SeeThroughTextView
+                        <com.ldt.musicr.ui.widget.SeeThroughTextView
                                 android:layout_width="0dp"
                                 android:layout_weight="1"
                                 android:layout_height="match_parent"
@@ -200,13 +200,13 @@
                                 android:text="Now Playing"
                                 android:gravity="center"
                                 android:paddingRight="15dp"/>
-                            <com.ldt.musicr.ui.widget.SeeThroughTextView
+                        <com.ldt.musicr.ui.widget.SeeThroughTextView
                                 android:layout_height="match_parent"
                                 android:layout_width="wrap_content"
                                 android:text="•"
                                 android:gravity="center"
                                 android:background="@color/backward_color"/>
-                            <com.ldt.musicr.ui.widget.SeeThroughTextView
+                        <com.ldt.musicr.ui.widget.SeeThroughTextView
                                 android:layout_width="0dp"
                                 android:layout_weight="1"
                                 android:layout_height="match_parent"
@@ -214,28 +214,28 @@
                                 android:text="1st in playlists"
                                 android:gravity="center"
                                 android:paddingLeft="15dp"/>
-                        </LinearLayout>
-                        <View
+                    </LinearLayout>
+                    <View
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:background="@color/backward_color"/>
-                    </LinearLayout>
-                    <View
+                </LinearLayout>
+                <View
                         android:layout_width="30dp"
                         android:layout_height="match_parent"
                         android:background="@color/backward_color"/>
-                </LinearLayout>
             </LinearLayout>
+        </LinearLayout>
         <View
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/backward_color"/>
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/backward_color"/>
     </LinearLayout>
     <View
-        android:id="@+id/back_wall_blank"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/backward_color"
-        android:visibility="gone" />
+            android:id="@+id/back_wall_blank"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/backward_color"
+            android:visibility="gone"/>
 </FrameLayout>

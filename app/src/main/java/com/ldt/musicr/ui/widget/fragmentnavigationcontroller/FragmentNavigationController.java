@@ -23,7 +23,8 @@ public class FragmentNavigationController extends SupportFragment {
 
     private FragmentManager fragmentManager = null;
     private Stack<SupportFragment> fragmentStack = new Stack<>();
-    private @IdRes int containerViewId;
+    private @IdRes
+    int containerViewId;
     private Object sync = new Object();
     private PresentStyle presentStyle = PresentStyle.get(PresentStyle.NONE);
     private TimeInterpolator interpolator = new LinearInterpolator();
@@ -46,8 +47,9 @@ public class FragmentNavigationController extends SupportFragment {
                     .commit();
         }
     }
+
     public SupportFragment getTopFragment() {
-        if(fragmentStack.size()!=0)return  fragmentStack.lastElement();
+        if (fragmentStack.size() != 0) return fragmentStack.lastElement();
         return null;
     }
 
@@ -64,6 +66,7 @@ public class FragmentNavigationController extends SupportFragment {
 
     /**
      * set the present style
+     *
      * @param style
      */
     public void setPresentStyle(int style) {
@@ -72,6 +75,7 @@ public class FragmentNavigationController extends SupportFragment {
 
     /**
      * for setting of user defined PrensetStyle
+     *
      * @param style
      */
     public void setPresentStyle(PresentStyle style) {
@@ -118,7 +122,7 @@ public class FragmentNavigationController extends SupportFragment {
 
     public void presentFragment(SupportFragment fragment, boolean withAnimation) {
 
-        if(fragmentManager == null) return;
+        if (fragmentManager == null) return;
 
         synchronized (sync) {
 
@@ -150,7 +154,9 @@ public class FragmentNavigationController extends SupportFragment {
             fragmentStack.add(fragment);
         }
     }
+
     private boolean mIsAbleToPopRoot = false;
+
     public void setAbleToPopRoot(boolean able) {
         mIsAbleToPopRoot = able;
     }
@@ -160,19 +166,19 @@ public class FragmentNavigationController extends SupportFragment {
     }
 
     public boolean dismissFragment(boolean withAnimation) {
-        if(mIsAbleToPopRoot) return dismissFragmentIncludingRoot(withAnimation);
+        if (mIsAbleToPopRoot) return dismissFragmentIncludingRoot(withAnimation);
         else return dismissFragmentWithoutRoot(withAnimation);
     }
 
     public boolean dismissFragmentIncludingRoot(boolean withAnimation) {
 
-        if(fragmentManager == null) return false;
+        if (fragmentManager == null) return false;
 
         // fragmentStack only has root fragment
-        if(fragmentStack.size() == 1) {
+        if (fragmentStack.size() == 1) {
 
             // remove root
-            SupportFragment fragmentToRemove= fragmentStack.pop();
+            SupportFragment fragmentToRemove = fragmentStack.pop();
             fragmentToRemove.setNavigationController(this);
             fragmentToRemove.setAnimatable(withAnimation);
             fragmentManager
@@ -182,8 +188,7 @@ public class FragmentNavigationController extends SupportFragment {
                     .remove(fragmentToRemove)
                     .commit();
             return true;
-        }
-        else if(fragmentStack.size()==0) return false;
+        } else if (fragmentStack.size() == 0) return false;
 
         synchronized (sync) {
 
@@ -204,12 +209,13 @@ public class FragmentNavigationController extends SupportFragment {
         }
         return true;
     }
+
     public boolean dismissFragmentWithoutRoot(boolean withAnimation) {
 
-        if(fragmentManager == null) return false;
+        if (fragmentManager == null) return false;
 
         // fragmentStack only has root fragment
-        if(fragmentStack.size() == 1) {
+        if (fragmentStack.size() == 1) {
 
             // show the root fragment
             SupportFragment fragmentToShow = fragmentStack.peek();
@@ -248,11 +254,12 @@ public class FragmentNavigationController extends SupportFragment {
             dismissFragment();
         }
     }
+
     public void popAllFragments() {
-        if(!mIsAbleToPopRoot) {
+        if (!mIsAbleToPopRoot) {
             popToRootFragment();
         } else {
-            while (fragmentStack.size()>=1)
+            while (fragmentStack.size() >= 1)
                 dismissFragment();
         }
     }

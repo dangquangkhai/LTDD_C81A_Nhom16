@@ -24,7 +24,7 @@ public class NavigateFragment extends Fragment implements BackPressable {
     @Nullable
     @Override
     public final View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.back_pressable_fragment,container,false);
+        return inflater.inflate(R.layout.back_pressable_fragment, container, false);
     }
 
     public Fragment getRootFragment() {
@@ -40,17 +40,18 @@ public class NavigateFragment extends Fragment implements BackPressable {
 
     @Override
     public boolean onBackPressed() {
-        if(mNavigationController.getTopFragment().isReadyToDismiss())
-            if(!(isNavigationControllerInit() && mNavigationController.dismissFragment(true)))
-        return false;
-            return true;
+        if (mNavigationController.getTopFragment().isReadyToDismiss())
+            if (!(isNavigationControllerInit() && mNavigationController.dismissFragment(true)))
+                return false;
+        return true;
     }
 
     private boolean isNavigationControllerInit() {
-        return null!= mNavigationController;
+        return null != mNavigationController;
     }
+
     public void presentFragment(SupportFragment fragment) {
-        if(isNavigationControllerInit()) {
+        if (isNavigationControllerInit()) {
 //            Random r = new Random();
 //            mNavigationController.setPresentStyle(r.nextInt(39)+1); //exclude NONE present style
             mNavigationController.setPresentStyle(fragment.getPresentTransition());
@@ -64,7 +65,9 @@ public class NavigateFragment extends Fragment implements BackPressable {
         f.mRootFragment = rootFragmentInstance;
         return f;
     }
+
     private SupportFragment mRootFragment;
+
     private void initBackStack(Bundle savedInstanceState) {
 
         FragmentManager fm = getChildFragmentManager();
@@ -83,24 +86,27 @@ public class NavigateFragment extends Fragment implements BackPressable {
 //          else Log.d(TAG, "initBackStack: unable to get Navigation Controller");
         // }
     }
+
     public void dismiss() {
-        if(isNavigationControllerInit()) {
+        if (isNavigationControllerInit()) {
             mNavigationController.dismissFragment();
         }
     }
 
     public void presentFragment(SupportFragment fragment, boolean animated) {
-        if(isNavigationControllerInit()) {
-            mNavigationController.presentFragment(fragment,animated);
+        if (isNavigationControllerInit()) {
+            mNavigationController.presentFragment(fragment, animated);
         }
     }
+
     public void dismiss(boolean animated) {
-        if(isNavigationControllerInit()) {
+        if (isNavigationControllerInit()) {
             mNavigationController.dismissFragment(animated);
         }
     }
+
     public void popToRootFragment() {
-        if(isNavigationControllerInit())
+        if (isNavigationControllerInit())
             mNavigationController.popToRootFragment();
     }
 }

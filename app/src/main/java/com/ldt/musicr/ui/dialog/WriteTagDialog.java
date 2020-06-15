@@ -48,6 +48,7 @@ public class WriteTagDialog extends LoadingScreenDialog {
     }
 
     private WriteTagResultListener mListener;
+
     public WriteTagDialog setWritingTagResultListener(WriteTagResultListener listener) {
         mListener = listener;
         return this;
@@ -56,6 +57,7 @@ public class WriteTagDialog extends LoadingScreenDialog {
     public void removeWriteTagResultListener() {
         mListener = null;
     }
+
     private LoadingInfo mLoadingInfo;
 
     public static WriteTagDialog newInstance(@NonNull LoadingInfo loadingInfo) {
@@ -78,7 +80,7 @@ public class WriteTagDialog extends LoadingScreenDialog {
     }
 
     private void runTask() {
-        if(mTask!=null) mTask.cancel();
+        if (mTask != null) mTask.cancel();
         mTask = new WriteTagsAsyncTask(this);
         mTask.execute(mLoadingInfo);
     }
@@ -99,13 +101,13 @@ public class WriteTagDialog extends LoadingScreenDialog {
 
     @Override
     public void onDestroyView() {
-        if(mTask!=null) {
+        if (mTask != null) {
             mTask.cancel();
             mTask = null;
         }
 
         mHandler = null;
-        mListener =null;
+        mListener = null;
         super.onDestroyView();
     }
 
@@ -113,23 +115,23 @@ public class WriteTagDialog extends LoadingScreenDialog {
     private Handler mHandler = new Handler();
 
     protected void postOnWritingFinish(String message, String[] fileToBeScanned) {
-        if(mHandler!=null) mHandler.post(() -> finishWriting(message, fileToBeScanned));
+        if (mHandler != null) mHandler.post(() -> finishWriting(message, fileToBeScanned));
     }
 
     private void finishWriting(String message, String[] fileToBeScanned) {
         scan(fileToBeScanned);
-        if(message==null || !message.isEmpty()) {
-            if(mListener!=null) mListener.onWritingTagFinish(false);
+        if (message == null || !message.isEmpty()) {
+            if (mListener != null) mListener.onWritingTagFinish(false);
             showFailureThenDismiss(message);
         } else {
-            if(mListener!=null) mListener.onWritingTagFinish(true);
+            if (mListener != null) mListener.onWritingTagFinish(true);
             showSuccessThenDismiss(null);
         }
     }
 
     private void scan(String[] fileToBeScanned) {
         Context context = getContext();
-        if(context==null) context = App.getInstance().getApplicationContext();
+        if (context == null) context = App.getInstance().getApplicationContext();
         MediaScannerConnection.scanFile(context, fileToBeScanned, null, context instanceof Activity ? new UpdateToastMediaScannerCompletionListener((Activity) context, fileToBeScanned) : null);
     }
 
@@ -160,7 +162,7 @@ public class WriteTagDialog extends LoadingScreenDialog {
 
         private Context getContext() {
             WriteTagDialog dialog = mWeakDialog.get();
-            if(dialog!=null) return dialog.getContext();
+            if (dialog != null) return dialog.getContext();
             return null;
         }
 
@@ -170,12 +172,12 @@ public class WriteTagDialog extends LoadingScreenDialog {
 
         private void finish(String message, String[] fileToBeScanned) {
             WriteTagDialog dialog = mWeakDialog.get();
-            if(dialog!=null) dialog.postOnWritingFinish(message, fileToBeScanned);
+            if (dialog != null) dialog.postOnWritingFinish(message, fileToBeScanned);
         }
 
         @Override
         protected Void doInBackground(LoadingInfo... params) {
-            String mMessage ="";
+            String mMessage = "";
             try {
                 LoadingInfo info = params[0];
 
@@ -206,8 +208,8 @@ public class WriteTagDialog extends LoadingScreenDialog {
                                 try {
                                     tag.setField(entry.getKey(), entry.getValue());
                                 } catch (Exception e) {
-                                    if(mMessage.isEmpty())
-                                    mMessage = "Something wrong when writing tag";
+                                    if (mMessage.isEmpty())
+                                        mMessage = "Something wrong when writing tag";
                                 }
                             }
                         }

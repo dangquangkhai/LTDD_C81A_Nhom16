@@ -21,7 +21,7 @@ public class BottomNavigationPagerAdapter extends FragmentPagerAdapter {
     private Context mContext;
 
     public BottomNavigationPagerAdapter(Context context, FragmentManager fragmentManager) {
-        super(fragmentManager,BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        super(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         mContext = context;
         initData();
     }
@@ -29,8 +29,8 @@ public class BottomNavigationPagerAdapter extends FragmentPagerAdapter {
     public ArrayList<NavigateFragment> mData = new ArrayList<>();
 
     public boolean onBackPressed(int position) {
-        if(position<mData.size())
-        return mData.get(position).onBackPressed();
+        if (position < mData.size())
+            return mData.get(position).onBackPressed();
         return false;
     }
 
@@ -51,7 +51,7 @@ public class BottomNavigationPagerAdapter extends FragmentPagerAdapter {
     @NonNull
     @Override
     public Fragment getItem(int position) {
-        if(position>=mData.size()) return mData.get(0);
+        if (position >= mData.size()) return mData.get(0);
         return mData.get(position);
     }
 
@@ -59,10 +59,14 @@ public class BottomNavigationPagerAdapter extends FragmentPagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         switch (position) {
-            case 0: return mContext.getResources().getString(R.string.feature);
-            case 1: return mContext.getResources().getString(R.string.library);
-            case 2: return mContext.getResources().getString(R.string.settings);
-            default:return "";
+            case 0:
+                return mContext.getResources().getString(R.string.feature);
+            case 1:
+                return mContext.getResources().getString(R.string.library);
+            case 2:
+                return mContext.getResources().getString(R.string.settings);
+            default:
+                return "";
         }
     }
 }

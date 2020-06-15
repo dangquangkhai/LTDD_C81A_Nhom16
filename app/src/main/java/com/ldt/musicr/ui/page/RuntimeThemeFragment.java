@@ -13,7 +13,8 @@ import java.util.Arrays;
 public class RuntimeThemeFragment extends Fragment {
     private ArrayList<View> rippleViews = new ArrayList<>();
     private boolean first_time = true;
-    public void addToBeRipple(int drawable,View... v) {
+
+    public void addToBeRipple(int drawable, View... v) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             if (first_time) {
                 first_time = false;
@@ -27,13 +28,14 @@ public class RuntimeThemeFragment extends Fragment {
             }
         }
     }
+
     Resources res;
+
     public void applyRippleColor(int color) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-        for( final View v : rippleViews)
-        {
+            for (final View v : rippleViews) {
 
-                ((RippleDrawable)v.getBackground()).setColor(ColorStateList.valueOf(color));
+                ((RippleDrawable) v.getBackground()).setColor(ColorStateList.valueOf(color));
             }
         }
     }

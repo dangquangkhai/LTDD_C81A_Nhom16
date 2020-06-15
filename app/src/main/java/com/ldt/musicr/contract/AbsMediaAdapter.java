@@ -72,7 +72,7 @@ public abstract class AbsMediaAdapter<VH extends AbsBindAbleHolder, I extends Me
 
         @Override
         public boolean onLongClick(View view) {
-            return onLongPressedItem(this,getAdapterPosition());
+            return onLongPressedItem(this, getAdapterPosition());
         }
     }
 }

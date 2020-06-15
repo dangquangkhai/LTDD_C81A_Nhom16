@@ -91,7 +91,7 @@ public class PlayingNotificationImpl extends PlayingNotification {
             @Override
             public void run() {
                 GlideApp.with(service).clear(target);
-                target = SongGlideRequest.Builder.from(GlideApp.with(service),song)
+                target = SongGlideRequest.Builder.from(GlideApp.with(service), song)
                         .checkIgnoreMediaStore(service)
                         .generatePalette(service)
                         .build()
@@ -186,6 +186,7 @@ public class PlayingNotificationImpl extends PlayingNotification {
         intent.setComponent(serviceName);
         return PendingIntent.getService(context, 0, intent, 0);
     }
+
     private static Bitmap createBitmap(Drawable drawable, float sizeMultiplier) {
         Bitmap bitmap = Bitmap.createBitmap((int) (drawable.getIntrinsicWidth() * sizeMultiplier), (int) (drawable.getIntrinsicHeight() * sizeMultiplier), Bitmap.Config.ARGB_8888);
         Canvas c = new Canvas(bitmap);

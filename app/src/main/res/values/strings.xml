@@ -28,20 +28,57 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
     <string name="trade_mark">Music ®</string>
-    <string name="count_song"><xliff:g id="count">%d</xliff:g> song</string>
-    <string name="count_songs"><xliff:g id="count">%d</xliff:g> songs</string>
-    <string name="count_album"><xliff:g id="count">%d</xliff:g> album</string>
-    <string name="count_albums"><xliff:g id="count">%d</xliff:g> albums</string>
-    <string name="count_artist"><xliff:g id="count">%d</xliff:g> artist</string>
-    <string name="count_artists"><xliff:g id="count">%d</xliff:g> artists</string>
-    <string name="number_song_add_queue"><xliff:g example="1" id="number">%d</xliff:g> song added to the queue.</string>
-    <string name="number_songs_add_queue"><xliff:g example="1" id="number">%d</xliff:g> songs added to the queue.</string>
-    <string name="number_song_add_playlist"><xliff:g example="1" id="number">%d</xliff:g> song added to playlist.</string>
-    <string name="number_songs_add_playlist"><xliff:g example="1" id="number">%d</xliff:g> songs added to playlist.</string>
+    <string name="count_song">
+        <xliff:g id="count">%d</xliff:g>
+        song
+    </string>
+    <string name="count_songs">
+        <xliff:g id="count">%d</xliff:g>
+        songs
+    </string>
+    <string name="count_album">
+        <xliff:g id="count">%d</xliff:g>
+        album
+    </string>
+    <string name="count_albums">
+        <xliff:g id="count">%d</xliff:g>
+        albums
+    </string>
+    <string name="count_artist">
+        <xliff:g id="count">%d</xliff:g>
+        artist
+    </string>
+    <string name="count_artists">
+        <xliff:g id="count">%d</xliff:g>
+        artists
+    </string>
+    <string name="number_song_add_queue">
+        <xliff:g example="1" id="number">%d</xliff:g>
+        song added to the queue.
+    </string>
+    <string name="number_songs_add_queue">
+        <xliff:g example="1" id="number">%d</xliff:g>
+        songs added to the queue.
+    </string>
+    <string name="number_song_add_playlist">
+        <xliff:g example="1" id="number">%d</xliff:g>
+        song added to playlist.
+    </string>
+    <string name="number_songs_add_playlist">
+        <xliff:g example="1" id="number">%d</xliff:g>
+        songs added to playlist.
+    </string>
     <string name="combine_two_strings" translatable="false">%1$s | %2$s</string>
-    <string name="duration_format" translatable="false"><xliff:g id="hours">%1$s</xliff:g> <xliff:g id="minutes">%2$s</xliff:g></string>
-    <string name="durationformatshort" translatable="false"><xliff:g id="format">%2$d:%3$02d</xliff:g></string>
-    <string name="durationformatlong" translatable="false"><xliff:g id="format">%1$d:%2$02d:%3$02d</xliff:g></string>
+    <string name="duration_format" translatable="false">
+        <xliff:g id="hours">%1$s</xliff:g>
+        <xliff:g id="minutes">%2$s</xliff:g>
+    </string>
+    <string name="durationformatshort" translatable="false">
+        <xliff:g id="format">%2$d:%3$02d</xliff:g>
+    </string>
+    <string name="durationformatlong" translatable="false">
+        <xliff:g id="format">%1$d:%2$02d:%3$02d</xliff:g>
+    </string>
     <string name="playlist_last_added">Last Added</string>
     <string name="playlist_recently_played">Recently Played</string>
     <string name="playlist_top_tracks">My Top Tracks</string>
@@ -81,8 +118,11 @@
     <string name="failed_to_save_playlist">Failed to save playlist (%s).</string>
     <string name="saved_x_playlists_to_x">Saved %1$d playlists to %2$s.</string>
 
-    <string name="timber_source">Report any bugs <u> here </u> </string>
-    <string name="timber_feature_request">Specify any feature request in the Google+ community <u> here </u></string>
+    <string name="timber_source">Report any bugs <u>here</u>
+    </string>
+    <string name="timber_feature_request">Specify any feature request in the Google+ community
+        <u>here</u>
+    </string>
     <string name="dialog_ringtone_title">Set ringtone</string>
     <string name="dialog_ringtone_message">Allow app to modify audio settings</string>
     <string name="menu_show_as">View As</string>
@@ -127,7 +167,9 @@
     <string name="timber_about_opensource">Timber is a open source Music Player developed by Naman Dwivedi.</string>
     <string name="summary_pause_detach">Toggle for pausing playback when headphone is detached</string>
     <string name="pause_detach">Pause on Detach</string>
-    <string name="summary_xposed_trackselector">Requires Xposed and XMediaNotificationTrackSelector Xposed module to be installed. This will provide access to playing queue from the notification bar itself.</string>
+    <string name="summary_xposed_trackselector">Requires Xposed and XMediaNotificationTrackSelector Xposed module to be
+        installed. This will provide access to playing queue from the notification bar itself.
+    </string>
     <string name="xposed_trackselector">Playing queue support in notification</string>
     <string name="currently_selected">Currently Selected</string>
 
@@ -227,7 +269,8 @@
     <string name="unplayable_file">Couldn\u2019t play this song.</string>
     <string name="history">Recently played</string>
     <string name="playlist_is_empty">Playlist is empty</string>
-    <string name="playing_notification_description">The playing notification provides actions for play/pause etc.</string>
+    <string name="playing_notification_description">The playing notification provides actions for play/pause etc.
+    </string>
     <string name="playing_notification_name">Playing notification</string>
     <string name="audio_focus_denied">Audio focus denied.</string>
     <string name="added_title_to_playing_queue">"Added 1 title to the playing queue."</string>
@@ -259,7 +302,9 @@
     <string name="clear_playlist_x"><![CDATA[Clear the playlist <b>%1$s</b>? This can\u2019t be undone!]]></string>
     <string name="inserted_x_songs_into_playlist_x">Inserted %1$d songs into the playlist %2$s.</string>
     <string name="delete_x_playlists"><![CDATA[Delete <b>%1$d</b> playlists?]]></string>
-    <string name="grant_permission_order_description">Music ® needs storage permission to access your music library. Without this permission, the application couldn\'t run properly.</string>
+    <string name="grant_permission_order_description">Music ® needs storage permission to access your music library.
+        Without this permission, the application couldn\'t run properly.
+    </string>
     <string name="access_external_storage">Access External Storage</string>
     <string name="allow_access">Allow Access</string>
     <string name="fill_this_field_by_lyric">Fill this field by lyric</string>
@@ -314,7 +359,9 @@
     <string name="artist_image_background">Use Artist image as background</string>
     <string name="show_lyric">Show lyric</string>
     <string name="in_app_volume">In-App Volume</string>
-    <string name="specific_playlist_note">Playlists with songs do not appear in any other playlists, including playlist All Songs. Create somethings like Blacklist, English Study List, etc.</string>
+    <string name="specific_playlist_note">Playlists with songs do not appear in any other playlists, including playlist
+        All Songs. Create somethings like Blacklist, English Study List, etc.
+    </string>
     <string name="change_languague_note">Require a quick restart to affect the change, music won\'t be stopped.</string>
     <string name="more_setting">More Options</string>
     <string name="back_description">Back to previous screen</string>

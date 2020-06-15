@@ -49,12 +49,13 @@ public class PlaylistChildAdapter extends RecyclerView.Adapter<PlaylistChildAdap
     private Context mContext;
     private boolean showAuto;
     private int songCountInt;
-    private long firstAlbumID=-1;
+    private long firstAlbumID = -1;
 
     public PlaylistChildAdapter(Context mContext, boolean showAuto) {
         this.mContext = mContext;
         this.showAuto = showAuto;
     }
+
     public void setOnItemClickListener(FeaturePlaylistAdapter.PlaylistClickListener listener) {
         mListener = listener;
     }
@@ -63,10 +64,11 @@ public class PlaylistChildAdapter extends RecyclerView.Adapter<PlaylistChildAdap
         mListener = null;
         mContext = null;
     }
+
     public void setData(List<Playlist> data) {
         Log.d(TAG, "setData: count = " + data.size());
         mPlaylistData.clear();
-        if(data!=null) {
+        if (data != null) {
             mPlaylistData.addAll(data);
             notifyDataSetChanged();
 
@@ -74,19 +76,20 @@ public class PlaylistChildAdapter extends RecyclerView.Adapter<PlaylistChildAdap
     }
 
     public void addData(ArrayList<Playlist> data) {
-        if(data!=null) {
+        if (data != null) {
             int posBefore = mPlaylistData.size();
             mPlaylistData.addAll(data);
-            notifyItemRangeInserted(posBefore,data.size());
+            notifyItemRangeInserted(posBefore, data.size());
         }
     }
 
     @NotNull
     @Override
     public ItemHolder onCreateViewHolder(@NotNull ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_playlist_child, viewGroup,false);
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_playlist_child, viewGroup, false);
         return new ItemHolder(v);
     }
+
     @Override
     public void onBindViewHolder(@NotNull final ItemHolder itemHolder, int i) {
         // Lấy item Playlist thứ i
@@ -96,24 +99,25 @@ public class PlaylistChildAdapter extends RecyclerView.Adapter<PlaylistChildAdap
         // lấy uri của mImage
         Log.d(TAG, "one");
 
-        new PlaylistBitmapLoader(this,playlist,itemHolder).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        new PlaylistBitmapLoader(this, playlist, itemHolder).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
         itemHolder.mImage.setTag(firstAlbumID);
         itemHolder.mTitle.setText(playlist.name);
-        if(Util.isLollipop()) itemHolder.mImage.setTransitionName("transition_album_art"+i);
+        if (Util.isLollipop()) itemHolder.mImage.setTransitionName("transition_album_art" + i);
     }
 
     @Override
     public int getItemCount() {
-        return  mPlaylistData.size();
+        return mPlaylistData.size();
     }
 
     public List<Song> getPlaylistWithListId(int position, int id) {
-        if(mContext!=null) {
+        if (mContext != null) {
             firstAlbumID = -1;
-            if(showAuto) {
+            if (showAuto) {
                 switch (position) {
-                    case 0: return  LastAddedLoader.getLastAddedSongs(mContext);
+                    case 0:
+                        return LastAddedLoader.getLastAddedSongs(mContext);
                     case 1:
                         return TopAndRecentlyPlayedTracksLoader.getRecentlyPlayedTracks(mContext);
                     case 2:
@@ -126,17 +130,22 @@ public class PlaylistChildAdapter extends RecyclerView.Adapter<PlaylistChildAdap
         return null;
     }
 
-    public class ItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener,View.OnTouchListener{
-        @BindView(R.id.title) TextView mTitle;
-        @BindView(R.id.image) ImageView mImage;
-        @BindView(R.id.over) View view_over;
-        int currentColor=0;
+    public class ItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnTouchListener {
+        @BindView(R.id.title)
+        TextView mTitle;
+        @BindView(R.id.image)
+        ImageView mImage;
+        @BindView(R.id.over)
+        View view_over;
+        int currentColor = 0;
+
         ItemHolder(View view) {
             super(view);
-            ButterKnife.bind(this,view);
+            ButterKnife.bind(this, view);
             view_over.setOnClickListener(this);
             view_over.setOnTouchListener(this);
         }
+
         @Override
         public void onClick(View v) {
             //Todo: Navigate to playlist detail
@@ -146,19 +155,19 @@ public class PlaylistChildAdapter extends RecyclerView.Adapter<PlaylistChildAdap
             myAnim.setDuration(350);
             itemView.startAnimation(myAnim);
 
-            if(mListener!=null) {
+            if (mListener != null) {
                 Bitmap bitmap = null;
                 Drawable d = mImage.getDrawable();
-                if(d instanceof BitmapDrawable) bitmap = ((BitmapDrawable)d).getBitmap();
-                else if(d instanceof RoundedDrawable) bitmap = ((RoundedDrawable)d).getSourceBitmap();
+                if (d instanceof BitmapDrawable) bitmap = ((BitmapDrawable) d).getBitmap();
+                else if (d instanceof RoundedDrawable) bitmap = ((RoundedDrawable) d).getSourceBitmap();
                 mListener.onClickPlaylist(mPlaylistData.get(getAdapterPosition()), bitmap);
             }
-               //itemView.startAnimation(myAnim);
+            //itemView.startAnimation(myAnim);
         }
 
         @Override
         public boolean onTouch(View view, MotionEvent motionEvent) {
-            if(currentColor!=Tool.getBaseColor()) {
+            if (currentColor != Tool.getBaseColor()) {
                 currentColor = Tool.getBaseColor();
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     ((RippleDrawable) view_over.getBackground()).setColor(ColorStateList.valueOf(Tool.getBaseColor()));
@@ -169,8 +178,8 @@ public class PlaylistChildAdapter extends RecyclerView.Adapter<PlaylistChildAdap
     }
 
 
-    private static class PlaylistBitmapLoader extends AsyncTask<Void,Void,Bitmap> {
-        private final WeakReference<PlaylistChildAdapter>mWeakAdapter;
+    private static class PlaylistBitmapLoader extends AsyncTask<Void, Void, Bitmap> {
+        private final WeakReference<PlaylistChildAdapter> mWeakAdapter;
         private final WeakReference<ItemHolder> mWeakItemHolder;
         private Playlist mPlaylist;
 
@@ -179,11 +188,12 @@ public class PlaylistChildAdapter extends RecyclerView.Adapter<PlaylistChildAdap
             mWeakItemHolder = new WeakReference<>(item);
             mPlaylist = playlist;
         }
+
         @Override
         protected void onPostExecute(Bitmap bitmap) {
             ItemHolder itemHolder = mWeakItemHolder.get();
-            if(itemHolder!=null)
-            itemHolder.mImage.setImageBitmap(bitmap);
+            if (itemHolder != null)
+                itemHolder.mImage.setImageBitmap(bitmap);
         }
 
         @Override

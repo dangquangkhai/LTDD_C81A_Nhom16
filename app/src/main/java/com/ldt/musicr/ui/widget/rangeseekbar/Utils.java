@@ -21,7 +21,8 @@ import androidx.core.content.ContextCompat;
 public class Utils {
 
     /**
-     *  make a drawable to a bitmap
+     * make a drawable to a bitmap
+     *
      * @param drawable drawable you want convert
      * @return converted bitmap
      */
@@ -49,8 +50,8 @@ public class Utils {
      * draw 9Path
      *
      * @param canvas Canvas
-     * @param bmp 9path bitmap
-     * @param rect 9path rect
+     * @param bmp    9path bitmap
+     * @param rect   9path rect
      */
     public static void drawNinePath(Canvas canvas, Bitmap bmp, Rect rect) {
         NinePatch patch = new NinePatch(bmp, bmp.getNinePatchChunk(), null);
@@ -58,13 +59,14 @@ public class Utils {
     }
 
     public static int dp2px(Context context, float dpValue) {
-        if (context == null || compareFloat(0f,dpValue) == 0)return 0;
+        if (context == null || compareFloat(0f, dpValue) == 0) return 0;
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
     }
 
     /**
      * Compare the size of two floating point numbers
+     *
      * @param a
      * @param b
      * @return 1 is a > b

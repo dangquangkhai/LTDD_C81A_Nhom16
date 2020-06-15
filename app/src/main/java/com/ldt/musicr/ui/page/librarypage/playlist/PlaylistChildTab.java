@@ -24,7 +24,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class PlaylistChildTab extends BaseMusicServiceFragment implements FeaturePlaylistAdapter.PlaylistClickListener {
-    public static final String TAG ="PlaylistChildTab";
+    public static final String TAG = "PlaylistChildTab";
 
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
@@ -33,34 +33,36 @@ public class PlaylistChildTab extends BaseMusicServiceFragment implements Featur
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.playlist_child_tab,container,false);
+        return inflater.inflate(R.layout.playlist_child_tab, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(this,view);
-        mAdapter = new PlaylistChildAdapter(getActivity(),true);
+        ButterKnife.bind(this, view);
+        mAdapter = new PlaylistChildAdapter(getActivity(), true);
         mAdapter.setOnItemClickListener(this);
         mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         mRecyclerView.setAdapter(mAdapter);
 
-        if(getActivity() instanceof BaseActivity) {
-            ((BaseActivity)getActivity()).addMusicServiceEventListener(this);
+        if (getActivity() instanceof BaseActivity) {
+            ((BaseActivity) getActivity()).addMusicServiceEventListener(this);
         }
         refreshData();
-;    }
+        ;
+    }
+
     private void refreshData() {
-        if(getActivity() !=null)
-      mAdapter.setData(PlaylistLoader.getAllPlaylistsWithAuto(getActivity()));
+        if (getActivity() != null)
+            mAdapter.setData(PlaylistLoader.getAllPlaylistsWithAuto(getActivity()));
     }
 
     @Override
     public void onClickPlaylist(Playlist playlist, @org.jetbrains.annotations.Nullable Bitmap bitmap) {
-        SupportFragment sf = PlaylistPagerFragment.newInstance(getContext(),playlist,bitmap);
+        SupportFragment sf = PlaylistPagerFragment.newInstance(getContext(), playlist, bitmap);
         Fragment parentFragment = getParentFragment();
-        if(parentFragment instanceof SupportFragment)
-            ((SupportFragment)parentFragment).getNavigationController().presentFragment(sf);
+        if (parentFragment instanceof SupportFragment)
+            ((SupportFragment) parentFragment).getNavigationController().presentFragment(sf);
     }
 
     @Override

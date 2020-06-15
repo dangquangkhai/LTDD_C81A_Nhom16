@@ -24,7 +24,8 @@ public final class MediaElement {
             TYPE_SONGS_IN_ARTIST,
             TYPE_SONGS_IN_FOLDER
     })
-    public @interface MediaType{}
+    public @interface MediaType {
+    }
 
     public MediaElement(@MediaType int type, String name) {
         mType = type;
@@ -39,9 +40,11 @@ public final class MediaElement {
         return mName;
     }
 
-    private final @MediaType int mType;
+    private final @MediaType
+    int mType;
     private final String mName;
-    public static MediaElement create(final @MediaType int type,final String name) {
+
+    public static MediaElement create(final @MediaType int type, final String name) {
         return new MediaElement(type, name);
     }
 }

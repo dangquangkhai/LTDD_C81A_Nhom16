@@ -19,13 +19,14 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class IntroStepOneFragment extends SupportFragment implements MainActivity.PermissionListener {
-    private static final String TAG ="IntroStepOneFragment";
+    private static final String TAG = "IntroStepOneFragment";
 
 
     @BindView(R.id.swipe_refresh)
     SwipeRefreshLayout mSwipeRefresh;
 
-    @BindView(R.id.allow_button) View mAllowButton;
+    @BindView(R.id.allow_button)
+    View mAllowButton;
 
     @OnClick(R.id.allow_button)
     void allowAccess() {
@@ -36,13 +37,13 @@ public class IntroStepOneFragment extends SupportFragment implements MainActivit
     @Override
     protected View onCreateView(LayoutInflater inflater, ViewGroup container) {
         getMainActivity().setPermissionListener(this);
-        return inflater.inflate(R.layout.grant_permission_screen,container,false);
+        return inflater.inflate(R.layout.grant_permission_screen, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(this,view);
+        ButterKnife.bind(this, view);
         mSwipeRefresh.setColorSchemeResources(R.color.flatBlue);
         mSwipeRefresh.setOnRefreshListener(this::refreshData);
     }
@@ -55,7 +56,7 @@ public class IntroStepOneFragment extends SupportFragment implements MainActivit
     }
 
     private void refreshData() {
-        if(getMainActivity().checkSelfPermission()) onPermissionGranted();
+        if (getMainActivity().checkSelfPermission()) onPermissionGranted();
         else mSwipeRefresh.setRefreshing(false);
     }
 

@@ -31,11 +31,12 @@ public class MyGlideModule extends AppGlideModule {
     @Override
     public void registerComponents(@NonNull Context context, @NonNull Glide glide, @NonNull Registry registry) {
         super.registerComponents(context, glide, registry);
-        registry.append(AudioFileCover.class,InputStream.class,new AudioFileCoverLoader.Factory());
-        registry.append(ArtistImage.class,InputStream.class, new ArtistImageLoader.Factory(context));
+        registry.append(AudioFileCover.class, InputStream.class, new AudioFileCoverLoader.Factory());
+        registry.append(ArtistImage.class, InputStream.class, new ArtistImageLoader.Factory(context));
         registry.register(Bitmap.class, BitmapPaletteWrapper.class, new BitmapPaletteTranscoder());
         registry.replace(GlideUrl.class, InputStream.class, new OkHttpUrlLoader.Factory());
     }
+
     @Override
     public boolean isManifestParsingEnabled() {
         return false;

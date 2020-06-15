@@ -33,7 +33,7 @@ public class LoadingScreenDialog extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.loading_layout,container,false);
+        return inflater.inflate(R.layout.loading_layout, container, false);
     }
 
     @Override
@@ -43,32 +43,34 @@ public class LoadingScreenDialog extends DialogFragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view,savedInstanceState);
-        ButterKnife.bind(this,view);
+        super.onViewCreated(view, savedInstanceState);
+        ButterKnife.bind(this, view);
         setCancelable(false);
     }
 
     public void showSuccessThenDismiss(String message) {
-        if(isResumed())
-        try {
-            mLoader.setVisibility(View.GONE);
-            mSuccessView.setVisibility(View.VISIBLE);
-            mSuccessView.startTickAnim();
+        if (isResumed())
+            try {
+                mLoader.setVisibility(View.GONE);
+                mSuccessView.setVisibility(View.VISIBLE);
+                mSuccessView.startTickAnim();
 
-            if (message != null && !message.isEmpty())
-                Toasty.success(mSuccessView.getContext(), message).show();
-            mLoader.postDelayed(this::dismiss,1000);
-        } catch (Exception ignored) {}
+                if (message != null && !message.isEmpty())
+                    Toasty.success(mSuccessView.getContext(), message).show();
+                mLoader.postDelayed(this::dismiss, 1000);
+            } catch (Exception ignored) {
+            }
     }
 
     public void showFailureThenDismiss(String error) {
-        if(isResumed())
-        try {
-            mLoader.setVisibility(View.GONE);
-            if(getContext()!=null)
-            Toasty.error(getContext(), error).show();
-            this.dismiss();
-        } catch (Exception ignored) {}
+        if (isResumed())
+            try {
+                mLoader.setVisibility(View.GONE);
+                if (getContext() != null)
+                    Toasty.error(getContext(), error).show();
+                this.dismiss();
+            } catch (Exception ignored) {
+            }
     }
 
     DialogInterface.OnCancelListener mOnCancelListener;
@@ -83,7 +85,7 @@ public class LoadingScreenDialog extends DialogFragment {
 
     @Override
     public void onCancel(DialogInterface dialog) {
-        if(mOnCancelListener!=null) mOnCancelListener.onCancel(dialog);
+        if (mOnCancelListener != null) mOnCancelListener.onCancel(dialog);
         super.onCancel(dialog);
     }
 }

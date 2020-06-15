@@ -35,8 +35,8 @@ public abstract class AbsCustomPlaylist extends Playlist {
         String songCountString = MusicUtil.getSongCountString(context, songCount);
 
         return MusicUtil.buildInfoString(
-            songCountString,
-            super.getInfoString(context)
+                songCountString,
+                super.getInfoString(context)
         );
     }
 }

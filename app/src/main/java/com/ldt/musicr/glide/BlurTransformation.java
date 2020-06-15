@@ -155,6 +155,7 @@ public class BlurTransformation extends BitmapTransformation {
     public int hashCode() {
         return ID.hashCode();
     }
+
     @Override
     public boolean equals(Object obj) {
         return obj instanceof BlurTransformation;

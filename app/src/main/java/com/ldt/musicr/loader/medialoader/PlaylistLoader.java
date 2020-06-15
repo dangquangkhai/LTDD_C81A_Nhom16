@@ -23,15 +23,15 @@ public class PlaylistLoader {
         return getAllPlaylists(makePlaylistCursor(context, null, null));
     }
 
-    public static ArrayList<Playlist> getAllPlaylistsWithAuto(@NonNull final  Context context) {
+    public static ArrayList<Playlist> getAllPlaylistsWithAuto(@NonNull final Context context) {
         ArrayList<Playlist> playlists = new ArrayList<>();
-        playlists.add(new Playlist(-1,context.getResources().getString(R.string.playlist_last_added)));
-        playlists.add(new Playlist(-2,context.getResources().getString(R.string.playlist_recently_played)));
-        playlists.add(new Playlist(-3,context.getResources().getString(R.string.playlist_top_tracks)));
+        playlists.add(new Playlist(-1, context.getResources().getString(R.string.playlist_last_added)));
+        playlists.add(new Playlist(-2, context.getResources().getString(R.string.playlist_recently_played)));
+        playlists.add(new Playlist(-3, context.getResources().getString(R.string.playlist_top_tracks)));
         playlists.addAll(getAllPlaylists(context));
         for (Playlist p :
                 playlists) {
-            Log.d(TAG, "getAllPlaylistsWithAuto: id = "+p.id+", name = "+p.name);
+            Log.d(TAG, "getAllPlaylistsWithAuto: id = " + p.id + ", name = " + p.name);
         }
         return playlists;
     }
@@ -96,9 +96,9 @@ public class PlaylistLoader {
         try {
             return context.getContentResolver().query(MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI,
                     new String[]{
-                        /* 0 */
+                            /* 0 */
                             BaseColumns._ID,
-                        /* 1 */
+                            /* 1 */
                             PlaylistsColumns.NAME
                     }, selection, values, MediaStore.Audio.Playlists.DEFAULT_SORT_ORDER);
         } catch (SecurityException e) {

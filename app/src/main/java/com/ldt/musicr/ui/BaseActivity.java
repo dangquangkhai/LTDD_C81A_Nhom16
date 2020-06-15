@@ -33,7 +33,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 /**
- *  Create relationship between Activity and Music Player Service
+ * Create relationship between Activity and Music Player Service
  */
 
 public abstract class BaseActivity extends AppCompatActivity implements MusicServiceEventListener {
@@ -67,12 +67,13 @@ public abstract class BaseActivity extends AppCompatActivity implements MusicSer
             }
         });
 
-        if(mSongPreviewController==null) mSongPreviewController = new SongPreviewController();
+        if (mSongPreviewController == null) mSongPreviewController = new SongPreviewController();
         addMusicServiceEventListener(mSongPreviewController);
     }
 
     /**
      * Improve bundle to prevent restoring of fragments.
+     *
      * @param bundle bundle container
      * @return improved bundle with removed "fragments parcelable"
      */
@@ -85,10 +86,10 @@ public abstract class BaseActivity extends AppCompatActivity implements MusicSer
 
     @Override
     protected void onDestroy() {
-        if(mPaletteGeneratorTask!=null) mPaletteGeneratorTask.cancel();
+        if (mPaletteGeneratorTask != null) mPaletteGeneratorTask.cancel();
         mPaletteGeneratorTask = null;
 
-        if(mSongPreviewController!=null) mSongPreviewController.destroy();
+        if (mSongPreviewController != null) mSongPreviewController.destroy();
 
         MusicPlayerRemote.unbindFromService(serviceToken);
         if (receiverRegistered) {
@@ -111,6 +112,7 @@ public abstract class BaseActivity extends AppCompatActivity implements MusicSer
             mMusicServiceEventListeners.remove(listener);
         }
     }
+
     public void removeAllMusicServiceEventListener() {
         mMusicServiceEventListeners.clear();
     }
@@ -168,7 +170,7 @@ public abstract class BaseActivity extends AppCompatActivity implements MusicSer
     }
 
     public void refreshPalette() {
-        if(mPaletteGeneratorTask!=null) mPaletteGeneratorTask.cancel();
+        if (mPaletteGeneratorTask != null) mPaletteGeneratorTask.cancel();
         mPaletteGeneratorTask = new PaletteGeneratorTask(getApplicationContext());
         mPaletteGeneratorTask.execute();
     }
@@ -220,8 +222,8 @@ public abstract class BaseActivity extends AppCompatActivity implements MusicSer
 
     @Override
     public void onPaletteChanged() {
-        for(MusicServiceEventListener listener : mMusicServiceEventListeners) {
-            if(listener != null) {
+        for (MusicServiceEventListener listener : mMusicServiceEventListeners) {
+            if (listener != null) {
                 listener.onPaletteChanged();
             }
         }
@@ -239,7 +241,7 @@ public abstract class BaseActivity extends AppCompatActivity implements MusicSer
         public void onReceive(final Context context, @NonNull final Intent intent) {
             final String action = intent.getAction();
             BaseActivity activity = reference.get();
-            if (activity != null&&action!=null) {
+            if (activity != null && action != null) {
                 switch (action) {
                     case MusicService.META_CHANGED:
                         activity.onPlayingMetaChanged();
@@ -260,14 +262,14 @@ public abstract class BaseActivity extends AppCompatActivity implements MusicSer
                         activity.onMediaStoreChanged();
                         break;
                     case PaletteGeneratorTask.PALETTE_ACTION:
-                         if(intent.getBooleanExtra(PaletteGeneratorTask.RESULT,false)) {
-                             Log.d(TAG, "onReceive: PaletteGeneratorTask true");
-                             Tool.ColorOne = intent.getIntExtra(PaletteGeneratorTask.COLOR_ONE,Tool.ColorOne);
-                             Tool.ColorTwo = intent.getIntExtra(PaletteGeneratorTask.COLOR_TWO,Tool.ColorTwo);
-                             Tool.AlphaOne = intent.getFloatExtra(PaletteGeneratorTask.ALPHA_ONE,Tool.AlphaOne);
-                             Tool.AlphaTwo = intent.getFloatExtra(PaletteGeneratorTask.ALPHA_TWO,Tool.AlphaTwo);
+                        if (intent.getBooleanExtra(PaletteGeneratorTask.RESULT, false)) {
+                            Log.d(TAG, "onReceive: PaletteGeneratorTask true");
+                            Tool.ColorOne = intent.getIntExtra(PaletteGeneratorTask.COLOR_ONE, Tool.ColorOne);
+                            Tool.ColorTwo = intent.getIntExtra(PaletteGeneratorTask.COLOR_TWO, Tool.ColorTwo);
+                            Tool.AlphaOne = intent.getFloatExtra(PaletteGeneratorTask.ALPHA_ONE, Tool.AlphaOne);
+                            Tool.AlphaTwo = intent.getFloatExtra(PaletteGeneratorTask.ALPHA_TWO, Tool.AlphaTwo);
 
-                         } else Log.d(TAG, "onReceive: PaletteGeneratorTask false");
+                        } else Log.d(TAG, "onReceive: PaletteGeneratorTask false");
                         activity.onPaletteChanged();
                 }
             }
@@ -275,13 +277,13 @@ public abstract class BaseActivity extends AppCompatActivity implements MusicSer
     }
 
 
-public void addMusicServiceEventListener(final MusicServiceEventListener listener, boolean firstIndex) {
+    public void addMusicServiceEventListener(final MusicServiceEventListener listener, boolean firstIndex) {
         if (listener == this) {
             throw new UnsupportedOperationException("Override the method, don't add a listener");
         }
 
         if (listener != null) {
-            mMusicServiceEventListeners.add(0,listener);
+            mMusicServiceEventListeners.add(0, listener);
         }
     }
 

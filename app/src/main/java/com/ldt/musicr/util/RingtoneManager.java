@@ -41,7 +41,7 @@ public class RingtoneManager {
                 .show();
     }
 
-    public   void setRingtone(@NonNull final Context context, final int id) {
+    public void setRingtone(@NonNull final Context context, final int id) {
         final ContentResolver resolver = context.getContentResolver();
         final Uri uri = MusicUtil.getSongFileUri(id);
         try {
@@ -66,6 +66,7 @@ public class RingtoneManager {
                     Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                 }
             }
-        } catch (SecurityException ignored) {}
+        } catch (SecurityException ignored) {
+        }
     }
 }

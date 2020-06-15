@@ -9,18 +9,23 @@ import org.jetbrains.annotations.Contract;
  */
 
 public class MCoordinate {
-    public MCoordinate() {}
+    public MCoordinate() {
+    }
+
     public static class MPoint {
         public double[] toArray() {
-            return new double[] {X,Y};
+            return new double[]{X, Y};
         }
+
         public MPoint() {
             X = Y = 0;
         }
-        public MPoint(double x,double y) {
+
+        public MPoint(double x, double y) {
             X = x;
             Y = y;
         }
+
         public double X;
 
         public double getX() {
@@ -41,12 +46,14 @@ public class MCoordinate {
 
         public double Y;
     }
+
     public static class MLine {
-        public MLine(double a,double b,double c) {
+        public MLine(double a, double b, double c) {
             A = a;
             B = b;
             C = c;
         }
+
         public double getA() {
             return A;
         }
@@ -74,47 +81,54 @@ public class MCoordinate {
         // 5x + 3y = 0
         // ax+ by = C
         double A, B, C;
+
         public double[] VectoPhapTuyen() {
-            return new double[] {A,B};
+            return new double[]{A, B};
         }
+
         public double[] VectoChiPhuong() {
-            if(A<0) return new double[] {-A,B};
-            return new double[] {A,-B};
+            if (A < 0) return new double[]{-A, B};
+            return new double[]{A, -B};
         }
-        public MLine(MPoint p1, MPoint p2)  {
+
+        public MLine(MPoint p1, MPoint p2) {
             double[] vtcp = {
-                    p2.X - p1.X,p2.Y - p1.Y
+                    p2.X - p1.X, p2.Y - p1.Y
             };
             double[] vtpt = chuyenDoiHuong(vtcp);
             A = vtpt[0];
             B = vtpt[1];
-            C = A*p1.X + B*p1.Y;
+            C = A * p1.X + B * p1.Y;
         }
 
         public MLine(MLine lSongSong, MPoint p) {
             double[] vtpt = lSongSong.VectoPhapTuyen();
             A = vtpt[0];
             B = vtpt[1];
-            C = A*p.X + B*p.Y;
+            C = A * p.X + B * p.Y;
         }
-        public MLine(double[] vtpt,MPoint p) {
+
+        public MLine(double[] vtpt, MPoint p) {
             A = vtpt[0];
             B = vtpt[1];
-            C = A*p.X + B*p.Y;
+            C = A * p.X + B * p.Y;
         }
-        public MLine(double[] vtcp,MPoint p,Boolean IsVtcp) {
+
+        public MLine(double[] vtcp, MPoint p, Boolean IsVtcp) {
             double[] vtpt = chuyenDoiHuong(vtcp);
             A = vtpt[0];
             B = vtpt[1];
-            C = A*p.X + B*p.Y;
+            C = A * p.X + B * p.Y;
         }
+
         public MLine DuongThangVuongGoc(MPoint p) {
             double[] vtpt = VectoChiPhuong();
-            return new MLine(vtpt,p);
+            return new MLine(vtpt, p);
         }
-       // public MPoint[] DiemCachMoc(MPoint p) {
+
+        // public MPoint[] DiemCachMoc(MPoint p) {
 //
-       // }
+        // }
         public MPoint GiaoDiem(MLine l) {
             //a1.x+b1.y= c1
             //a2.x+b2.y= c2
@@ -123,12 +137,13 @@ public class MCoordinate {
             // (a2 - b2.a1/b1).x + b2.c1/b1 = c2
             // x = (c2 - b2.c1/b1)/ (a2 - b2.a1/b1)
             MPoint p = new MPoint();
-            p.X = (l.C - l.B*C/B)/(l.A - l.B*A/B);
-            p.Y = (C - A*p.X)/B;
+            p.X = (l.C - l.B * C / B) / (l.A - l.B * A / B);
+            p.Y = (C - A * p.X) / B;
             return p;
         }
+
         public double[] toArray() {
-            return new double[] {A,B,C};
+            return new double[]{A, B, C};
         }
 
     }
@@ -136,9 +151,9 @@ public class MCoordinate {
     @NonNull
     @Contract(pure = true)
     public static double[] chuyenDoiHuong(double[] someTypeVector) {
-        if(someTypeVector[0]<0)
-            return new double[] {-someTypeVector[0],someTypeVector[1]};
-        return new double[] {someTypeVector[0],-someTypeVector[1]};
+        if (someTypeVector[0] < 0)
+            return new double[]{-someTypeVector[0], someTypeVector[1]};
+        return new double[]{someTypeVector[0], -someTypeVector[1]};
     }
 
 

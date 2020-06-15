@@ -17,6 +17,7 @@ public class FixedFastScrollRecyclerView extends FastScrollRecyclerView {
     public FixedFastScrollRecyclerView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
+
     @Override
     protected int getAvailableScrollHeight(int adapterHeight, int yOffset) {
         int visibleHeight = this.getHeight();

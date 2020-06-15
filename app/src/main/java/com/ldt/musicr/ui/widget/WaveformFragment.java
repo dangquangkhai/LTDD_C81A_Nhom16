@@ -1,35 +1,35 @@
 package com.ldt.musicr.ui.widget;
 
 
-        import android.app.ProgressDialog;
-        import android.content.DialogInterface;
-        import android.media.AudioManager;
-        import android.media.MediaPlayer;
-        import android.os.Bundle;
-        import android.os.Handler;
-        import androidx.annotation.Nullable;
-        import androidx.fragment.app.Fragment;
-        import android.text.Editable;
-        import android.text.TextWatcher;
-        import android.util.DisplayMetrics;
-        import android.util.Log;
-        import android.view.LayoutInflater;
-        import android.view.View;
-        import android.view.View.OnClickListener;
-        import android.view.ViewGroup;
-        import android.widget.AbsoluteLayout;
-        import android.widget.ImageButton;
-        import android.widget.TextView;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.os.Bundle;
+import android.os.Handler;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.AbsoluteLayout;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
-        import com.ldt.musicr.R;
-        import com.ldt.musicr.ui.widget.soundfile.CheapSoundFile;
-        import com.ldt.musicr.ui.widget.soundfile.MarkerView;
-        import com.ldt.musicr.ui.widget.soundfile.Segment;
-        import com.ldt.musicr.ui.widget.soundfile.WaveformView;
+import com.ldt.musicr.R;
+import com.ldt.musicr.ui.widget.soundfile.CheapSoundFile;
+import com.ldt.musicr.ui.widget.soundfile.MarkerView;
+import com.ldt.musicr.ui.widget.soundfile.Segment;
+import com.ldt.musicr.ui.widget.soundfile.WaveformView;
 
-        import java.io.File;
-        import java.io.FileInputStream;
-        import java.util.List;
+import java.io.File;
+import java.io.FileInputStream;
+import java.util.List;
 
 /*
  * Copyright (C) 2008 Google Inc.
@@ -50,7 +50,7 @@ package com.ldt.musicr.ui.widget;
 /**
  * Keeps track of the waveform display, current horizontal offset, marker handles,
  * start / end text boxes, and handles all of the buttons and controls
- *
+ * <p>
  * Modified by Anna Stępień <anna.stepien@semantive.com>
  */
 public abstract class WaveformFragment extends Fragment implements MarkerView.MarkerListener, WaveformView.WaveformListener {
@@ -175,7 +175,7 @@ public abstract class WaveformFragment extends Fragment implements MarkerView.Ma
 
     public void waveformTouchMove(float x) {
         mOffset = trap((int) (mTouchInitialOffset + (mTouchStart - x)));
-        Log.d (TAG,"onTouchMove : x = "+x+", mOffset = "+mOffset);
+        Log.d(TAG, "onTouchMove : x = " + x + ", mOffset = " + mOffset);
         updateDisplay();
     }
 
@@ -185,11 +185,11 @@ public abstract class WaveformFragment extends Fragment implements MarkerView.Ma
 
         long elapsedMsec = System.currentTimeMillis() - mWaveformTouchStartMsec;
         if (elapsedMsec < 300) {
-            Log.d(TAG,"elapsed");
+            Log.d(TAG, "elapsed");
             if (mIsPlaying) {
                 int seekMsec = mWaveformView.pixelsToMillisecs((int) (mTouchStart + mOffset));
                 if (seekMsec >= mPlayStartMsec && seekMsec < mPlayEndMsec) {
-                    Log.d(TAG,"seekTo");
+                    Log.d(TAG, "seekTo");
                     mPlayer.seekTo(seekMsec - mPlayStartOffset);
                 } else {
                     handlePause();
@@ -204,7 +204,7 @@ public abstract class WaveformFragment extends Fragment implements MarkerView.Ma
         mTouchDragging = false;
         mOffsetGoal = mOffset;
         mFlingVelocity = (int) (-vx);
-        Log.d (TAG,"onFling : vx = "+vx+", mOffset = "+mOffset);
+        Log.d(TAG, "onFling : vx = " + vx + ", mOffset = " + mOffset);
         updateDisplay();
     }
 
@@ -363,21 +363,21 @@ public abstract class WaveformFragment extends Fragment implements MarkerView.Ma
         mPlayButton.setOnClickListener(mPlayListener);
         mRewindButton = view.findViewById(R.id.rew);
         mRewindButton.setOnClickListener(getRewindListener());
-        mFfwdButton =  view.findViewById(R.id.ffwd);
+        mFfwdButton = view.findViewById(R.id.ffwd);
         mFfwdButton.setOnClickListener(getFwdListener());
 
-        TextView markStartButton =   view.findViewById(R.id.mark_start);
+        TextView markStartButton = view.findViewById(R.id.mark_start);
         markStartButton.setOnClickListener(mMarkStartListener);
-        TextView markEndButton =   view.findViewById(R.id.mark_end);
+        TextView markEndButton = view.findViewById(R.id.mark_end);
         markEndButton.setOnClickListener(mMarkEndListener);
 
         enableDisableButtons();
 
-        mWaveformView =  view.findViewById(R.id.waveform);
+        mWaveformView = view.findViewById(R.id.waveform);
         mWaveformView.setListener(this);
         mWaveformView.setSegments(getSegments());
 
-        mInfo =   view.findViewById(R.id.info);
+        mInfo = view.findViewById(R.id.info);
         mInfo.setText(mCaption);
 
         mMaxPos = 0;
@@ -517,8 +517,8 @@ public abstract class WaveformFragment extends Fragment implements MarkerView.Ma
                 float saveVal = mFlingVelocity;
 
 
-                offsetDelta = (int) ((mFlingVelocity+0.0f) / (30)); // v of offset ("distance")
-           //     offsetDelta =(mFlingVelocity>0) ? 160: -160; // v of offset ("distance")
+                offsetDelta = (int) ((mFlingVelocity + 0.0f) / (30)); // v of offset ("distance")
+                //     offsetDelta =(mFlingVelocity>0) ? 160: -160; // v of offset ("distance")
                 if (mFlingVelocity > offsetDelta) {  // ?
                     mFlingVelocity -= offsetDelta;
                 } else if (mFlingVelocity < -offsetDelta) {
@@ -756,7 +756,7 @@ public abstract class WaveformFragment extends Fragment implements MarkerView.Ma
                     mPlayer.reset();
                     mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
                     FileInputStream subsetInputStream = new FileInputStream(mFile.getAbsolutePath());
-                    mPlayer.setDataSource(subsetInputStream.getFD(),startByte, endByte - startByte);
+                    mPlayer.setDataSource(subsetInputStream.getFD(), startByte, endByte - startByte);
                     mPlayer.prepare();
                     mPlayStartOffset = mPlayStartMsec;
                 } catch (Exception e) {
