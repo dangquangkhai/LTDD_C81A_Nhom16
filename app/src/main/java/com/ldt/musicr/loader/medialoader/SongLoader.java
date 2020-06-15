@@ -15,8 +15,10 @@ import android.util.Log;
 import android.webkit.MimeTypeMap;
 
 import com.ldt.musicr.App;
+import com.ldt.musicr.api.config.ApiConfig;
 import com.ldt.musicr.api.customModels.ApiResponse;
 import com.ldt.musicr.api.providers.EntertainmentProvider;
+import com.ldt.musicr.api.utils.LibUtils;
 import com.ldt.musicr.api.utils.ReflectionHelper;
 import com.ldt.musicr.model.Song;
 import com.ldt.musicr.provider.BlacklistStore;
@@ -329,7 +331,8 @@ public class SongLoader {
         Cursor cursor = makeSongCursor(context, null, null, sortOrder);
         List<Song> lstLocalSong = getSongs(cursor);
         for (com.ldt.musicr.api.models.Song item : lstSong ) {
-            Song newSongLocal = new Song(item.getId(), item.getName(), 0, 2020, 0, "https://8r0mhcvmh3.execute-api.ap-southeast-1.amazonaws.com/dev" + item.getPath(), 0, 0, "Hello", item.getArtist().getId(), item.getArtist().getFirstname() + " " + item.getArtist().getLastname());
+            long duration = LibUtils.getSongDuration(ApiConfig.BACKEND_API + item.getPath());
+            Song newSongLocal = new Song(item.getId(), item.getName(), 0, 2020, duration, ApiConfig.BACKEND_API + item.getPath(), 0, 0, "Hello", item.getArtist().getId(), item.getArtist().getFirstname() + " " + item.getArtist().getLastname());
             newSongLocal.image = item.getImage();
             newSongLocal.path = item.getPath();
             newSongLocal.isWeb = true;

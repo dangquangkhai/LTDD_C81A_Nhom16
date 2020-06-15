@@ -2,6 +2,7 @@ package com.ldt.musicr.api.providers;
 
 import android.media.MediaMetadataRetriever;
 import android.util.Log;
+import com.ldt.musicr.api.config.ApiConfig;
 import com.ldt.musicr.api.customModels.ApiResponse;
 import com.ldt.musicr.api.models.Song;
 import com.ldt.musicr.api.utils.ReflectionHelper;
@@ -23,48 +24,33 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class EntertainmentProvider {
 
     public static final String TAG = "Entertainment";
-    public Call getAllSong(Callback callback) {
-        String BACKEND_API = "https://8r0mhcvmh3.execute-api.ap-southeast-1.amazonaws.com/dev";
-        String SONG = "/entmt/song";
-        OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder()
-                .url(BACKEND_API + SONG)
-                .build();
-        Call call = client.newCall(request);
-        call.enqueue(callback);
-        return call;
-    }
-
-    public List<Song> getAllSongSync()
-    {
+    public List<Song> getAllSongSync() {
         try {
             Observable<Response> fetchDt = Observable.create(
-                (ObservableOnSubscribe<Response>) emitter -> {
-                    try {
-                        String BACKEND_API = "https://8r0mhcvmh3.execute-api.ap-southeast-1.amazonaws.com/dev";
-                        String SONG = "/entmt/song";
-                        OkHttpClient client = new OkHttpClient();
-                        Request request = new Request.Builder()
-                                .url(BACKEND_API + SONG)
-                                .build();
-                        emitter.onNext(client.newCall(request).execute());
-                    } catch(Exception e) {
-                        emitter.onError(e); // In case there are network errors
-                    }
-                });
+                    (ObservableOnSubscribe<Response>) emitter -> {
+                        try {
+                            String url = ApiConfig.BACKEND_API + ApiConfig.SONG_API;
+                            OkHttpClient client = new OkHttpClient();
+                            Request request = new Request.Builder()
+                                    .url(url)
+                                    .build();
+                            emitter.onNext(client.newCall(request).execute());
+                        } catch (Exception e) {
+                            emitter.onError(e); // In case there are network errors
+                        }
+                    });
             Response _res = fetchDt.subscribeOn(Schedulers.io()).observeOn(Schedulers.computation()).blockingFirst();
-            ApiResponse apiRes =  ReflectionHelper._mapper().readValue(_res.body().string(), ApiResponse.class);
-            if (!apiRes.getSuccess())
-            {
+            ApiResponse apiRes = ReflectionHelper._mapper().readValue(_res.body().string(), ApiResponse.class);
+            if (!apiRes.getSuccess()) {
                 throw new Exception("Can't get list song");
             }
             List<HashMap<String, Object>> lstSong = new ArrayList<>();
             List<Song> lstResult = new ArrayList<>();
             lstSong = ReflectionHelper._mapper().convertValue(apiRes.getData(), lstSong.getClass());
-            lstSong.forEach(item -> {
+            for (HashMap<String, Object> item : lstSong) {
                 Song newItem = ReflectionHelper._mapper().convertValue(item, Song.class);
                 lstResult.add(newItem);
-            });
+            }
             return lstResult;
         } catch (Exception e) {
             Log.e(TAG, e.getMessage());
@@ -72,17 +58,33 @@ public class EntertainmentProvider {
         }
 
     }
-
-    public long getSongDuration(String source)
+    public Song getSongByIdSync(int SongId)
     {
-        MediaMetadataRetriever retriever = new MediaMetadataRetriever();
-        retriever.setDataSource(source);
-        String time = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
-        long timeInmillisec = Long.parseLong( time );
-        long duration = timeInmillisec / 1000;
-        long hours = duration / 3600;
-        long minutes = (duration - hours * 3600) / 60;
-        long seconds = duration - (hours * 3600 + minutes * 60);
-        return duration;
+        try {
+            Observable<Response> fetchDt = Observable.create(
+                    (ObservableOnSubscribe<Response>) emitter -> {
+                        try {
+                            String url = ApiConfig.BACKEND_API + ApiConfig.SONG_API + "/" + SongId;
+                            OkHttpClient client = new OkHttpClient();
+                            Request request = new Request.Builder()
+                                    .url(url)
+                                    .build();
+                            emitter.onNext(client.newCall(request).execute());
+                        } catch (Exception e) {
+                            emitter.onError(e); // In case there are network errors
+                        }
+                    });
+            Response _res = fetchDt.subscribeOn(Schedulers.io()).observeOn(Schedulers.computation()).blockingFirst();
+            ApiResponse apiRes = ReflectionHelper._mapper().readValue(_res.body().string(), ApiResponse.class);
+            if (!apiRes.getSuccess()) {
+                throw new Exception("Can't get song data");
+            }
+            Song _song = new Song();
+            _song = ReflectionHelper._mapper().convertValue(apiRes.getData(), Song.class);
+            return _song;
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage());
+            return new Song();
+        }
     }
 }
