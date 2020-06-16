@@ -86,7 +86,7 @@
             android:maxLines="1"
             android:textSize="13sp"
     />
-    <com.ldt.musicr.ui.widget.CircularPlayPauseProgressBar
+    <com.app.musicapp.ui.widget.CircularPlayPauseProgressBar
             android:id="@+id/preview_button"
             android:layout_width="48dp"
             android:layout_height="48dp"

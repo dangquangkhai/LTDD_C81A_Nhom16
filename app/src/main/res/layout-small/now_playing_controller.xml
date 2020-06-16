@@ -6,7 +6,7 @@
                                    android:layout_height="match_parent"
                                    xmlns:app="http://schemas.android.com/apk/res-auto"
                                    xmlns:ec="http://schemas.android.com/apk/res-auto"
-                                   tools:context="com.ldt.musicr.ui.nowplaying.NowPlayingController">
+                                   tools:context="com.app.musicapp.ui.nowplaying.NowPlayingController">
     <androidx.constraintlayout.motion.widget.MotionLayout
             android:id="@+id/constraint_root"
             android:layout_width="match_parent"
@@ -196,7 +196,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/visual_seek_bar"
         />
-        <com.ldt.musicr.ui.widget.view.AudioVisualSeekBar
+        <com.app.musicapp.ui.widget.view.AudioVisualSeekBar
                 android:id="@+id/visual_seek_bar"
                 android:layout_width="0dp"
                 android:layout_height="120dp"

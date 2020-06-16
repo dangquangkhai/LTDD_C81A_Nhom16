@@ -46,7 +46,7 @@
                 android:layout_marginEnd="24dp"
                 android:fontFamily="@font/hevetica_font"
         />
-        <com.ldt.musicr.ui.widget.rangeseekbar.RangeSeekBar
+        <com.app.musicapp.ui.widget.rangeseekbar.RangeSeekBar
                 android:id="@+id/in_app_volume_seek_bar"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
@@ -88,7 +88,7 @@
                 android:layout_marginEnd="24dp"
                 android:fontFamily="@font/hevetica_font"
         />
-        <com.ldt.musicr.ui.widget.rangeseekbar.RangeSeekBar
+        <com.app.musicapp.ui.widget.rangeseekbar.RangeSeekBar
                 android:id="@+id/left_right_balance_seek_bar"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
