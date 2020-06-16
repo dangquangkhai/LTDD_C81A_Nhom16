@@ -212,7 +212,7 @@ public class LyricBottomSheet extends BottomSheetDialogFragment implements Music
                 Glide.with(getContext()).load(MusicUtil.getMediaStoreAlbumCoverUri(mSong.albumId)).placeholder(R.drawable.music_style).error(R.drawable.music_style).into(mImageView);
             else
                 Picasso.get().load(MusicUtil.getMediaStoreAlbumCoverUri(mSong.albumId)).placeholder(R.drawable.music_style).error(R.drawable.music_style).into(mImageView);
-        } else Log.d(TAG, "updateLyric: Song is null");
+        } else Log.d(TAG, "updateLyric: SongApi is null");
     }
 
     private void setClipboard(Context context, String text) {

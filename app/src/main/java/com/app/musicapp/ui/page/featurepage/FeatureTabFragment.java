@@ -2,25 +2,24 @@ package com.app.musicapp.ui.page.featurepage;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.widget.NestedScrollView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.app.musicapp.R;
-import com.app.musicapp.service.MusicServiceEventListener;
-import com.app.musicapp.ui.page.BaseMusicServiceSupportFragment;
-import com.app.musicapp.ui.page.subpages.PlaylistPagerFragment;
 import com.app.musicapp.loader.medialoader.PlaylistLoader;
 import com.app.musicapp.loader.medialoader.SongLoader;
 import com.app.musicapp.model.Playlist;
+import com.app.musicapp.service.MusicServiceEventListener;
+import com.app.musicapp.ui.page.BaseMusicServiceSupportFragment;
+import com.app.musicapp.ui.page.subpages.PlaylistPagerFragment;
 import com.app.musicapp.ui.widget.fragmentnavigationcontroller.SupportFragment;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class FeatureTabFragment extends BaseMusicServiceSupportFragment implements FeaturePlaylistAdapter.PlaylistClickListener, MusicServiceEventListener {
     private static final String TAG = "FeatureTabFragment";
@@ -58,10 +57,14 @@ public class FeatureTabFragment extends BaseMusicServiceSupportFragment implemen
     private void refreshData() {
 
         if (getActivity() != null) {
-            mFeatureLinearHolder.setSuggestedPlaylists(PlaylistLoader.getAllPlaylistsWithAuto(getActivity()));
-            mFeatureLinearHolder.setSuggestedSongs(SongLoader.getAllSongs(getActivity()));
-        }
+            SongLoader.getAllSongs(getActivity()).subscribe(songs -> {
+                mFeatureLinearHolder.setSuggestedPlaylists(PlaylistLoader.getAllPlaylistsWithAuto(getActivity()));
+                mFeatureLinearHolder.setSuggestedSongs(songs);
+            }, throwable -> {
+                Log.e(TAG, throwable.getMessage());
+            });
 
+        }
         mSwipeRefreshLayout.setRefreshing(false);
 
     }

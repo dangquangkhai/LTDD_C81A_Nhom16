@@ -3,8 +3,9 @@ package com.app.musicapp.api.providers;
 import android.util.Log;
 import com.app.musicapp.api.config.ApiConfig;
 import com.app.musicapp.api.customModels.ApiResponse;
-import com.app.musicapp.api.models.Song;
+import com.app.musicapp.api.models.SongApi;
 import com.app.musicapp.api.utils.ReflectionHelper;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.ObservableOnSubscribe;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -21,7 +22,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class EntertainmentProvider {
 
     public static final String TAG = "Entertainment";
-    public List<Song> getAllSongSync() {
+    public List<SongApi> getAllSongSync() {
         try {
             Observable<Response> fetchDt = Observable.create(
                     (ObservableOnSubscribe<Response>) emitter -> {
@@ -42,10 +43,10 @@ public class EntertainmentProvider {
                 throw new Exception("Can't get list song");
             }
             List<HashMap<String, Object>> lstSong = new ArrayList<>();
-            List<Song> lstResult = new ArrayList<>();
+            List<SongApi> lstResult = new ArrayList<>();
             lstSong = ReflectionHelper._mapper().convertValue(apiRes.getData(), lstSong.getClass());
             for (HashMap<String, Object> item : lstSong) {
-                Song newItem = ReflectionHelper._mapper().convertValue(item, Song.class);
+                SongApi newItem = ReflectionHelper._mapper().convertValue(item, SongApi.class);
                 lstResult.add(newItem);
             }
             return lstResult;
@@ -55,7 +56,39 @@ public class EntertainmentProvider {
         }
 
     }
-    public Song getSongByIdSync(int SongId)
+    public Observable<List<SongApi>> getAllSongAsync() {
+        try {
+            Observable<Response> fetchDt = Observable.create(
+                    (ObservableOnSubscribe<Response>) emitter -> {
+                        try {
+                            String url = ApiConfig.BACKEND_API + ApiConfig.SONG_API;
+                            OkHttpClient client = new OkHttpClient();
+                            Request request = new Request.Builder()
+                                    .url(url)
+                                    .build();
+                            emitter.onNext(client.newCall(request).execute());
+                        } catch (Exception e) {
+                            emitter.onError(e); // In case there are network errors
+                        }
+                    });
+             Observable<List<SongApi>> lstSongObj = (Observable<List<SongApi>>) fetchDt.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).map(val -> {
+                 ApiResponse apiRes = ReflectionHelper._mapper().readValue(val.body().string(), ApiResponse.class);
+                 List<HashMap<String, Object>> lstSong = new ArrayList<>();
+                 List<SongApi> lstResult = new ArrayList<>();
+                 lstSong = ReflectionHelper._mapper().convertValue(apiRes.getData(), lstSong.getClass());
+                 for (HashMap<String, Object> item : lstSong) {
+                     SongApi newItem = ReflectionHelper._mapper().convertValue(item, SongApi.class);
+                     lstResult.add(newItem);
+                 }
+                 return lstResult;
+             });
+             return lstSongObj;
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage());
+            return null;
+        }
+    }
+    public SongApi getSongByIdSync(int SongId)
     {
         try {
             Observable<Response> fetchDt = Observable.create(
@@ -76,12 +109,12 @@ public class EntertainmentProvider {
             if (!apiRes.getSuccess()) {
                 throw new Exception("Can't get song data");
             }
-            Song _song = new Song();
-            _song = ReflectionHelper._mapper().convertValue(apiRes.getData(), Song.class);
+            SongApi _song = new SongApi();
+            _song = ReflectionHelper._mapper().convertValue(apiRes.getData(), SongApi.class);
             return _song;
         } catch (Exception e) {
             Log.e(TAG, e.getMessage());
-            return new Song();
+            return new SongApi();
         }
     }
 }

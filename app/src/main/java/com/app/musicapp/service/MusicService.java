@@ -515,6 +515,11 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
     private boolean openCurrent() {
         synchronized (this) {
             try {
+                Song _chk = getCurrentSong();
+                if (_chk.isWeb)
+                {
+                    return playback.setDataSource(_chk.data);
+                }
                 return playback.setDataSource(getTrackUri(getCurrentSong()));
             } catch (Exception e) {
                 return false;
@@ -531,6 +536,11 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
         synchronized (this) {
             try {
                 int nextPosition = getNextPosition(false);
+                Song _chk = getSongAt(nextPosition);
+                if (_chk.isWeb)
+                {
+                    playback.setNextDataSource(_chk.data);
+                }
                 playback.setNextDataSource(getTrackUri(getSongAt(nextPosition)));
                 this.nextPosition = nextPosition;
                 return true;

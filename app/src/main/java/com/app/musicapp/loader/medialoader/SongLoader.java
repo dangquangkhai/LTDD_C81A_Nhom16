@@ -8,19 +8,19 @@ import android.os.Environment;
 import android.provider.BaseColumns;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Audio.AudioColumns;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.util.Log;
 import android.webkit.MimeTypeMap;
-
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import com.app.musicapp.App;
 import com.app.musicapp.api.config.ApiConfig;
+import com.app.musicapp.api.models.SongApi;
 import com.app.musicapp.api.providers.EntertainmentProvider;
 import com.app.musicapp.api.utils.LibUtils;
 import com.app.musicapp.model.Song;
 import com.app.musicapp.provider.BlacklistStore;
 import com.app.musicapp.util.PreferenceUtil;
-
+import io.reactivex.rxjava3.core.Observable;
 import org.jaudiotagger.audio.AudioFile;
 import org.jaudiotagger.audio.AudioFileIO;
 import org.jaudiotagger.tag.FieldKey;
@@ -60,10 +60,12 @@ public class SongLoader {
             AudioColumns.ARTIST,// 10
     };
 
-    public static ArrayList<Song> getAllSongsIncludeHidden(@NonNull Context context) {
-        ArrayList<Song> list = getAllSongs(context);
-        list.addAll(getHiddenSongs(context));
-        return list;
+    public static Observable<ArrayList<Song>> getAllSongsIncludeHidden(@NonNull Context context) {
+        return getAllSongs(context).map(songs -> {
+            ArrayList<Song> list = songs;
+            list.addAll(getHiddenSongs(context));
+            return list;
+        });
     }
 
     public static ArrayList<Song> getHiddenSongs(@NonNull Context context) {
@@ -299,43 +301,74 @@ public class SongLoader {
     }
 
     @NonNull
-    public static ArrayList<Song> getAllSongs(@NonNull Context context) {
-        Cursor cursor = makeSongCursor(context, null, null);
-        return getSongs(cursor);
+    public static Observable<ArrayList<Song>> getAllSongs(@NonNull Context context) {
+        EntertainmentProvider _provider = new EntertainmentProvider();
+        Observable<List<SongApi>> lstSongAsync = _provider.getAllSongAsync();
+        Observable<ArrayList<Song>> lstResult = lstSongAsync.map(val -> {
+            Cursor cursor = makeSongCursor(context, null, null);
+            ArrayList<Song> lstLocalSong = getSongs(cursor);
+            for (SongApi item : val) {
+                long duration = LibUtils.getSongDuration(ApiConfig.BACKEND_API + item.getPath());
+                Song newSongLocal = new Song(item.getId(), item.getName(), 0, 2020, duration, ApiConfig.BACKEND_API + item.getPath(), 0, 0, "Hello", item.getArtist().getId(), item.getArtist().getFirstname() + " " + item.getArtist().getLastname());
+                newSongLocal.image = item.getImage();
+                newSongLocal.path = item.getPath();
+                newSongLocal.isWeb = true;
+                lstLocalSong.add(newSongLocal);
+            }
+            return lstLocalSong;
+        });
+        return lstResult;
     }
 
-    public static ArrayList<Song> getAllSongsV2(Context context, String sortOrder) {
+    public static Observable<ArrayList<Song>> getAllSongsV2(Context context, String sortOrder) {
         EntertainmentProvider _provider = new EntertainmentProvider();
-        List<com.app.musicapp.api.models.Song> lstSong = _provider.getAllSongSync();
-/*        _provider.getAllSong(new Callback() {
-            @Override
-            public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                Log.e("Callbacl Exception", e.getMessage());
+        Observable<List<SongApi>> lstSongAsync = _provider.getAllSongAsync();
+        Observable<ArrayList<Song>> lstResult = lstSongAsync.map(val -> {
+            Cursor cursor = makeSongCursor(context, null, null, sortOrder);
+            ArrayList<Song> lstLocalSong = getSongs(cursor);
+            for (SongApi item : val) {
+                long duration = LibUtils.getSongDuration(ApiConfig.BACKEND_API + item.getPath());
+                Song newSongLocal = new Song(item.getId(), item.getName(), 0, 2020, duration, ApiConfig.BACKEND_API + item.getPath(), 0, 0, "Hello", item.getArtist().getId(), item.getArtist().getFirstname() + " " + item.getArtist().getLastname());
+                newSongLocal.image = item.getImage();
+                newSongLocal.path = item.getPath();
+                newSongLocal.isWeb = true;
+                lstLocalSong.add(newSongLocal);
             }
-
-            @Override
-            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                List<com.app.musicapp.api.models.Song> lstSong = new ArrayList<>();
-                ApiResponse _res = ReflectionHelper._mapper().readValue(response.body().string().toString(), ApiResponse.class);
-                lstSong = ReflectionHelper._mapper().convertValue(_res.getData(), lstSong.getClass());
-            }
-        });*/
+            return lstLocalSong;
+        });
+        return lstResult;
+/*        List<SongApi> lstSong = _provider.getAllSongSync();
         Cursor cursor = makeSongCursor(context, null, null, sortOrder);
-        List<Song> lstLocalSong = getSongs(cursor);
-        for (com.app.musicapp.api.models.Song item : lstSong ) {
-            long duration = LibUtils.getSongDuration(ApiConfig.BACKEND_API + item.getPath());
-            Song newSongLocal = new Song(item.getId(), item.getName(), 0, 2020, duration, ApiConfig.BACKEND_API + item.getPath(), 0, 0, "Hello", item.getArtist().getId(), item.getArtist().getFirstname() + " " + item.getArtist().getLastname());
+        List<SongApi> lstLocalSong = getSongs(cursor);
+        for (SongApi item : lstSong ) {
+            long duration = LibUtils.getSongDuration(ApiConfig.`BACKEND_API + item.getPath());
+            SongApi newSongLocal = new SongApi(item.getId(), item.getName(), 0, 2020, duration, ApiConfig.BACKEND_API + item.getPath(), 0, 0, "Hello", item.getArtist().getId(), item.getArtist().getFirstname() + " " + item.getArtist().getLastname());
             newSongLocal.image = item.getImage();
             newSongLocal.path = item.getPath();
             newSongLocal.isWeb = true;
             lstLocalSong.add(newSongLocal);
-        }
-        return (ArrayList<Song>) lstLocalSong;
+        }*/
     }
 
-    public static ArrayList<Song> getAllSongs(Context context, String sortOrder) {
-        Cursor cursor = makeSongCursor(context, null, null, sortOrder);
-        return getSongs(cursor);
+    public static Observable<ArrayList<Song>> getAllSongs(Context context, String sortOrder) {
+/*        Cursor cursor = makeSongCursor(context, null, null, sortOrder);
+        return getSongs(cursor);*/
+        EntertainmentProvider _provider = new EntertainmentProvider();
+        Observable<List<SongApi>> lstSongAsync = _provider.getAllSongAsync();
+        Observable<ArrayList<Song>> lstResult = lstSongAsync.map(val -> {
+            Cursor cursor = makeSongCursor(context, null, null, sortOrder);
+            ArrayList<Song> lstLocalSong = getSongs(cursor);
+            for (SongApi item : val) {
+                long duration = LibUtils.getSongDuration(ApiConfig.BACKEND_API + item.getPath());
+                Song newSongLocal = new Song(item.getId(), item.getName(), 0, 2020, duration, ApiConfig.BACKEND_API + item.getPath(), 0, 0, "Hello", item.getArtist().getId(), item.getArtist().getFirstname() + " " + item.getArtist().getLastname());
+                newSongLocal.image = item.getImage();
+                newSongLocal.path = item.getPath();
+                newSongLocal.isWeb = true;
+                lstLocalSong.add(newSongLocal);
+            }
+            return lstLocalSong;
+        });
+        return lstResult;
     }
 
     @NonNull

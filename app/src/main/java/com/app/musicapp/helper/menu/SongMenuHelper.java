@@ -1,10 +1,10 @@
 package com.app.musicapp.helper.menu;
 
 import android.content.Intent;
+import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.app.musicapp.R;
 import com.app.musicapp.helper.songpreview.SongPreviewController;
 import com.app.musicapp.loader.medialoader.SongLoader;
@@ -27,6 +27,7 @@ import java.util.Collections;
  * modified by Le Dinh Trung (dtrung98)
  */
 public class SongMenuHelper {
+    public static final String TAG = "SongMenuHelper";
     @StringRes
     public static final int[] SONG_OPTION = new int[]{
             /*   R.string.play,*/
@@ -120,16 +121,20 @@ public class SongMenuHelper {
                         if (preview.isPlayingPreview())
                             preview.cancelPreview();
                         else {
-                            ArrayList<Song> list = SongLoader.getAllSongs(activity);
-                            Collections.shuffle(list);
-                            int index = 0;
-                            for (int i = 0; i < list.size(); i++) {
-                                if (song.id == list.get(i).id) index = i;
-                            }
+                            SongLoader.getAllSongs(activity).subscribe(songs -> {
+                                ArrayList<Song> list = songs;
+                                Collections.shuffle(list);
+                                int index = 0;
+                                for (int i = 0; i < list.size(); i++) {
+                                    if (song.id == list.get(i).id) index = i;
+                                }
 
-                            if (index != 0)
-                                list.add(0, list.remove(index));
-                            preview.previewSongs(list);
+                                if (index != 0)
+                                    list.add(0, list.remove(index));
+                                preview.previewSongs(list);
+                            }, throwable -> {
+                                Log.e(TAG, throwable.getMessage());
+                            });
                         }
                     }
                 }

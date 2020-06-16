@@ -4,10 +4,10 @@ import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 import androidx.annotation.NonNull;
-
 import com.app.musicapp.R;
 import com.app.musicapp.loader.medialoader.SongLoader;
 import com.app.musicapp.model.Song;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 import java.util.ArrayList;
 
@@ -20,7 +20,9 @@ public class ShuffleAllPlaylist extends AbsSmartPlaylist {
     @NonNull
     @Override
     public ArrayList<Song> getSongs(@NonNull Context context) {
-        return SongLoader.getAllSongs(context);
+        return SongLoader.getAllSongs(context).subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.computation())
+                .blockingFirst();
     }
 
     @Override

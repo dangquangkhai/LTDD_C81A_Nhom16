@@ -78,7 +78,7 @@ public class Song extends Media implements Parcelable {
 
     @Override
     public String toString() {
-        return "Song{" +
+        return "SongApi{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", trackNumber=" + trackNumber +

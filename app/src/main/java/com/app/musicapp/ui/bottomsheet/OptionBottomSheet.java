@@ -107,8 +107,8 @@ public class OptionBottomSheet extends BottomSheetDialogFragment implements View
             TextView view = new TextView(context);
             view.setPadding((int) (12 * dp), 0, (int) (12 * dp), 0);
 
-           /* if(options[i]==R.string.go_to_artist &&mObject instanceof Song && !((Song)mObject).artistName.isEmpty()) {
-                view.setText(getString(R.string.see_more_about)+" "+ ((Song)mObject).artistName);
+           /* if(options[i]==R.string.go_to_artist &&mObject instanceof SongApi && !((SongApi)mObject).artistName.isEmpty()) {
+                view.setText(getString(R.string.see_more_about)+" "+ ((SongApi)mObject).artistName);
             } else*/
             view.setText(options[i]);
 

@@ -2,6 +2,7 @@ package com.app.musicapp.ui.page.subpages;
 
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -85,26 +86,31 @@ public class MoreOptionFragment extends BaseMusicServiceSupportFragment {
     @OnClick(R.id.button_one)
     void ButtonOneClick() {
         if (getContext() != null) {
-            ArrayList<Song> songs = SongLoader.getAllSongs(getContext());
-            MediaPlayer mediaPlayer = new MediaPlayer();
-            try {
-                mediaPlayer.setDataSource(songs.get(new Random().nextInt(songs.size())).data);
-                mediaPlayer.prepare();
-                mediaPlayer.seekTo(1000 * 25);
-                mRoot.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            mediaPlayer.release();
-                        } catch (Exception ignored) {
+            SongLoader.getAllSongs(getContext()).subscribe(val -> {
+                ArrayList<Song> songs = val;
+                MediaPlayer mediaPlayer = new MediaPlayer();
+                try {
+                    mediaPlayer.setDataSource(songs.get(new Random().nextInt(songs.size())).data);
+                    mediaPlayer.prepare();
+                    mediaPlayer.seekTo(1000 * 25);
+                    mRoot.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                mediaPlayer.release();
+                            } catch (Exception ignored) {
+                            }
                         }
-                    }
-                }, 20 * 1000);
-                mediaPlayer.start();
-            } catch (Exception e) {
-                e.printStackTrace();
-                Toasty.error(getContext(), "Couldn't play songs").show();
-            }
+                    }, 20 * 1000);
+                    mediaPlayer.start();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toasty.error(getContext(), "Couldn't play songs").show();
+                }
+            }, throwable -> {
+                Log.e(TAG, throwable.getMessage());
+            });
+
         }
     }
 }

@@ -1,35 +1,34 @@
 package com.app.musicapp.ui.page.librarypage.song;
 
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.Group;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.Group;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import com.app.musicapp.App;
 import com.app.musicapp.R;
 import com.app.musicapp.contract.AbsMediaAdapter;
 import com.app.musicapp.loader.medialoader.SongLoader;
 import com.app.musicapp.model.Song;
-import com.app.musicapp.ui.page.BaseMusicServiceFragment;
 import com.app.musicapp.ui.bottomsheet.SortOrderBottomSheet;
+import com.app.musicapp.ui.page.BaseMusicServiceFragment;
+import com.app.musicapp.util.Animation;
 import com.app.musicapp.util.Tool;
 import com.app.musicapp.util.Util;
-import com.app.musicapp.util.Animation;
+import com.bumptech.glide.Glide;
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
 
 import java.util.ArrayList;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class SongChildTab extends BaseMusicServiceFragment implements SortOrderBottomSheet.SortOrderChangedListener, PreviewRandomPlayAdapter.FirstItemCallBack {
     public static final String TAG = "SongChildTab";
@@ -115,10 +114,12 @@ public class SongChildTab extends BaseMusicServiceFragment implements SortOrderB
     /*    if(getContext() != null)
         SongLoader.doSomething(getContext());
 */
-        ArrayList<Song> songs = SongLoader.getAllSongsV2(getActivity(), SortOrderBottomSheet.mSortOrderCodes[mCurrentSortOrder]);
-        mAdapter.setData(songs);
-        showOrHidePreview(!songs.isEmpty());
-
+        SongLoader.getAllSongsV2(getActivity(), SortOrderBottomSheet.mSortOrderCodes[mCurrentSortOrder]).subscribe(songs -> {
+            mAdapter.setData(songs);
+            showOrHidePreview(!songs.isEmpty());
+        }, throwable -> {
+            Log.e(TAG, throwable.getMessage());
+        });
     }
 
     private void showOrHidePreview(boolean show) {
@@ -163,9 +164,12 @@ public class SongChildTab extends BaseMusicServiceFragment implements SortOrderB
 
     @Override
     public void onMediaStoreChanged() {
-        ArrayList<Song> songs = SongLoader.getAllSongs(getActivity(), SortOrderBottomSheet.mSortOrderCodes[mCurrentSortOrder]);
-        mAdapter.setData(songs);
-        showOrHidePreview(!songs.isEmpty());
+        SongLoader.getAllSongs(getActivity(), SortOrderBottomSheet.mSortOrderCodes[mCurrentSortOrder]).subscribe(songs -> {
+            mAdapter.setData(songs);
+            showOrHidePreview(!songs.isEmpty());
+        }, throwable -> {
+            Log.e(TAG, throwable.getMessage());
+        });
     }
 
     @Override

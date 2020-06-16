@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Song {
+public class SongApi {
     @JsonProperty("id")
     public int id;
     @JsonProperty("name")
@@ -20,10 +20,10 @@ public class Song {
     @JsonProperty("artist")
     public Artist artist;
 
-    public Song() {
+    public SongApi() {
     }
 
-    public Song(int id, String name, String image, String path, int artist_id, Artist artist) {
+    public SongApi(int id, String name, String image, String path, int artist_id, Artist artist) {
         this.id = id;
         this.name = name;
         this.image = image;
@@ -84,7 +84,7 @@ public class Song {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Song song = (Song) o;
+        SongApi song = (SongApi) o;
         return id == song.id &&
                 artist_id == song.artist_id &&
                 name.equals(song.name) &&
@@ -100,7 +100,7 @@ public class Song {
 
     @Override
     public String toString() {
-        return "Song{" +
+        return "SongApi{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", image='" + image + '\'' +

@@ -331,12 +331,12 @@ public class MusicUtil {
         return PlaylistLoader.getPlaylist(context, PlaylistsUtil.createPlaylist(context, context.getString(R.string.favorites)));
     }
 
-    public static boolean isFavorite(@NonNull final Context context, @NonNull final Song song) {
+    public static boolean isFavorite(@NonNull final Context context, @NonNull final SongApi song) {
         return PlaylistsUtil.doPlaylistContains(context, getFavoritesPlaylist(context).id, song.id);
     }
 
 
-    public static void toggleFavorite(@NonNull final Context context, @NonNull final Song song) {
+    public static void toggleFavorite(@NonNull final Context context, @NonNull final SongApi song) {
         if (isFavorite(context, song)) {
             PlaylistsUtil.removeFromPlaylist(context, song, getFavoritesPlaylist(context).id);
         } else {

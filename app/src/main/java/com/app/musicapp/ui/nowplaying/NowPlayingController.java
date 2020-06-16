@@ -8,15 +8,6 @@ import android.graphics.Rect;
 import android.graphics.drawable.RippleDrawable;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.constraintlayout.motion.widget.MotionLayout;
-import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.PagerSnapHelper;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.SnapHelper;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -24,30 +15,33 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.motion.widget.MotionLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.PagerSnapHelper;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SnapHelper;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import com.app.musicapp.R;
 import com.app.musicapp.helper.menu.SongMenuHelper;
 import com.app.musicapp.loader.medialoader.SongLoader;
+import com.app.musicapp.model.Song;
 import com.app.musicapp.service.MusicPlayerRemote;
 import com.app.musicapp.service.MusicServiceEventListener;
-import com.app.musicapp.ui.page.BaseLayerFragment;
-
-import com.app.musicapp.model.Song;
-
 import com.app.musicapp.ui.BaseActivity;
 import com.app.musicapp.ui.LayerController;
-
 import com.app.musicapp.ui.MainActivity;
 import com.app.musicapp.ui.bottomsheet.OptionBottomSheet;
+import com.app.musicapp.ui.page.BaseLayerFragment;
 import com.app.musicapp.ui.widget.view.AudioVisualSeekBar;
 import com.app.musicapp.util.SortOrder;
 import com.app.musicapp.util.Tool;
 
 import java.util.ArrayList;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class NowPlayingController extends BaseLayerFragment implements MusicServiceEventListener, AudioVisualSeekBar.OnSeekBarChangeListener, PalettePickerAdapter.OnColorChangedListener {
     private static final String TAG = "NowPlayingController";
@@ -369,29 +363,33 @@ public class NowPlayingController extends BaseLayerFragment implements MusicServ
     }
 
     private void updatePlayingSongInfo() {
-        Song song = MusicPlayerRemote.getCurrentSong();
-        if (song == null || song.id == -1) {
-            ArrayList<Song> list = SongLoader.getAllSongs(mPlayPauseButton.getContext(), SortOrder.SongSortOrder.SONG_DATE);
-            if (list.isEmpty()) return;
-            MusicPlayerRemote.openQueue(list, 0, false);
-            return;
-        }
-        mTitle.setText(String.format("%s %s %s", song.title, getString(R.string.middle_dot), song.artistName));
-        mBigTitle.setText(song.title);
-        mBigArtist.setText(song.artistName);
+        SongLoader.getAllSongs(mPlayPauseButton.getContext(), SortOrder.SongSortOrder.SONG_DATE).subscribe(songs -> {
+            Song song = MusicPlayerRemote.getCurrentSong();
+            if (song == null || song.id == -1) {
+                ArrayList<Song> list = songs;
+                if (list.isEmpty()) return;
+                MusicPlayerRemote.openQueue(list, 0, false);
+                return;
+            }
+            mTitle.setText(String.format("%s %s %s", song.title, getString(R.string.middle_dot), song.artistName));
+            mBigTitle.setText(song.title);
+            mBigArtist.setText(song.artistName);
 
-        String path = song.data;
-        long duration = song.duration;
-        if (duration > 0 && path != null && !path.isEmpty() && !mVisualSeekBar.getCurrentFileName().equals(path)) {
-            Log.d(TAG, "start visualize " + path + "dur = " + duration + ", pos = " + MusicPlayerRemote.getSongProgressMillis());
-            mVisualSeekBar.visualize(path, duration, MusicPlayerRemote.getSongProgressMillis());
-        } else {
-            Log.d(TAG, "ignore visualize " + path);
-        }
+            String path = song.data;
+            long duration = song.duration;
+            if (duration > 0 && path != null && !path.isEmpty() && !mVisualSeekBar.getCurrentFileName().equals(path)) {
+                Log.d(TAG, "start visualize " + path + "dur = " + duration + ", pos = " + MusicPlayerRemote.getSongProgressMillis());
+                mVisualSeekBar.visualize(path, duration, MusicPlayerRemote.getSongProgressMillis());
+            } else {
+                Log.d(TAG, "ignore visualize " + path);
+            }
 
-        mVisualSeekBar.postDelayed(mUpdateProgress, 10);
-        if (getActivity() instanceof BaseActivity)
-            ((BaseActivity) getActivity()).refreshPalette();
+            mVisualSeekBar.postDelayed(mUpdateProgress, 10);
+            if (getActivity() instanceof BaseActivity)
+                ((BaseActivity) getActivity()).refreshPalette();
+        }, throwable -> {
+            Log.e(TAG, throwable.getMessage());
+        });
     }
 
 

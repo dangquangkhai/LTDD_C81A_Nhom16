@@ -5,7 +5,7 @@ package com.app.musicapp.helper.menu;
  * modified by Le Dinh Trung (dtrung98)
  */
 public class SongsMenuHelper {
-/*    public static boolean handleMenuClick(@NonNull Activity activity, @NonNull List<Song> songs, int menuItemId) {
+/*    public static boolean handleMenuClick(@NonNull Activity activity, @NonNull List<SongApi> songs, int menuItemId) {
         switch (menuItemId) {
             case R.id.:
                 MusicPlayerRemote.playNext(songs);
