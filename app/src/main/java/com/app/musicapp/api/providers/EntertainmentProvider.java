@@ -1,5 +1,6 @@
 package com.app.musicapp.api.providers;
 
+import android.os.Environment;
 import android.util.Log;
 import com.app.musicapp.api.config.ApiConfig;
 import com.app.musicapp.api.customModels.ApiResponse;
@@ -11,6 +12,7 @@ import io.reactivex.rxjava3.core.ObservableOnSubscribe;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import okhttp3.*;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,6 +24,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class EntertainmentProvider {
 
     public static final String TAG = "Entertainment";
+
     public List<SongApi> getAllSongSync() {
         try {
             Observable<Response> fetchDt = Observable.create(
@@ -56,6 +59,7 @@ public class EntertainmentProvider {
         }
 
     }
+
     public Observable<List<SongApi>> getAllSongAsync() {
         try {
             Observable<Response> fetchDt = Observable.create(
@@ -71,25 +75,25 @@ public class EntertainmentProvider {
                             emitter.onError(e); // In case there are network errors
                         }
                     });
-             Observable<List<SongApi>> lstSongObj = (Observable<List<SongApi>>) fetchDt.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).map(val -> {
-                 ApiResponse apiRes = ReflectionHelper._mapper().readValue(val.body().string(), ApiResponse.class);
-                 List<HashMap<String, Object>> lstSong = new ArrayList<>();
-                 List<SongApi> lstResult = new ArrayList<>();
-                 lstSong = ReflectionHelper._mapper().convertValue(apiRes.getData(), lstSong.getClass());
-                 for (HashMap<String, Object> item : lstSong) {
-                     SongApi newItem = ReflectionHelper._mapper().convertValue(item, SongApi.class);
-                     lstResult.add(newItem);
-                 }
-                 return lstResult;
-             });
-             return lstSongObj;
+            Observable<List<SongApi>> lstSongObj = (Observable<List<SongApi>>) fetchDt.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).map(val -> {
+                ApiResponse apiRes = ReflectionHelper._mapper().readValue(val.body().string(), ApiResponse.class);
+                List<HashMap<String, Object>> lstSong = new ArrayList<>();
+                List<SongApi> lstResult = new ArrayList<>();
+                lstSong = ReflectionHelper._mapper().convertValue(apiRes.getData(), lstSong.getClass());
+                for (HashMap<String, Object> item : lstSong) {
+                    SongApi newItem = ReflectionHelper._mapper().convertValue(item, SongApi.class);
+                    lstResult.add(newItem);
+                }
+                return lstResult;
+            });
+            return lstSongObj;
         } catch (Exception e) {
             Log.e(TAG, e.getMessage());
             return null;
         }
     }
-    public SongApi getSongByIdSync(int SongId)
-    {
+
+    public SongApi getSongByIdSync(int SongId) {
         try {
             Observable<Response> fetchDt = Observable.create(
                     (ObservableOnSubscribe<Response>) emitter -> {
@@ -117,4 +121,46 @@ public class EntertainmentProvider {
             return new SongApi();
         }
     }
+
+    public void downloadSongAsync(String urlDownload) {
+        try {
+            Observable<Response> fetchDt = Observable.create(
+                    (ObservableOnSubscribe<Response>) emitter -> {
+                        try {
+                            String url = urlDownload;
+                            OkHttpClient client = new OkHttpClient();
+                            Request request = new Request.Builder()
+                                    .url(url)
+                                    .build();
+                            emitter.onNext(client.newCall(request).execute());
+                        } catch (Exception e) {
+                            emitter.onError(e); // In case there are network errors
+                        }
+                    });
+            fetchDt.subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(val -> {
+                        InputStream is = val.body().byteStream();
+                        String filename = val.header("content-disposition").replaceFirst("(?i)^.*filename=\"?([^\"]+)\"?.*$", "$1");
+                        BufferedInputStream input = new BufferedInputStream(is);
+                        OutputStream output = new FileOutputStream(Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + filename);
+                        byte[] data = new byte[is.available()];
+                        long total = 0;
+                        int count;
+                        while ((count = input.read(data)) != -1) {
+                            total += count;
+                            output.write(data, 0, count);
+                        }
+
+                        output.flush();
+                        output.close();
+                        input.close();
+                    }, throwable -> {
+                        Log.e(TAG, throwable.getMessage());
+                    });
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage());
+        }
+    }
+
 }

@@ -18,8 +18,10 @@ public class ExampleInstrumentedTest {
     @Test
     public void useAppContext() throws Exception {
         // Context of the app under test.
+        String filename = ("attachment; filename=sample.mp3").replaceFirst("(?i)^.*filename=\"?([^\"]+)\"?.*$", "$1");
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
         String obj = appContext.getPackageName();
         assertEquals("com.app.musicapp", appContext.getPackageName());
+        assertEquals("sample.mp3", filename);
     }
 }
