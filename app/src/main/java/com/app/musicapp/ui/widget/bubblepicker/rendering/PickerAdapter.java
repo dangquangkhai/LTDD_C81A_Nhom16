@@ -3,15 +3,12 @@ package com.app.musicapp.ui.widget.bubblepicker.rendering;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
-
 import androidx.core.content.ContextCompat;
-
 import com.app.musicapp.App;
 import com.app.musicapp.R;
 import com.app.musicapp.ui.widget.bubblepicker.BubblePickerListener;
 import com.app.musicapp.ui.widget.bubblepicker.model.BubbleGradient;
 import com.app.musicapp.ui.widget.bubblepicker.model.PickerItem;
-
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;

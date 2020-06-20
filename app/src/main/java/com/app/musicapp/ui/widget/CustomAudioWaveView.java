@@ -1,8 +1,6 @@
 package com.app.musicapp.ui.widget;
 
 import android.graphics.Color;
-
-
 import com.app.musicapp.ui.widget.soundfile.Segment;
 
 import java.util.Arrays;

@@ -1,7 +1,6 @@
 package com.app.musicapp.glide.palette;
 
 import androidx.annotation.NonNull;
-
 import com.bumptech.glide.load.engine.Resource;
 import com.bumptech.glide.util.Util;
 

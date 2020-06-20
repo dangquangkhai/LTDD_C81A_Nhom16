@@ -8,24 +8,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 import com.app.musicapp.R;
 import com.app.musicapp.loader.medialoader.SongLoader;
 import com.app.musicapp.model.Song;
 import com.app.musicapp.ui.page.BaseMusicServiceSupportFragment;
 import com.app.musicapp.util.Tool;
+import es.dmoral.toasty.Toasty;
 
 import java.util.ArrayList;
 import java.util.Random;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.Unbinder;
-import es.dmoral.toasty.Toasty;
 
 public class MoreOptionFragment extends BaseMusicServiceSupportFragment {
     private static final String TAG = "MoreOptionFragment";

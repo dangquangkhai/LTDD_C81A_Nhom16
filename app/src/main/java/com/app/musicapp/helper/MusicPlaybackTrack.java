@@ -18,7 +18,6 @@ package com.app.musicapp.helper;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
 import com.app.musicapp.util.Util;
 
 

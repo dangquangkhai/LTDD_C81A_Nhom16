@@ -3,7 +3,6 @@ package com.app.musicapp.helper.songpreview;
 import android.media.MediaPlayer;
 import android.os.Handler;
 import android.util.Log;
-
 import com.app.musicapp.model.Song;
 
 import java.lang.ref.WeakReference;

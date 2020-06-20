@@ -2,11 +2,10 @@ package com.app.musicapp.ui.page.subpages;
 
 import android.content.Context;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.app.musicapp.R;
 import com.app.musicapp.helper.menu.SongMenuHelper;
-import com.app.musicapp.ui.page.librarypage.song.SongChildAdapter;
 import com.app.musicapp.ui.bottomsheet.OptionBottomSheet;
+import com.app.musicapp.ui.page.librarypage.song.SongChildAdapter;
 
 public class SongInArtistPagerAdapter extends SongChildAdapter {
     private static final String TAG = "SongInArtistPagerAdapter";

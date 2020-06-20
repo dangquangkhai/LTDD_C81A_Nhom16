@@ -7,13 +7,12 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.ImageView;
-
-import com.app.musicapp.util.BitmapEditor;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import com.app.musicapp.R;
+import com.app.musicapp.util.BitmapEditor;
 
 public class BlurImageViewChildConstraintLayout extends ConstraintLayout {
     private static final String TAG = "DeepShadowConstraint";

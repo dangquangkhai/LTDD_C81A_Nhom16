@@ -7,15 +7,18 @@ import android.graphics.Color;
 import android.graphics.drawable.RippleDrawable;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.graphics.drawable.DrawableCompat;
-import androidx.appcompat.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SwitchCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnCheckedChanged;
+import butterknife.OnClick;
 import com.app.musicapp.App;
 import com.app.musicapp.R;
 import com.app.musicapp.helper.LocaleHelper;
@@ -25,11 +28,6 @@ import com.app.musicapp.ui.page.subpages.MoreOptionFragment;
 import com.app.musicapp.ui.widget.rangeseekbar.OnRangeChangedListener;
 import com.app.musicapp.ui.widget.rangeseekbar.RangeSeekBar;
 import com.app.musicapp.util.Tool;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnCheckedChanged;
-import butterknife.OnClick;
 
 public class SettingTabFragment extends BaseMusicServiceSupportFragment implements OnRangeChangedListener {
     private static final String EN = "en";

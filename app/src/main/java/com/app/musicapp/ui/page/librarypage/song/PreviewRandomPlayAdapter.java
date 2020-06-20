@@ -2,26 +2,23 @@ package com.app.musicapp.ui.page.librarypage.song;
 
 import android.content.Context;
 import android.os.Handler;
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.RequestManager;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
+import butterknife.OnClick;
 import com.app.musicapp.R;
 import com.app.musicapp.model.Song;
-
 import com.app.musicapp.service.MusicPlayerRemote;
 import com.app.musicapp.util.Util;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.ArrayList;
 import java.util.Random;
-
-import butterknife.OnClick;
 
 public class PreviewRandomPlayAdapter extends RecyclerView.Adapter<PreviewRandomPlayAdapter.ItemHolder> {
     private static final String TAG = "PreviewRandomPlayAdapter";

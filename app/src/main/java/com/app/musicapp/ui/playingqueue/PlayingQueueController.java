@@ -6,12 +6,6 @@ import android.content.res.ColorStateList;
 import android.graphics.drawable.RippleDrawable;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.constraintlayout.motion.widget.MotionLayout;
-import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -19,30 +13,32 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.motion.widget.MotionLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.OnTouch;
 import com.app.musicapp.R;
 import com.app.musicapp.contract.AbsMediaAdapter;
 import com.app.musicapp.model.Song;
 import com.app.musicapp.service.MusicPlayerRemote;
 import com.app.musicapp.service.MusicService;
 import com.app.musicapp.service.MusicServiceEventListener;
-import com.app.musicapp.ui.MainActivity;
-import com.app.musicapp.ui.page.BaseLayerFragment;
 import com.app.musicapp.ui.LayerController;
+import com.app.musicapp.ui.MainActivity;
 import com.app.musicapp.ui.bottomsheet.LyricBottomSheet;
+import com.app.musicapp.ui.page.BaseLayerFragment;
 import com.app.musicapp.util.Tool;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.OnTouch;
-
-import static android.widget.AbsListView.OnScrollListener.SCROLL_STATE_FLING;
-import static android.widget.AbsListView.OnScrollListener.SCROLL_STATE_IDLE;
-import static android.widget.AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL;
+import static android.widget.AbsListView.OnScrollListener.*;
 
 public class PlayingQueueController extends BaseLayerFragment implements MusicServiceEventListener {
     private static final String TAG = "PlayingQueueController";

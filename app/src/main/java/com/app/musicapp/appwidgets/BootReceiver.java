@@ -6,7 +6,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-
 import com.app.musicapp.service.MusicService;
 
 public class BootReceiver extends BroadcastReceiver {

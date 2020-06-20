@@ -6,14 +6,13 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Build;
+import android.util.AttributeSet;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import android.util.AttributeSet;
-
 import com.app.musicapp.R;
-import com.app.musicapp.util.Tool;
 import com.app.musicapp.util.BitmapEditor;
+import com.app.musicapp.util.Tool;
 
 public class DarkenAndRoundedBackgroundContraintLayout extends ConstraintLayout implements RoundColorable {
 

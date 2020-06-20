@@ -2,10 +2,9 @@ package com.app.musicapp.ui.dialog;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.text.Html;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
-import android.text.Html;
-
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.app.musicapp.R;
 import com.app.musicapp.model.Playlist;

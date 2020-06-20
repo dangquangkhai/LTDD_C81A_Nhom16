@@ -3,19 +3,17 @@ package com.app.musicapp.glide;
 import android.content.Context;
 import android.graphics.Bitmap;
 import androidx.annotation.NonNull;
-
-import com.bumptech.glide.GenericTransitionOptions;
-import com.bumptech.glide.RequestBuilder;
-import com.bumptech.glide.RequestManager;
-import com.bumptech.glide.load.Key;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-
-import com.bumptech.glide.signature.MediaStoreSignature;
 import com.app.musicapp.R;
 import com.app.musicapp.glide.audiocover.AudioFileCover;
 import com.app.musicapp.model.Song;
 import com.app.musicapp.util.MusicUtil;
 import com.app.musicapp.util.PreferenceUtil;
+import com.bumptech.glide.GenericTransitionOptions;
+import com.bumptech.glide.RequestBuilder;
+import com.bumptech.glide.RequestManager;
+import com.bumptech.glide.load.Key;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.signature.MediaStoreSignature;
 
 public class SongGlideRequest {
 

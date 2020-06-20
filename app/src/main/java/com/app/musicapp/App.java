@@ -1,7 +1,6 @@
 package com.app.musicapp;
 
 import android.app.Application;
-
 import com.app.musicapp.util.PreferenceUtil;
 
 

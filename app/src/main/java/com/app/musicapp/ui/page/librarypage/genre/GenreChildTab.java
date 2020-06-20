@@ -1,18 +1,16 @@
 package com.app.musicapp.ui.page.librarypage.genre;
 
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.app.musicapp.R;
-import com.app.musicapp.ui.page.BaseMusicServiceFragment;
-
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import butterknife.BindDimen;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import com.app.musicapp.R;
+import com.app.musicapp.ui.page.BaseMusicServiceFragment;
 
 public class GenreChildTab extends BaseMusicServiceFragment {
     public static final String TAG = "GenreChildTab";

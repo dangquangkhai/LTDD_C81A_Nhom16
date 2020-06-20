@@ -1,18 +1,27 @@
 package com.app.musicapp.api.providers;
 
+import android.app.NotificationManager;
 import android.os.Environment;
 import android.util.Log;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import com.app.musicapp.R;
 import com.app.musicapp.api.config.ApiConfig;
 import com.app.musicapp.api.customModels.ApiResponse;
 import com.app.musicapp.api.models.SongApi;
 import com.app.musicapp.api.utils.ReflectionHelper;
+import com.app.musicapp.config.Env;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.ObservableOnSubscribe;
 import io.reactivex.rxjava3.schedulers.Schedulers;
-import okhttp3.*;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -122,7 +131,7 @@ public class EntertainmentProvider {
         }
     }
 
-    public void downloadSongAsync(String urlDownload) {
+    public Observable<Boolean> downloadSongAsync(String urlDownload) {
         try {
             Observable<Response> fetchDt = Observable.create(
                     (ObservableOnSubscribe<Response>) emitter -> {
@@ -137,29 +146,92 @@ public class EntertainmentProvider {
                             emitter.onError(e); // In case there are network errors
                         }
                     });
-            fetchDt.subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(val -> {
-                        InputStream is = val.body().byteStream();
-                        String filename = val.header("content-disposition").replaceFirst("(?i)^.*filename=\"?([^\"]+)\"?.*$", "$1");
-                        BufferedInputStream input = new BufferedInputStream(is);
-                        OutputStream output = new FileOutputStream(Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + filename);
-                        byte[] data = new byte[is.available()];
-                        long total = 0;
-                        int count;
-                        while ((count = input.read(data)) != -1) {
-                            total += count;
-                            output.write(data, 0, count);
-                        }
+            return fetchDt.subscribeOn(Schedulers.io())
+                    .observeOn(Schedulers.computation())
+                    .map(val -> {
+                        try {
+                            InputStream is = val.body().byteStream();
+                            String filename = val.header("content-disposition").replaceFirst("(?i)^.*filename=\"?([^\"]+)\"?.*$", "$1");
+                            BufferedInputStream input = new BufferedInputStream(is);
+                            String downloadPath = Environment.getExternalStorageDirectory().getAbsolutePath() + Env.MUSIC_APP_PATH + "/";
+                            Files.createDirectories(Paths.get(downloadPath));
+                            OutputStream output = new FileOutputStream(downloadPath + filename);
+                            long contentLength = val.body().contentLength();
+                            byte[] data = new byte[1024];
+                            long total = 0;
+                            int count = 0;
+                            while ((count = is.read(data)) != -1) {
+                                total += count;
+                                int progress = (int) ((total * 100) / contentLength);
+                                output.write(data, 0, count);
+                            }
 
-                        output.flush();
-                        output.close();
-                        input.close();
-                    }, throwable -> {
-                        Log.e(TAG, throwable.getMessage());
+                            output.flush();
+                            output.close();
+                            input.close();
+                            return true;
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            return false;
+                        }
                     });
         } catch (Exception e) {
             Log.e(TAG, e.getMessage());
+            return null;
+        }
+    }
+
+    public Observable<Boolean> downloadSongAsync(String urlDownload, NotificationCompat.Builder _builder, NotificationManager _manager, AppCompatActivity activity) {
+        try {
+            Observable<Response> fetchDt = Observable.create(
+                    (ObservableOnSubscribe<Response>) emitter -> {
+                        try {
+                            String url = urlDownload;
+                            OkHttpClient client = new OkHttpClient();
+                            Request request = new Request.Builder()
+                                    .url(url)
+                                    .build();
+                            emitter.onNext(client.newCall(request).execute());
+                        } catch (Exception e) {
+                            emitter.onError(e); // In case there are network errors
+                        }
+                    });
+            return fetchDt.subscribeOn(Schedulers.io())
+                    .observeOn(Schedulers.computation())
+                    .map(val -> {
+                        try {
+                            InputStream is = val.body().byteStream();
+                            String filename = val.header("content-disposition").replaceFirst("(?i)^.*filename=\"?([^\"]+)\"?.*$", "$1");
+                            BufferedInputStream input = new BufferedInputStream(is);
+                            String downloadPath = Environment.getExternalStorageDirectory().getAbsolutePath() + Env.MUSIC_APP_PATH + "/";
+                            Files.createDirectories(Paths.get(downloadPath));
+                            OutputStream output = new FileOutputStream(downloadPath + filename);
+                            long contentLength = val.body().contentLength();
+                            byte[] data = new byte[1024];
+                            long total = 0;
+                            int count = 0;
+                            while ((count = is.read(data)) != -1) {
+                                total += count;
+                                int progress = (int) ((total * 100) / contentLength);
+                                if (_builder != null && _manager != null) {
+                                    _builder.setProgress(100, progress, false).setContentText( activity.getResources().getString(R.string.percent) +": " + progress + "/100");
+                                    _manager.notify(1, _builder.build());
+                                }
+                                output.write(data, 0, count);
+                            }
+
+                            output.flush();
+                            output.close();
+                            input.close();
+                            return true;
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            return false;
+                        }
+                    });
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage());
+            return null;
         }
     }
 

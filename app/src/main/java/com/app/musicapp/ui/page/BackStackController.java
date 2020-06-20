@@ -3,20 +3,16 @@ package com.app.musicapp.ui.page;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.*;
+import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
-import androidx.cardview.widget.CardView;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.app.musicapp.App;
 import com.app.musicapp.R;
 import com.app.musicapp.glide.ArtistGlideRequest;
@@ -31,11 +27,9 @@ import com.app.musicapp.ui.MainActivity;
 import com.app.musicapp.ui.page.librarypage.LibraryTabFragment;
 import com.app.musicapp.ui.widget.navigate.NavigateFragment;
 import com.app.musicapp.util.Tool;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class BackStackController extends BaseLayerFragment implements ViewPager.OnPageChangeListener, MusicServiceEventListener {
     private static final String TAG = "BackStackController";

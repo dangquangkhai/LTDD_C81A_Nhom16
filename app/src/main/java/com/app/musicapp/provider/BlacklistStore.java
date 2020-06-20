@@ -8,8 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Environment;
 import androidx.annotation.NonNull;
-
-
 import com.app.musicapp.service.MusicService;
 import com.app.musicapp.util.FileUtil;
 import com.app.musicapp.util.PreferenceUtil;

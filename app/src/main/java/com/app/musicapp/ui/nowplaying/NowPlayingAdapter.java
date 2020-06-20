@@ -1,15 +1,15 @@
 package com.app.musicapp.ui.nowplaying;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-
-import com.bumptech.glide.Glide;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.app.musicapp.R;
 import com.app.musicapp.glide.ArtistGlideRequest;
 import com.app.musicapp.glide.GlideApp;
@@ -18,13 +18,11 @@ import com.app.musicapp.model.Artist;
 import com.app.musicapp.model.Song;
 import com.app.musicapp.util.Tool;
 import com.app.musicapp.util.Util;
+import com.bumptech.glide.Glide;
 import com.squareup.picasso.Callback;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class NowPlayingAdapter extends RecyclerView.Adapter<NowPlayingAdapter.ItemHolder> implements Callback {
     private static final String TAG = "NowPlayingAdapter";

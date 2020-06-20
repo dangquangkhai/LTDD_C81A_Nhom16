@@ -1,16 +1,11 @@
 package com.app.musicapp.ui.widget;
 
 import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.ColorFilter;
-import android.graphics.Paint;
-import android.graphics.Path;
-import android.graphics.PixelFormat;
+import android.graphics.*;
 import android.graphics.drawable.Drawable;
+import android.util.AttributeSet;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import android.util.AttributeSet;
-
 import com.app.musicapp.R;
 
 public class RoundSeeThroughTextView extends SeeThroughTranslucentTextView {

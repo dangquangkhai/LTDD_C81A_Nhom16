@@ -4,8 +4,6 @@ import android.content.Context;
 import android.provider.MediaStore.Audio.AudioColumns;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
-
 import com.app.musicapp.model.Album;
 import com.app.musicapp.model.Song;
 import com.app.musicapp.util.PreferenceUtil;

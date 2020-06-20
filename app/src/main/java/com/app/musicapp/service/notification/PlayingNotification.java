@@ -5,7 +5,6 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.os.Build;
 import androidx.annotation.RequiresApi;
-
 import com.app.musicapp.R;
 import com.app.musicapp.service.MusicService;
 

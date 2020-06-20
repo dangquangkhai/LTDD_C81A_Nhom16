@@ -1,32 +1,28 @@
 package com.app.musicapp.glide.artistimage;
 
+import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import android.util.Log;
-
+import com.app.musicapp.addon.lastfm.rest.LastFMRestClient;
+import com.app.musicapp.addon.lastfm.rest.model.LastFmArtist;
+import com.app.musicapp.util.LastFMUtil;
+import com.app.musicapp.util.MusicUtil;
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.Options;
 import com.bumptech.glide.load.data.DataFetcher;
 import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.load.model.ModelLoader;
-
-import com.app.musicapp.addon.lastfm.rest.LastFMRestClient;
-import com.app.musicapp.addon.lastfm.rest.model.LastFmArtist;
-import com.app.musicapp.util.LastFMUtil;
-import com.app.musicapp.util.MusicUtil;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import retrofit2.Response;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Random;
-
-import retrofit2.Response;
 
 /**
  * @author Karim Abou Zeid (kabouzeid)

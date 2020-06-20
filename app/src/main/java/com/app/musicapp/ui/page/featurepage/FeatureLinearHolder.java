@@ -2,14 +2,16 @@ package com.app.musicapp.ui.page.featurepage;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import com.app.musicapp.R;
 import com.app.musicapp.model.Playlist;
 import com.app.musicapp.model.Song;
@@ -19,13 +21,9 @@ import com.app.musicapp.ui.page.librarypage.LibraryTabFragment;
 import com.app.musicapp.ui.page.librarypage.playlist.PlaylistChildTab;
 import com.app.musicapp.ui.page.librarypage.song.SongChildTab;
 import com.app.musicapp.util.Animation;
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
 
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
 
 public class FeatureLinearHolder {
 

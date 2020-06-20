@@ -1,9 +1,8 @@
 package com.app.musicapp.contract;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
 import android.view.View;
-
+import androidx.annotation.NonNull;
 import com.app.musicapp.model.Media;
 import com.app.musicapp.util.Tool;
 

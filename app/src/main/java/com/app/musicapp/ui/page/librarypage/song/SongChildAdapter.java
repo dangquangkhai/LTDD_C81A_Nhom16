@@ -1,36 +1,29 @@
 package com.app.musicapp.ui.page.librarypage.song;
 
 import android.content.Context;
-
 import android.os.Handler;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import android.widget.TextView;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import com.app.musicapp.R;
 import com.app.musicapp.contract.AbsBindAbleHolder;
 import com.app.musicapp.contract.AbsSongAdapter;
-
 import com.app.musicapp.helper.menu.SongMenuHelper;
 import com.app.musicapp.service.MusicPlayerRemote;
 import com.app.musicapp.ui.bottomsheet.OptionBottomSheet;
 import com.app.musicapp.ui.bottomsheet.SortOrderBottomSheet;
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
-
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class SongChildAdapter extends AbsSongAdapter
         implements FastScrollRecyclerView.SectionedAdapter,

@@ -1,18 +1,19 @@
 package com.app.musicapp.ui.page.librarypage;
 
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.constraintlayout.motion.widget.MotionLayout;
-import com.google.android.material.tabs.TabLayout;
-import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
-import androidx.appcompat.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
+import androidx.constraintlayout.motion.widget.MotionLayout;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import com.app.musicapp.R;
 import com.app.musicapp.ui.page.librarypage.artist.ArtistChildTab;
 import com.app.musicapp.ui.page.librarypage.genre.GenreChildTab;
@@ -20,10 +21,7 @@ import com.app.musicapp.ui.page.librarypage.playlist.PlaylistChildTab;
 import com.app.musicapp.ui.page.librarypage.song.SongChildTab;
 import com.app.musicapp.ui.widget.fragmentnavigationcontroller.SupportFragment;
 import com.app.musicapp.util.Tool;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+import com.google.android.material.tabs.TabLayout;
 
 public class LibraryTabFragment extends SupportFragment {
     private static final String TAG = "LibraryTabFragment";

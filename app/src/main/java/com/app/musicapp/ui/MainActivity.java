@@ -8,31 +8,28 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import androidx.annotation.NonNull;
-
-import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
-
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import butterknife.BindView;
 import com.app.musicapp.App;
 import com.app.musicapp.R;
 import com.app.musicapp.service.MusicPlayerRemote;
 import com.app.musicapp.service.MusicService;
 import com.app.musicapp.ui.intro.IntroController;
-import com.app.musicapp.ui.playingqueue.PlayingQueueController;
-import com.app.musicapp.ui.page.BackStackController;
 import com.app.musicapp.ui.nowplaying.NowPlayingController;
+import com.app.musicapp.ui.page.BackStackController;
+import com.app.musicapp.ui.playingqueue.PlayingQueueController;
 import com.app.musicapp.util.NavigationUtil;
-
-import butterknife.BindView;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends BaseActivity {
     private static final String TAG = "MainActivity";
@@ -323,4 +320,6 @@ public class MainActivity extends BaseActivity {
     public PlayingQueueController getPlayingQueueController() {
         return mPlayingQueueController;
     }
+
+
 }

@@ -2,14 +2,8 @@ package com.app.musicapp.ui.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.RectF;
+import android.graphics.*;
 import android.util.AttributeSet;
-
 import com.app.musicapp.R;
 import com.app.musicapp.ui.widget.rounded.RoundColorable;
 import com.app.musicapp.util.BitmapEditor;

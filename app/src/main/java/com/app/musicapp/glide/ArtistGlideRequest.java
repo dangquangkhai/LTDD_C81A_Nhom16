@@ -3,10 +3,12 @@ package com.app.musicapp.glide;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
-
 import androidx.annotation.NonNull;
-
-
+import com.app.musicapp.App;
+import com.app.musicapp.glide.artistimage.ArtistImage;
+import com.app.musicapp.model.Artist;
+import com.app.musicapp.util.ArtistSignatureUtil;
+import com.app.musicapp.util.CustomArtistImageUtil;
 import com.bumptech.glide.GenericTransitionOptions;
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.RequestBuilder;
@@ -14,12 +16,6 @@ import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.load.Key;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.target.Target;
-
-import com.app.musicapp.App;
-import com.app.musicapp.glide.artistimage.ArtistImage;
-import com.app.musicapp.model.Artist;
-import com.app.musicapp.util.ArtistSignatureUtil;
-import com.app.musicapp.util.CustomArtistImageUtil;
 
 import static com.app.musicapp.glide.artistimage.ArtistImage.FIRST;
 

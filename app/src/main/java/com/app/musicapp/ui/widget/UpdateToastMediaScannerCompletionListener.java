@@ -4,12 +4,10 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
-
 import com.app.musicapp.R;
+import es.dmoral.toasty.Toasty;
 
 import java.lang.ref.WeakReference;
-
-import es.dmoral.toasty.Toasty;
 
 
 public class UpdateToastMediaScannerCompletionListener implements MediaScannerConnection.OnScanCompletedListener {

@@ -3,11 +3,10 @@ package com.app.musicapp.glide.palette;
 import android.graphics.Bitmap;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
+import com.app.musicapp.util.PhonographColorUtil;
 import com.bumptech.glide.load.Options;
 import com.bumptech.glide.load.engine.Resource;
 import com.bumptech.glide.load.resource.transcode.ResourceTranscoder;
-import com.app.musicapp.util.PhonographColorUtil;
 
 public class BitmapPaletteTranscoder implements ResourceTranscoder<Bitmap, BitmapPaletteWrapper> {
     @Nullable

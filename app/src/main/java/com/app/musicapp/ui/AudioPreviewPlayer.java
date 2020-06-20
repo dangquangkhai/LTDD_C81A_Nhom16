@@ -4,8 +4,6 @@ import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.util.Log;
-
-
 import com.app.musicapp.service.MusicPlayerRemote;
 import com.app.musicapp.service.MusicServiceEventListener;
 import com.app.musicapp.ui.widget.soundfile.CheapSoundFile;

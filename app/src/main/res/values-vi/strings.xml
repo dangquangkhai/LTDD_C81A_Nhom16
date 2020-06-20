@@ -317,5 +317,11 @@
     <string name="left_right_audio_balance">Cân bằng âm trái phải</string>
     <string name="play_preview_all">Nghe thử (tất cả)</string>
     <string name="download">Tải về</string>
+    <string name="downloading_song">Đang tải nhạc về</string>
+    <string name="completed_download_song">Tải nhạc hoàn thành</string>
+    <string name="percent">Phần trăm</string>
+    <string name="music_notification_download">Tải nhạc</string>
+    <string name="download_in_progress">Đang tải</string>
+    <string name="download_complete">Tải xong</string>
 
 </resources>

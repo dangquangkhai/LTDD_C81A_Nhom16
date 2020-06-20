@@ -1,7 +1,6 @@
 package com.app.musicapp.helper;
 
 import android.content.Context;
-
 import com.app.musicapp.loader.medialoader.PlaylistSongLoader;
 import com.app.musicapp.model.AbsCustomPlaylist;
 import com.app.musicapp.model.Playlist;

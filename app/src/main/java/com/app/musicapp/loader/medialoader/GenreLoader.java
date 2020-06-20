@@ -5,8 +5,6 @@ import android.database.Cursor;
 import android.provider.MediaStore.Audio.Genres;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
-
 import com.app.musicapp.model.Genre;
 import com.app.musicapp.model.Song;
 import com.app.musicapp.util.PreferenceUtil;

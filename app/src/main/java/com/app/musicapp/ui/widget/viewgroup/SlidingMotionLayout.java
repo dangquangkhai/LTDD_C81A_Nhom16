@@ -1,11 +1,10 @@
 package com.app.musicapp.ui.widget.viewgroup;
 
 import android.content.Context;
-
-import androidx.constraintlayout.motion.widget.MotionLayout;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
+import androidx.constraintlayout.motion.widget.MotionLayout;
 
 public class SlidingMotionLayout extends MotionLayout {
     private static final String TAG = "SlidingMotionLayout";

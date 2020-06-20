@@ -4,9 +4,7 @@ import android.app.Dialog;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
-
 import com.afollestad.materialdialogs.MaterialDialog;
-
 import com.app.musicapp.R;
 import com.app.musicapp.loader.medialoader.PlaylistLoader;
 import com.app.musicapp.model.Playlist;

@@ -6,18 +6,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.RemoteViews;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.AppWidgetTarget;
-import com.bumptech.glide.request.target.Target;
-
-import com.bumptech.glide.request.transition.Transition;
-import com.kabouzeid.appthemehelper.util.MaterialValueHelper;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import com.app.musicapp.R;
 import com.app.musicapp.appwidgets.base.BaseAppWidget;
 import com.app.musicapp.glide.SongGlideRequest;
@@ -25,6 +18,11 @@ import com.app.musicapp.model.Song;
 import com.app.musicapp.service.MusicService;
 import com.app.musicapp.ui.MainActivity;
 import com.app.musicapp.util.ImageUtil;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.AppWidgetTarget;
+import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.request.transition.Transition;
+import com.kabouzeid.appthemehelper.util.MaterialValueHelper;
 
 public class AppWidgetCard extends BaseAppWidget {
     public static final String NAME = "app_widget_card";

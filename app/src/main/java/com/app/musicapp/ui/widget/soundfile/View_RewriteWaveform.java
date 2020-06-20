@@ -5,9 +5,8 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
-
-import com.app.musicapp.util.Tool;
 import com.app.musicapp.R;
+import com.app.musicapp.util.Tool;
 
 /**
  * Created by unitTest on 9/14/2017.

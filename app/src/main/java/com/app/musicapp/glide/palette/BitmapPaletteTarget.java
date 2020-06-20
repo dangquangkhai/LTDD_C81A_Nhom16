@@ -1,7 +1,6 @@
 package com.app.musicapp.glide.palette;
 
 import android.widget.ImageView;
-
 import com.bumptech.glide.request.target.ImageViewTarget;
 
 public class BitmapPaletteTarget extends ImageViewTarget<BitmapPaletteWrapper> {

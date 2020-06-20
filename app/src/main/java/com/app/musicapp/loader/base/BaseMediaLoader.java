@@ -1,9 +1,8 @@
 package com.app.musicapp.loader.base;
 
-import android.os.Process;
 import android.content.Context;
+import android.os.Process;
 import androidx.annotation.NonNull;
-
 import com.app.musicapp.loader.manager.PriorityThreadFactory;
 import com.app.musicapp.util.PreferenceUtil;
 

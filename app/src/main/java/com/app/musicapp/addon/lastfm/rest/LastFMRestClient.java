@@ -3,20 +3,13 @@ package com.app.musicapp.addon.lastfm.rest;
 import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
-
 import com.app.musicapp.addon.lastfm.rest.service.LastFMService;
+import okhttp3.*;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 import java.io.File;
 import java.util.Locale;
-
-import okhttp3.Cache;
-import okhttp3.Call;
-import okhttp3.Interceptor;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LastFMRestClient {
     public static final String BASE_URL = "https://ws.audioscrobbler.com/2.0/";

@@ -1,11 +1,10 @@
 package com.app.musicapp.ui.intro;
 
 import android.os.Bundle;
-import androidx.fragment.app.FragmentManager;
-import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.animation.AccelerateDecelerateInterpolator;
-
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import com.app.musicapp.R;
 import com.app.musicapp.ui.widget.fragmentnavigationcontroller.FragmentNavigationController;
 import com.app.musicapp.ui.widget.fragmentnavigationcontroller.SupportFragment;

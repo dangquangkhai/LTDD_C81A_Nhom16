@@ -17,11 +17,9 @@ import com.app.musicapp.ui.widget.bubblepicker.rendering.BubbleShader.U_BACKGROU
 import com.app.musicapp.ui.widget.bubblepicker.rendering.BubbleShader.fragmentShader
 import com.app.musicapp.ui.widget.bubblepicker.rendering.BubbleShader.vertexShader
 import org.jbox2d.common.Vec2
-import java.lang.Exception
 import java.nio.FloatBuffer
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
-import kotlin.collections.ArrayList
 import kotlin.math.sqrt
 
 inline val <reified T> T.TAG: String

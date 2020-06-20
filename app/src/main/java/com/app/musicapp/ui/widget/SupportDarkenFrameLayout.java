@@ -8,13 +8,12 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
-
-import com.app.musicapp.util.Animation;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import com.app.musicapp.R;
+import com.app.musicapp.util.Animation;
 
 /**
  * Created by unitTest on 9/27/2017.

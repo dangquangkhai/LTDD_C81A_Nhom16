@@ -3,21 +3,19 @@ package com.app.musicapp.glide.artistimage;
 import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
+import com.app.musicapp.App;
+import com.app.musicapp.addon.lastfm.rest.LastFMRestClient;
+import com.app.musicapp.util.ArtistSignatureUtil;
 import com.bumptech.glide.integration.okhttp3.OkHttpUrlLoader;
 import com.bumptech.glide.load.Options;
 import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.load.model.ModelLoader;
 import com.bumptech.glide.load.model.ModelLoaderFactory;
 import com.bumptech.glide.load.model.MultiModelLoaderFactory;
-import com.app.musicapp.App;
-import com.app.musicapp.addon.lastfm.rest.LastFMRestClient;
-import com.app.musicapp.util.ArtistSignatureUtil;
+import okhttp3.OkHttpClient;
 
 import java.io.InputStream;
 import java.util.concurrent.TimeUnit;
-
-import okhttp3.OkHttpClient;
 
 /**
  * @author Karim Abou Zeid (kabouzeid)

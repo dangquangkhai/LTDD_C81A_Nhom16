@@ -2,18 +2,16 @@ package com.app.musicapp.ui.page.librarypage.genre;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
-import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.request.transition.Transition;
 import com.app.musicapp.glide.ArtistGlideRequest;
 import com.app.musicapp.glide.GlideApp;
 import com.app.musicapp.model.Artist;
 import com.app.musicapp.ui.widget.bubblepicker.model.PickerItem;
 import com.app.musicapp.ui.widget.bubblepicker.physics.PhysicsEngine;
 import com.app.musicapp.ui.widget.bubblepicker.rendering.PickerAdapter;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 
 public class ArtistPickerAdapter extends PickerAdapter<Artist> {
 

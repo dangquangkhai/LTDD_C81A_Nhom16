@@ -3,26 +3,15 @@ package com.app.musicapp.util;
 import android.content.Context;
 import android.database.Cursor;
 import android.provider.MediaStore;
+import android.webkit.MimeTypeMap;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import android.webkit.MimeTypeMap;
-
 import com.app.musicapp.loader.medialoader.SongLoader;
 import com.app.musicapp.loader.medialoader.SortedCursor;
 import com.app.musicapp.model.Song;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileFilter;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import java.io.*;
+import java.util.*;
 
 /**
  * @author Karim Abou Zeid (kabouzeid)

@@ -22,7 +22,6 @@ import android.provider.BaseColumns;
 import android.provider.MediaStore;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
 import com.app.musicapp.model.Song;
 import com.app.musicapp.provider.HistoryStore;
 import com.app.musicapp.provider.SongPlayCountStore;

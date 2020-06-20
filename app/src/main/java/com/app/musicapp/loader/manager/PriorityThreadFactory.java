@@ -1,8 +1,8 @@
 package com.app.musicapp.loader.manager;
 
-import java.util.concurrent.ThreadFactory;
-
 import android.os.Process;
+
+import java.util.concurrent.ThreadFactory;
 
 public class PriorityThreadFactory implements ThreadFactory {
 

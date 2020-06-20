@@ -10,7 +10,6 @@ import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-
 import com.app.musicapp.R;
 
 import static com.app.musicapp.ui.widget.rangeseekbar.SeekBar.INDICATOR_MODE_ALWAYS_SHOW;

@@ -1,31 +1,22 @@
 package com.app.musicapp.ui;
 
 import android.annotation.TargetApi;
-import android.content.BroadcastReceiver;
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.ServiceConnection;
+import android.content.*;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.media.AudioManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
-import androidx.annotation.NonNull;
-
-import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
-
-
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import com.app.musicapp.helper.LocaleHelper;
 import com.app.musicapp.helper.songpreview.SongPreviewController;
 import com.app.musicapp.loader.medialoader.PaletteGeneratorTask;
 import com.app.musicapp.service.MusicPlayerRemote;
-import com.app.musicapp.service.MusicServiceEventListener;
-
 import com.app.musicapp.service.MusicService;
+import com.app.musicapp.service.MusicServiceEventListener;
 import com.app.musicapp.util.Tool;
 
 import java.lang.ref.WeakReference;

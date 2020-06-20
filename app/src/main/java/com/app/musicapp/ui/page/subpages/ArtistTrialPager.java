@@ -2,17 +2,17 @@ package com.app.musicapp.ui.page.subpages;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.app.musicapp.R;
 import com.app.musicapp.addon.lastfm.rest.LastFMRestClient;
 import com.app.musicapp.addon.lastfm.rest.model.LastFmArtist;
@@ -20,19 +20,16 @@ import com.app.musicapp.model.Artist;
 import com.app.musicapp.ui.widget.fragmentnavigationcontroller.SupportFragment;
 import com.app.musicapp.util.LastFMUtil;
 import com.app.musicapp.util.MusicUtil;
-
+import com.bumptech.glide.Glide;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import retrofit2.Response;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import retrofit2.Response;
 
 public class ArtistTrialPager extends SupportFragment implements ResultCallback {
     private static final String TAG = "ArtistTrialPager";

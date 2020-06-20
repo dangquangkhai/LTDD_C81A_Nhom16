@@ -3,9 +3,7 @@ package com.app.musicapp.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 import androidx.annotation.NonNull;
-
 import com.app.musicapp.util.MusicUtil;
-
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;

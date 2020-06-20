@@ -2,12 +2,7 @@ package com.app.musicapp.service;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.content.ComponentName;
-import android.content.ContentResolver;
-import android.content.Context;
-import android.content.ContextWrapper;
-import android.content.Intent;
-import android.content.ServiceConnection;
+import android.content.*;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
@@ -15,11 +10,10 @@ import android.os.Environment;
 import android.os.IBinder;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.util.Log;
 import android.widget.Toast;
-
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import com.app.musicapp.R;
 import com.app.musicapp.loader.medialoader.SongLoader;
 import com.app.musicapp.model.Song;

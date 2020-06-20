@@ -7,9 +7,6 @@ import android.graphics.Outline;
 import android.graphics.PorterDuff;
 import android.os.AsyncTask;
 import android.os.Build;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,11 +14,13 @@ import android.view.ViewGroup;
 import android.view.ViewOutlineProvider;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.bumptech.glide.load.DataSource;
-import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.OnLongClick;
 import com.app.musicapp.R;
 import com.app.musicapp.contract.AbsBindAbleHolder;
 import com.app.musicapp.contract.AbsMediaAdapter;
@@ -33,6 +32,10 @@ import com.app.musicapp.model.Artist;
 import com.app.musicapp.model.Genre;
 import com.app.musicapp.ui.bottomsheet.OptionBottomSheet;
 import com.app.musicapp.util.PhonographColorUtil;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
 
 import java.lang.ref.WeakReference;
@@ -40,11 +43,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.OnLongClick;
 
 public class ArtistAdapter extends AbsMediaAdapter<AbsBindAbleHolder, Artist> implements FastScrollRecyclerView.SectionedAdapter {
     private static final String TAG = "ArtistAdapter";

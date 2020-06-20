@@ -1,7 +1,6 @@
 package com.app.musicapp.helper;
 
 import androidx.annotation.NonNull;
-
 import com.app.musicapp.model.Song;
 
 import java.util.Collections;

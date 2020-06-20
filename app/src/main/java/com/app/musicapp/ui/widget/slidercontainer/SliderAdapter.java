@@ -6,14 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-
 import androidx.viewpager.widget.PagerAdapter;
-
-import com.bumptech.glide.Glide;
 import com.app.musicapp.R;
 import com.app.musicapp.model.Song;
 import com.app.musicapp.util.Util;
-
+import com.bumptech.glide.Glide;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;

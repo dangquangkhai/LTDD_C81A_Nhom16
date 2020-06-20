@@ -5,19 +5,14 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.os.Build;
-import android.renderscript.Allocation;
-import android.renderscript.Element;
-import android.renderscript.RSRuntimeException;
-import android.renderscript.RenderScript;
-import android.renderscript.ScriptIntrinsicBlur;
+import android.renderscript.*;
 import androidx.annotation.FloatRange;
 import androidx.annotation.NonNull;
-
-import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
-import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
 import com.app.musicapp.BuildConfig;
 import com.app.musicapp.helper.StackBlur;
 import com.app.musicapp.util.ImageUtil;
+import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
+import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
 
 import java.nio.charset.Charset;
 import java.security.MessageDigest;

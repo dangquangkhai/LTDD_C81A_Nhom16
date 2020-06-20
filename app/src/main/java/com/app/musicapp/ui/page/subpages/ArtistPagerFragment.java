@@ -2,11 +2,6 @@ package com.app.musicapp.ui.page.subpages;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.Group;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -14,22 +9,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.github.chrisbanes.photoview.PhotoView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.Group;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import butterknife.*;
 import com.app.musicapp.R;
 import com.app.musicapp.contract.AbsMediaAdapter;
 import com.app.musicapp.glide.ArtistGlideRequest;
 import com.app.musicapp.glide.GlideApp;
 import com.app.musicapp.model.Artist;
 import com.app.musicapp.ui.page.BaseMusicServiceSupportFragment;
+import com.github.chrisbanes.photoview.PhotoView;
 
 import java.lang.ref.WeakReference;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.OnTouch;
-import butterknife.Unbinder;
 
 public class ArtistPagerFragment extends BaseMusicServiceSupportFragment {
     private static final String TAG = "ArtistPagerFragment";

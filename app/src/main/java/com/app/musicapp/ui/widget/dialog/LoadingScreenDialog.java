@@ -2,19 +2,17 @@ package com.app.musicapp.ui.widget.dialog;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.app.musicapp.R;
 import com.app.musicapp.ui.widget.view.SuccessTickView;
 import com.tuyenmonkey.mkloader.MKLoader;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import es.dmoral.toasty.Toasty;
 
 public class LoadingScreenDialog extends DialogFragment {

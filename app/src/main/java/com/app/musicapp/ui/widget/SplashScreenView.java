@@ -3,27 +3,17 @@ package com.app.musicapp.ui.widget;
 import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapShader;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.LinearGradient;
-import android.graphics.Paint;
-import android.graphics.Path;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.Rect;
-import android.graphics.Shader;
+import android.graphics.*;
 import android.graphics.drawable.BitmapDrawable;
-import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
-
+import androidx.annotation.Nullable;
+import com.app.musicapp.R;
 import com.app.musicapp.util.Animation;
 import com.app.musicapp.util.BitmapEditor;
 import com.app.musicapp.util.GradientResourses;
 import com.app.musicapp.util.Tool;
-import com.app.musicapp.R;
 
 
 /**

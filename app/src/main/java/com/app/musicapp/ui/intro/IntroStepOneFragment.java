@@ -2,21 +2,19 @@ package com.app.musicapp.ui.intro;
 
 
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.app.musicapp.R;
-import com.app.musicapp.ui.MainActivity;
-import com.app.musicapp.ui.widget.fragmentnavigationcontroller.SupportFragment;
-
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import com.app.musicapp.R;
+import com.app.musicapp.ui.MainActivity;
+import com.app.musicapp.ui.widget.fragmentnavigationcontroller.SupportFragment;
 
 public class IntroStepOneFragment extends SupportFragment implements MainActivity.PermissionListener {
     private static final String TAG = "IntroStepOneFragment";

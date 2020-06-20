@@ -10,27 +10,24 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import androidx.annotation.Nullable;
-import androidx.core.app.NotificationCompat;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.RemoteViews;
-
-import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.request.target.Target;
-import com.bumptech.glide.request.transition.Transition;
-import com.kabouzeid.appthemehelper.util.ColorUtil;
-import com.kabouzeid.appthemehelper.util.MaterialValueHelper;
-
+import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
 import com.app.musicapp.R;
-import com.app.musicapp.glide.SongGlideRequest;
 import com.app.musicapp.glide.GlideApp;
+import com.app.musicapp.glide.SongGlideRequest;
 import com.app.musicapp.model.Song;
 import com.app.musicapp.service.MusicService;
 import com.app.musicapp.ui.MainActivity;
 import com.app.musicapp.util.ImageUtil;
 import com.app.musicapp.util.PreferenceUtil;
-
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.request.transition.Transition;
+import com.kabouzeid.appthemehelper.util.ColorUtil;
+import com.kabouzeid.appthemehelper.util.MaterialValueHelper;
 import org.jetbrains.annotations.NotNull;
 
 public class PlayingNotificationImpl extends PlayingNotification {

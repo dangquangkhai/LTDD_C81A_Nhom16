@@ -7,18 +7,16 @@ import android.media.MediaScannerConnection;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import com.app.musicapp.App;
 import com.app.musicapp.loader.medialoader.SongLoader;
 import com.app.musicapp.ui.widget.UpdateToastMediaScannerCompletionListener;
 import com.app.musicapp.ui.widget.dialog.LoadingScreenDialog;
 import com.app.musicapp.util.MusicUtil;
-
 import org.jaudiotagger.audio.AudioFile;
 import org.jaudiotagger.audio.AudioFileIO;
 import org.jaudiotagger.audio.exceptions.CannotReadException;

@@ -24,8 +24,6 @@ import android.provider.BaseColumns;
 import android.provider.MediaStore.Audio.AudioColumns;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
-
 import com.app.musicapp.loader.medialoader.SongLoader;
 import com.app.musicapp.model.Song;
 

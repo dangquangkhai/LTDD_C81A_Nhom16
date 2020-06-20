@@ -1,11 +1,8 @@
 package com.app.musicapp.addon.lastfm.rest.service;
 
 import androidx.annotation.Nullable;
-
-
 import com.app.musicapp.addon.lastfm.rest.model.LastFmAlbum;
 import com.app.musicapp.addon.lastfm.rest.model.LastFmArtist;
-
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;

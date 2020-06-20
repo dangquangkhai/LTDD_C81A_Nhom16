@@ -7,10 +7,9 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
+import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.palette.graphics.Palette;
-import android.util.Log;
-
 import com.app.musicapp.R;
 import com.app.musicapp.service.MusicPlayerRemote;
 import com.app.musicapp.util.BitmapEditor;

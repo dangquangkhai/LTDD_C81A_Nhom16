@@ -2,10 +2,13 @@ package com.app.musicapp.helper.menu;
 
 import android.content.Intent;
 import android.util.Log;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
+import com.app.musicapp.CustomThread.DownloadSongThread;
 import com.app.musicapp.R;
+import com.app.musicapp.api.providers.EntertainmentProvider;
 import com.app.musicapp.helper.songpreview.SongPreviewController;
 import com.app.musicapp.loader.medialoader.SongLoader;
 import com.app.musicapp.model.Song;
@@ -20,14 +23,20 @@ import com.app.musicapp.util.NavigationUtil;
 import com.app.musicapp.util.RingtoneManager;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Karim Abou Zeid (kabouzeid)
- * modified by Le Dinh Trung (dtrung98)
+ * modified by Dang Quang Khai (dec25_)
  */
 public class SongMenuHelper {
     public static final String TAG = "SongMenuHelper";
+
+    public static final EntertainmentProvider _provider = new EntertainmentProvider();
+
     @StringRes
     public static final int[] SONG_OPTION = new int[]{
             /*   R.string.play,*/
@@ -44,6 +53,7 @@ public class SongMenuHelper {
             R.string.detail,
             R.string.divider,
             R.string.share,
+            R.string.download,
             R.string.set_as_ringtone,
             /*  R.string.delete_from_playlist,*/
             R.string.delete_from_device
@@ -177,8 +187,27 @@ public class SongMenuHelper {
             case R.string.go_to_artist:
                 NavigationUtil.navigateToArtist(activity, song.artistId);
                 return true;
+            case R.string.download:
+                Toast.makeText(activity, activity.getResources().getString(R.string.downloading_song), Toast.LENGTH_LONG).show();
+                DownloadSongThread p = new DownloadSongThread(143, song, activity);
+                p.start();
+                return true;
         }
         return false;
+    }
+
+    public static int[] filterSongOption(boolean isWeb) {
+        List<Integer> lstSong = Arrays.stream(SongMenuHelper.SONG_OPTION).boxed().collect(Collectors.toList());
+        if (!isWeb) {
+            lstSong = lstSong.stream()
+                    .filter(i -> i != R.string.download)
+                    .collect(Collectors.toList());
+        } else {
+            lstSong = lstSong.stream()
+                    .filter(i -> i != R.string.set_as_ringtone && i != R.string.delete_from_device)
+                    .collect(Collectors.toList());
+        }
+        return lstSong.stream().mapToInt(i -> i).toArray();
     }
 
 

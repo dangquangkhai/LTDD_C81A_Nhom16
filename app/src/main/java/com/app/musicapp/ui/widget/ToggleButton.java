@@ -6,14 +6,12 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
-import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
-
+import androidx.annotation.Nullable;
 import com.app.musicapp.R;
-import com.app.musicapp.util.BitmapEditor;
 import com.app.musicapp.coordinate.MCoordinate.MPoint;
-
+import com.app.musicapp.util.BitmapEditor;
 import com.app.musicapp.util.Tool;
 
 /**

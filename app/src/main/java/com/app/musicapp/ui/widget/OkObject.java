@@ -5,17 +5,10 @@ package com.app.musicapp.ui.widget;
  */
 
 import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.ColorFilter;
-import android.graphics.Matrix;
-import android.graphics.Paint;
-import android.graphics.Path;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
-import androidx.annotation.Nullable;
+import android.graphics.*;
 import android.util.AttributeSet;
 import android.view.View;
+import androidx.annotation.Nullable;
 
 public class OkObject extends View {
     private static final Paint p = new Paint();

@@ -1,9 +1,9 @@
 package com.app.musicapp.ui.widget.bubblepicker.rendering
 
 import android.content.Context
-import androidx.annotation.ColorInt
 import android.util.AttributeSet
 import android.view.MotionEvent
+import androidx.annotation.ColorInt
 import com.app.musicapp.R
 import com.app.musicapp.ui.widget.GLTextureView
 import com.app.musicapp.ui.widget.bubblepicker.BubblePickerListener

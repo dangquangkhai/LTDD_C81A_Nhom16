@@ -8,13 +8,9 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.util.Log;
 import androidx.core.app.NotificationCompat;
 import androidx.media.app.NotificationCompat.MediaStyle;
-import android.util.Log;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.request.transition.Transition;
 import com.app.musicapp.R;
 import com.app.musicapp.glide.SongGlideRequest;
 import com.app.musicapp.model.Song;
@@ -22,11 +18,11 @@ import com.app.musicapp.service.MusicService;
 import com.app.musicapp.ui.MainActivity;
 import com.app.musicapp.util.MusicUtil;
 import com.app.musicapp.util.PreferenceUtil;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 
-import static com.app.musicapp.service.MusicService.ACTION_REWIND;
-import static com.app.musicapp.service.MusicService.ACTION_SKIP;
-import static com.app.musicapp.service.MusicService.ACTION_TOGGLE_PAUSE;
-import static com.app.musicapp.service.MusicService.ACTION_ON_CLICK_NOTIFICATION;
+import static com.app.musicapp.service.MusicService.*;
 
 
 public class PlayingNotificationImpl24 extends PlayingNotification {

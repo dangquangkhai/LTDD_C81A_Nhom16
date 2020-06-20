@@ -1,35 +1,24 @@
 package com.app.musicapp.util;
 
-import android.content.ContentResolver;
-import android.content.ContentUris;
-import android.content.ContentValues;
-import android.content.Context;
-import android.content.Intent;
+import android.content.*;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.BaseColumns;
 import android.provider.MediaStore;
 import android.provider.Settings;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.FileProvider;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
-
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.FileProvider;
 import com.app.musicapp.R;
 import com.app.musicapp.loader.medialoader.PlaylistLoader;
 import com.app.musicapp.loader.medialoader.SongLoader;
-import com.app.musicapp.model.Album;
-import com.app.musicapp.model.Artist;
-import com.app.musicapp.model.Genre;
-import com.app.musicapp.model.Playlist;
-import com.app.musicapp.model.Song;
+import com.app.musicapp.model.*;
 import com.app.musicapp.model.lyrics.AbsSynchronizedLyrics;
 import com.app.musicapp.service.MusicPlayerRemote;
-
-
 import org.jaudiotagger.audio.AudioFileIO;
 import org.jaudiotagger.tag.FieldKey;
 

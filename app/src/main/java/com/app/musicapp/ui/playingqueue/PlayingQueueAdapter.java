@@ -1,11 +1,11 @@
 package com.app.musicapp.ui.playingqueue;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import com.app.musicapp.R;
 import com.app.musicapp.contract.AbsBindAbleHolder;
 import com.app.musicapp.contract.AbsSongAdapter;

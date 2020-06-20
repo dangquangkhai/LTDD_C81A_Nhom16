@@ -2,26 +2,24 @@ package com.app.musicapp.ui.page.librarypage.playlist;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import com.app.musicapp.R;
-import com.app.musicapp.ui.BaseActivity;
-import com.app.musicapp.ui.page.BaseMusicServiceFragment;
-import com.app.musicapp.ui.page.subpages.PlaylistPagerFragment;
-import com.app.musicapp.loader.medialoader.PlaylistLoader;
-import com.app.musicapp.model.Playlist;
-import com.app.musicapp.ui.page.featurepage.FeaturePlaylistAdapter;
-import com.app.musicapp.ui.widget.fragmentnavigationcontroller.SupportFragment;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.app.musicapp.R;
+import com.app.musicapp.loader.medialoader.PlaylistLoader;
+import com.app.musicapp.model.Playlist;
+import com.app.musicapp.ui.BaseActivity;
+import com.app.musicapp.ui.page.BaseMusicServiceFragment;
+import com.app.musicapp.ui.page.featurepage.FeaturePlaylistAdapter;
+import com.app.musicapp.ui.page.subpages.PlaylistPagerFragment;
+import com.app.musicapp.ui.widget.fragmentnavigationcontroller.SupportFragment;
 
 public class PlaylistChildTab extends BaseMusicServiceFragment implements FeaturePlaylistAdapter.PlaylistClickListener {
     public static final String TAG = "PlaylistChildTab";

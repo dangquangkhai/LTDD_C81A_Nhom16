@@ -1,7 +1,6 @@
 package com.app.musicapp.ui.widget.bubblepicker;
 
 import android.content.Context;
-
 import com.app.musicapp.ui.widget.bubblepicker.model.PickerItem;
 import com.app.musicapp.ui.widget.bubblepicker.physics.PhysicsEngine;
 import com.app.musicapp.ui.widget.bubblepicker.rendering.PickerAdapter;

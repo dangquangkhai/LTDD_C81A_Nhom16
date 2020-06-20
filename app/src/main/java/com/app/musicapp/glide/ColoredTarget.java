@@ -1,10 +1,9 @@
 package com.app.musicapp.glide;
 
 import android.graphics.drawable.Drawable;
+import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import android.widget.ImageView;
-
 import com.app.musicapp.R;
 import com.app.musicapp.glide.palette.BitmapPaletteTarget;
 import com.app.musicapp.glide.palette.BitmapPaletteWrapper;

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 import androidx.annotation.NonNull;
-
 import com.app.musicapp.R;
 import com.app.musicapp.loader.medialoader.TopAndRecentlyPlayedTracksLoader;
 import com.app.musicapp.model.Song;

@@ -7,8 +7,6 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
@@ -20,7 +18,8 @@ import android.view.ViewGroup;
 import android.widget.AbsoluteLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import com.app.musicapp.R;
 import com.app.musicapp.ui.widget.soundfile.CheapSoundFile;
 import com.app.musicapp.ui.widget.soundfile.MarkerView;

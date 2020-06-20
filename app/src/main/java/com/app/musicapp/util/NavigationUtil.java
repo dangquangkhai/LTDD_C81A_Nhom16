@@ -20,7 +20,6 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.media.audiofx.AudioEffect;
 import androidx.annotation.NonNull;
-
 import com.app.musicapp.R;
 import com.app.musicapp.loader.medialoader.ArtistLoader;
 import com.app.musicapp.model.Genre;
@@ -31,7 +30,6 @@ import com.app.musicapp.ui.MainActivity;
 import com.app.musicapp.ui.page.librarypage.LibraryTabFragment;
 import com.app.musicapp.ui.page.subpages.ArtistPagerFragment;
 import com.app.musicapp.ui.page.subpages.PlaylistPagerFragment;
-
 import es.dmoral.toasty.Toasty;
 
 public class NavigationUtil {

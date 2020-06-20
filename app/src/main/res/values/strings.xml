@@ -368,4 +368,10 @@
     <string name="left_right_audio_balance">Left Right Audio Balance</string>
     <string name="play_preview_all">Play preview all</string>
     <string name="download">Download</string>
+    <string name="downloading_song">Downloading song</string>
+    <string name="completed_download_song">Completed download song</string>
+    <string name="percent">Percent</string>
+    <string name="music_notification_download">Music Download</string>
+    <string name="download_in_progress">Download in progress</string>
+    <string name="download_complete">Download complete</string>
 </resources>

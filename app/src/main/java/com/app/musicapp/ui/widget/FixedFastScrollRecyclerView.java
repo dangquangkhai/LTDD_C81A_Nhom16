@@ -2,7 +2,6 @@ package com.app.musicapp.ui.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
-
 import com.app.musicapp.addon.fastscrollrecyclerview.FastScrollRecyclerView;
 
 public class FixedFastScrollRecyclerView extends FastScrollRecyclerView {

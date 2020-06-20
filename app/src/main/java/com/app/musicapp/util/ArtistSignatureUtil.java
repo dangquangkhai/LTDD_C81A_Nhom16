@@ -4,9 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import androidx.annotation.NonNull;
-
-import com.bumptech.glide.signature.ObjectKey;
 import com.app.musicapp.App;
+import com.bumptech.glide.signature.ObjectKey;
 
 /**
  * @author Karim Abou Zeid (kabouzeid)

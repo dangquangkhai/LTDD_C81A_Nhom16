@@ -5,33 +5,29 @@ import android.content.res.ColorStateList;
 import android.graphics.drawable.RippleDrawable;
 import android.os.Build;
 import android.os.Handler;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import com.app.musicapp.R;
 import com.app.musicapp.helper.menu.SongMenuHelper;
+import com.app.musicapp.model.Song;
 import com.app.musicapp.service.MusicPlayerRemote;
 import com.app.musicapp.ui.bottomsheet.OptionBottomSheet;
-import com.app.musicapp.model.Song;
-
-import com.app.musicapp.util.Util;
 import com.app.musicapp.util.Tool;
-
+import com.app.musicapp.util.Util;
+import com.bumptech.glide.Glide;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class FeatureSongAdapter extends RecyclerView.Adapter<FeatureSongAdapter.ItemHolder> {
     private static final String TAG = "SongAdapter";
@@ -104,7 +100,7 @@ public class FeatureSongAdapter extends RecyclerView.Adapter<FeatureSongAdapter.
     private void setOnPopupMenuListener(ItemHolder itemHolder, final int position) {
         itemHolder.mMenuButton.setOnClickListener(v -> {
             OptionBottomSheet
-                    .newInstance(SongMenuHelper.SONG_OPTION, mData.get(position))
+                    .newInstance(SongMenuHelper.filterSongOption(mData.get(position).isWeb), mData.get(position))
                     .show(((AppCompatActivity) mContext).getSupportFragmentManager(), "song_popup_menu");
         });
     }

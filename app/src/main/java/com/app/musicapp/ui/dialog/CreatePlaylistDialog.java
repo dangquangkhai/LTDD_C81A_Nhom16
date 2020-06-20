@@ -2,21 +2,18 @@ package com.app.musicapp.ui.dialog;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.text.InputType;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
-import android.text.InputType;
-import android.widget.Toast;
-
 import com.afollestad.materialdialogs.MaterialDialog;
-
 import com.app.musicapp.R;
 import com.app.musicapp.model.Song;
 import com.app.musicapp.util.PlaylistsUtil;
+import es.dmoral.toasty.Toasty;
 
 import java.util.ArrayList;
-
-import es.dmoral.toasty.Toasty;
 
 /**
  * @author Karim Abou Zeid (kabouzeid), Aidan Follestad (afollestad)

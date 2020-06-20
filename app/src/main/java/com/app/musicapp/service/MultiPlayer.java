@@ -7,11 +7,10 @@ import android.media.MediaPlayer;
 import android.media.audiofx.AudioEffect;
 import android.net.Uri;
 import android.os.PowerManager;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.util.Log;
 import android.widget.Toast;
-
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import com.app.musicapp.R;
 import com.app.musicapp.service.playback.Playback;
 import com.app.musicapp.util.PreferenceUtil;

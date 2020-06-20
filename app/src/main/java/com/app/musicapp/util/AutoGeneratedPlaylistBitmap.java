@@ -1,19 +1,12 @@
 package com.app.musicapp.util;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Rect;
-import android.graphics.RectF;
-import androidx.annotation.NonNull;
+import android.graphics.*;
 import android.util.Log;
-
-import com.bumptech.glide.Glide;
+import androidx.annotation.NonNull;
 import com.app.musicapp.R;
 import com.app.musicapp.model.Song;
-
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;

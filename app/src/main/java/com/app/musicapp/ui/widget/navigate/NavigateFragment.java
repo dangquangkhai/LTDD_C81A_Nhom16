@@ -1,16 +1,15 @@
 package com.app.musicapp.ui.widget.navigate;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.AccelerateDecelerateInterpolator;
-
 import com.app.musicapp.R;
 import com.app.musicapp.ui.widget.fragmentnavigationcontroller.FragmentNavigationController;
 import com.app.musicapp.ui.widget.fragmentnavigationcontroller.SupportFragment;

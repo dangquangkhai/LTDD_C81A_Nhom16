@@ -3,14 +3,14 @@ package com.app.musicapp.ui.widget.slidercontainer;
 import android.content.Context;
 import android.graphics.Point;
 import android.os.Build;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.viewpager.widget.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.viewpager.widget.ViewPager;
 
 public class SliderContainer extends FrameLayout implements ViewPager.OnPageChangeListener {
     private boolean needsRedraw;

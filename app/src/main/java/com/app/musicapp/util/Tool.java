@@ -12,7 +12,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
-import androidx.annotation.RequiresApi;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
@@ -20,14 +19,12 @@ import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
-
-
+import androidx.annotation.RequiresApi;
 import com.app.musicapp.R;
+import es.dmoral.toasty.Toasty;
 
 import java.io.File;
 import java.util.ArrayList;
-
-import es.dmoral.toasty.Toasty;
 
 import static android.content.Context.VIBRATOR_SERVICE;
 

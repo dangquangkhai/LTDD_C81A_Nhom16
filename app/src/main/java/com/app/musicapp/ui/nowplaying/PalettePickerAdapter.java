@@ -1,22 +1,19 @@
 package com.app.musicapp.ui.nowplaying;
 
 import android.graphics.Color;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-
-
-import com.app.musicapp.R;
-
-import java.util.ArrayList;
-
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import com.app.musicapp.R;
+
+import java.util.ArrayList;
 
 public class PalettePickerAdapter extends RecyclerView.Adapter<PalettePickerAdapter.ViewHolder> {
     private static final String TAG = "PalettePickerAdapter";

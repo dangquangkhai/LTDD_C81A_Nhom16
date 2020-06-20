@@ -2,10 +2,9 @@ package com.app.musicapp.ui.page;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import android.view.View;
-
 import com.app.musicapp.service.MusicServiceEventListener;
 import com.app.musicapp.ui.BaseActivity;
 import com.app.musicapp.ui.widget.fragmentnavigationcontroller.SupportFragment;

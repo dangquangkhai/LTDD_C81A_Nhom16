@@ -1,8 +1,8 @@
 package com.app.musicapp.contract;
 
+import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import android.view.View;
 
 public abstract class AbsBindAbleHolder<I> extends RecyclerView.ViewHolder {
 

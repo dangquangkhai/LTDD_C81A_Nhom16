@@ -2,7 +2,7 @@ package com.app.musicapp.helper.menu;
 
 /**
  * @author Karim Abou Zeid (kabouzeid)
- * modified by Le Dinh Trung (dtrung98)
+ * modified by Dang Quang Khai (dec25_)
  */
 public class SongsMenuHelper {
 /*    public static boolean handleMenuClick(@NonNull Activity activity, @NonNull List<SongApi> songs, int menuItemId) {

@@ -7,10 +7,8 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.preference.PreferenceManager;
 import androidx.annotation.NonNull;
-
 import com.app.musicapp.App;
 import com.app.musicapp.R;
-
 
 import java.io.File;
 

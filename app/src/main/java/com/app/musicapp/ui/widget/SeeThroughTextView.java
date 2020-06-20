@@ -2,16 +2,11 @@ package com.app.musicapp.ui.widget;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
+import android.graphics.*;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import androidx.appcompat.widget.AppCompatTextView;
 import android.util.AttributeSet;
+import androidx.appcompat.widget.AppCompatTextView;
 
 /**
  * Created by unitTest on 8/26/2017.

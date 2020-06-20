@@ -3,41 +3,23 @@ package com.app.musicapp.service;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.appwidget.AppWidgetManager;
-import android.content.BroadcastReceiver;
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.SharedPreferences;
+import android.content.*;
 import android.database.ContentObserver;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.media.audiofx.AudioEffect;
-import android.os.Binder;
-import android.os.Build;
-import android.os.Handler;
-import android.os.HandlerThread;
-import android.os.IBinder;
-import android.os.Looper;
-import android.os.Message;
-import android.os.PowerManager;
 import android.os.Process;
+import android.os.*;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.support.v4.media.MediaMetadataCompat;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
 import android.widget.Toast;
-
-import com.bumptech.glide.Glide;
-
-import com.bumptech.glide.RequestBuilder;
-import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.request.transition.Transition;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import com.app.musicapp.App;
 import com.app.musicapp.R;
 import com.app.musicapp.appwidgets.AppWidgetBig;
@@ -62,6 +44,10 @@ import com.app.musicapp.service.playback.Playback;
 import com.app.musicapp.util.MusicUtil;
 import com.app.musicapp.util.PreferenceUtil;
 import com.app.musicapp.util.Util;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestBuilder;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -516,8 +502,7 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
         synchronized (this) {
             try {
                 Song _chk = getCurrentSong();
-                if (_chk.isWeb)
-                {
+                if (_chk.isWeb) {
                     return playback.setDataSource(_chk.data);
                 }
                 return playback.setDataSource(getTrackUri(getCurrentSong()));
@@ -537,8 +522,7 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
             try {
                 int nextPosition = getNextPosition(false);
                 Song _chk = getSongAt(nextPosition);
-                if (_chk.isWeb)
-                {
+                if (_chk.isWeb) {
                     playback.setNextDataSource(_chk.data);
                 }
                 playback.setNextDataSource(getTrackUri(getSongAt(nextPosition)));

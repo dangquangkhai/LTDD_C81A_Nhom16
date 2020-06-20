@@ -2,15 +2,8 @@ package com.app.musicapp.addon.fastscrollrecyclerview;
 
 import android.animation.ObjectAnimator;
 import android.content.res.Resources;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Path;
-import android.graphics.Rect;
-import android.graphics.RectF;
-import android.graphics.Typeface;
+import android.graphics.*;
 import android.text.TextUtils;
-
 import androidx.annotation.Keep;
 
 public class FastScrollPopup {

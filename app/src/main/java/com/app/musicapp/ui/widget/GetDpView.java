@@ -2,10 +2,9 @@ package com.app.musicapp.ui.widget;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
-
+import androidx.annotation.Nullable;
 import com.app.musicapp.util.Tool;
 
 public class GetDpView extends View {

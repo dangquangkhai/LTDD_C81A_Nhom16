@@ -1,7 +1,6 @@
 package com.app.musicapp.coordinate;
 
 import androidx.annotation.NonNull;
-
 import org.jetbrains.annotations.Contract;
 
 /**

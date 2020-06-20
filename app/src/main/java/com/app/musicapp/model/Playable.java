@@ -1,7 +1,6 @@
 package com.app.musicapp.model;
 
 import android.content.Context;
-
 import com.app.musicapp.R;
 
 public class Playable {

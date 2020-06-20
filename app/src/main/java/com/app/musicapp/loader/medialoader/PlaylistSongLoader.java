@@ -5,8 +5,6 @@ import android.database.Cursor;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Audio.AudioColumns;
 import androidx.annotation.NonNull;
-
-
 import com.app.musicapp.model.PlaylistSong;
 
 import java.util.ArrayList;

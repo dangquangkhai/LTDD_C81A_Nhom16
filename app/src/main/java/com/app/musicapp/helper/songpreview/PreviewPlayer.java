@@ -2,7 +2,6 @@ package com.app.musicapp.helper.songpreview;
 
 import android.content.SharedPreferences;
 import android.util.Log;
-
 import com.app.musicapp.App;
 import com.app.musicapp.service.MusicPlayerRemote;
 import com.app.musicapp.util.PreferenceUtil;

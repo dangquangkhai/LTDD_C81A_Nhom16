@@ -5,12 +5,11 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Build;
+import android.util.AttributeSet;
+import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.graphics.ColorUtils;
-import android.util.AttributeSet;
-import android.widget.FrameLayout;
-
 import com.app.musicapp.util.BitmapEditor;
 import com.app.musicapp.util.Tool;
 

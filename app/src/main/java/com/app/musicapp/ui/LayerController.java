@@ -10,27 +10,21 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.CountDownTimer;
-import androidx.annotation.NonNull;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewConfiguration;
-import android.view.ViewGroup;
+import android.view.*;
 import android.widget.FrameLayout;
-
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import butterknife.BindView;
 import com.app.musicapp.R;
 import com.app.musicapp.ui.page.BaseLayerFragment;
 import com.app.musicapp.ui.widget.gesture.SwipeDetectorGestureListener;
 import com.app.musicapp.util.Animation;
 import com.app.musicapp.util.Tool;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
-
-import butterknife.BindView;
 
 
 /**

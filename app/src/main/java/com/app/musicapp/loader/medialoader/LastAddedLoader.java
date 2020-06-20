@@ -4,8 +4,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.provider.MediaStore;
 import androidx.annotation.NonNull;
-
-
 import com.app.musicapp.model.Song;
 import com.app.musicapp.util.PreferenceUtil;
 

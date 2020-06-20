@@ -1,11 +1,10 @@
 package com.app.musicapp.helper.menu;
 
 import android.content.Context;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
-import android.widget.Toast;
-
 import com.app.musicapp.App;
 import com.app.musicapp.R;
 import com.app.musicapp.helper.songpreview.SongPreviewController;
@@ -15,10 +14,10 @@ import com.app.musicapp.model.Song;
 import com.app.musicapp.service.MusicPlayerRemote;
 import com.app.musicapp.ui.BaseActivity;
 import com.app.musicapp.ui.MainActivity;
-import com.app.musicapp.ui.page.subpages.PlaylistPagerFragment;
 import com.app.musicapp.ui.dialog.AddToPlaylistDialog;
 import com.app.musicapp.ui.dialog.DeletePlaylistDialog;
 import com.app.musicapp.ui.dialog.RenamePlaylistDialog;
+import com.app.musicapp.ui.page.subpages.PlaylistPagerFragment;
 import com.app.musicapp.ui.widget.WeakContextAsyncTask;
 import com.app.musicapp.util.PlaylistsUtil;
 
@@ -28,7 +27,7 @@ import java.util.Collections;
 
 /**
  * @author Karim Abou Zeid (kabouzeid)
- * modified by Le Dinh Trung (dtrung98)
+ * modified by Dang Quang Khai (dec25_)
  */
 
 public class MenuHelper {

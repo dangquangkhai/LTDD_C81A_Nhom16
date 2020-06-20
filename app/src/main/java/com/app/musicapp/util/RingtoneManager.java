@@ -10,10 +10,8 @@ import android.os.Build;
 import android.provider.BaseColumns;
 import android.provider.MediaStore;
 import android.provider.Settings;
-import androidx.annotation.NonNull;
 import android.widget.Toast;
-
-
+import androidx.annotation.NonNull;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.app.musicapp.R;
 

@@ -4,8 +4,6 @@ import android.content.Context;
 import android.os.Parcel;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.Nullable;
-
-
 import com.app.musicapp.R;
 import com.app.musicapp.model.AbsCustomPlaylist;
 
