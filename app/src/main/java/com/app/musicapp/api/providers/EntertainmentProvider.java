@@ -181,7 +181,7 @@ public class EntertainmentProvider {
         }
     }
 
-    public Observable<Boolean> downloadSongAsync(String urlDownload, NotificationCompat.Builder _builder, NotificationManager _manager, AppCompatActivity activity) {
+    public Observable<Boolean> downloadSongAsync(String urlDownload, NotificationCompat.Builder _builder, NotificationManager _manager, AppCompatActivity activity, int notiId) {
         try {
             Observable<Response> fetchDt = Observable.create(
                     (ObservableOnSubscribe<Response>) emitter -> {
@@ -215,11 +215,10 @@ public class EntertainmentProvider {
                                 int progress = (int) ((total * 100) / contentLength);
                                 if (_builder != null && _manager != null) {
                                     _builder.setProgress(100, progress, false).setContentText( activity.getResources().getString(R.string.percent) +": " + progress + "/100");
-                                    _manager.notify(1, _builder.build());
+                                    _manager.notify(notiId, _builder.build());
                                 }
                                 output.write(data, 0, count);
                             }
-
                             output.flush();
                             output.close();
                             input.close();
