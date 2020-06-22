@@ -55,14 +55,3 @@ src="https://user-images.githubusercontent.com/33343210/61764970-4eb40180-ae05-1
 
 #### Author: Khai Dang (1654052054khai@ou.edu.vn)
 
-
-### License
-
-* This project is licensed under The GNU General Public License v3.0 - see the [LICENSE.md](/LICENSE) file for details
-
-### Acknowledgments
-
-* Hat tip to anyone who's code was used
-* Inspiration
-* etc
-
