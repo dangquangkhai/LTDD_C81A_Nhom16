@@ -1,0 +1,1074 @@
+{
+	"info": {
+		"_postman_id": "ac917e73-ce65-45ff-98d9-0cc74a7f424b",
+		"name": "Music App Backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Get All User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6c6ac26b-f9ac-42a4-a094-808c05fa141b",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/users",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get user by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "bfb4f6b8-19a0-4830-890b-5a70f4ac7540",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"type": "text",
+								"value": "{{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/users/x",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"x"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "77d7a7ef-59d0-4295-a6a5-4ca468daae08",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "authorization",
+								"type": "text",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"firstname\": \"Khải\",\n\t\"lastname\": \"Đặng\",\n\t\"age\": 12\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/users/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "081b2c72-2fa7-46be-898e-969f5b3d9bca",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"type": "text",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"pidrunhcm1@gmail.com\",\n\t\"password\": \"Bravo@123\",\n\t\"firstname\": \"Khải\",\n\t\"lastname\": \"Đặng\",\n\t\"age\": 12\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/users",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "423f87df-5a41-40db-a25a-d68552ab6c1b",
+								"exec": [
+									"var value = pm.response.json().token || null;\r",
+									"pm.globals.set(\"token\", value);\r",
+									"pm.environment.set(\"token\", value);\r",
+									"console.log(pm.variables.get(\"token\"));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"{{username}}\",\n\t\"password\": \"{{password}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send email reset password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"khaidang2512@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth/reset-password",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"reset-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Check OTP Code",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"code\": 7158892015\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth/check-code",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"check-code"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"code\": 7158892015,\n\t\"newPass\": \"Bravo@123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth/update-password",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"update-password"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Entertainment",
+			"item": [
+				{
+					"name": "Song",
+					"item": [
+						{
+							"name": "Get All Song",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/entmt/song",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"entmt",
+										"song"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Song By ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/entmt/song/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"entmt",
+										"song",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Song",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "069b0bd6-3940-4199-bd18-fef8d73beb9d",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authorization",
+										"type": "text",
+										"value": "{{token}}"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": " Sample 2",
+											"type": "text"
+										},
+										{
+											"key": "artist_id",
+											"value": " 1",
+											"type": "text"
+										},
+										{
+											"key": "creator",
+											"value": " 1",
+											"type": "text"
+										},
+										{
+											"key": "audio",
+											"type": "file",
+											"src": "/D:/Downloads/Music/sample_2.mp3"
+										},
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/D:/Downloads/Pictures/i-see-stars.jpg"
+										}
+									],
+									"options": {
+										"formdata": {}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/entmt/song",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"entmt",
+										"song"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Song",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1442489f-f024-4b8c-a5af-393675fab9d2",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "authorization",
+										"type": "text",
+										"value": "{{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"firstname\": \"Justin\",\n    \"lastname\": \"Bieber\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/entmt/song/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"entmt",
+										"song",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Stream Song",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/entmt/song/stream?key=NjBiZWUwNDE2NDhmYmNkMTU4NTRhYzA5YjQ0YjRkYjU6YzMxOTQwM2RhZDNhOWYxY2RjOGQ3YzdiZTQ1MDdlZmE0YzgyNjMwMzAzZjZkODNlZGE1OWExOGI0N2ZkY2VkMg==",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"entmt",
+										"song",
+										"stream"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "NjBiZWUwNDE2NDhmYmNkMTU4NTRhYzA5YjQ0YjRkYjU6YzMxOTQwM2RhZDNhOWYxY2RjOGQ3YzdiZTQ1MDdlZmE0YzgyNjMwMzAzZjZkODNlZGE1OWExOGI0N2ZkY2VkMg=="
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Stream Song Copy",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/entmt/song/stream?key=MDUyZjI3ZGQ5N2Y4YjI0ZjJiODUyNmU1N2I4NzhjMjU6MDFlMGE5MjVkZDI0Mjg0NDc5OGYxZDFkZWM2YmJjZWFjMDA5NjM0YjU2OTY1OTYzY2JhZmI3YTBkM2UzYjg1ZQ==",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"entmt",
+										"song",
+										"stream"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "MDUyZjI3ZGQ5N2Y4YjI0ZjJiODUyNmU1N2I4NzhjMjU6MDFlMGE5MjVkZDI0Mjg0NDc5OGYxZDFkZWM2YmJjZWFjMDA5NjM0YjU2OTY1OTYzY2JhZmI3YTBkM2UzYjg1ZQ=="
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Stream Image",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/entmt/image/stream?key=ZWE3NTAxNWZmODFmMzBjN2IxYTYxZWJiM2YwZDBmNmQ6OTc0NDdlMzQ4YzgzMGNjNTZiNmI2YjE2YjRkMThiODE4ZGIzZDg0NjAyN2Q5YTY1MDRiNjk0MTE2YTM2Y2U2NQ==",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"entmt",
+										"image",
+										"stream"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "ZWE3NTAxNWZmODFmMzBjN2IxYTYxZWJiM2YwZDBmNmQ6OTc0NDdlMzQ4YzgzMGNjNTZiNmI2YjE2YjRkMThiODE4ZGIzZDg0NjAyN2Q5YTY1MDRiNjk0MTE2YTM2Y2U2NQ=="
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Artist",
+					"item": [
+						{
+							"name": "Get All Artist",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/entmt/artist",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"entmt",
+										"artist"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Artist By ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/entmt/artist/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"entmt",
+										"artist",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Artist",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "ab9a8641-2a2b-4fad-a67b-52761efd0d12",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authorization",
+										"type": "text",
+										"value": "{{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n            \"firstname\": \"Charlie\",\n            \"lastname\": \"Puth\",\n            \"creator\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/entmt/artist",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"entmt",
+										"artist"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Artist By ID",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1d36f986-4de5-400f-8f9a-4fbe2ec24046",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "authorization",
+										"type": "text",
+										"value": "{{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"firstname\": \"Justin\",\n    \"lastname\": \"Bieber\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/entmt/artist/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"entmt",
+										"artist",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Category",
+					"item": [
+						{
+							"name": "Get All Category",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/entmt/category",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"entmt",
+										"category"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Category By ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/entmt/category/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"entmt",
+										"category",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Category",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "07992b39-aade-40f9-a17c-95a363249f10",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authorization",
+										"type": "text",
+										"value": "{{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"email\": \"pidrunhcm1@gmail.com\",\n\t\"password\": \"Bravo@123\",\n\t\"firstname\": \"Khải\",\n\t\"lastname\": \"Đặng\",\n\t\"age\": 12\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/entmt/category",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"entmt",
+										"category"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Category by ID",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "8a840577-1e26-4223-84c2-a36a2a2ecaef",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "authorization",
+										"type": "text",
+										"value": "{{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"firstname\": \"Khải\",\n\t\"lastname\": \"Đặng\",\n\t\"age\": 12\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/entmt/category/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"entmt",
+										"category",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Playlist",
+					"item": [
+						{
+							"name": "Get All Playlist",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/entmt/playlist",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"entmt",
+										"playlist"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Playlist by Id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/entmt/playlist/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"entmt",
+										"playlist",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Playlist",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "b49a846c-0d41-4232-9fa6-e363daf44a0f",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authorization",
+										"type": "text",
+										"value": "{{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"email\": \"pidrunhcm1@gmail.com\",\n\t\"password\": \"Bravo@123\",\n\t\"firstname\": \"Khải\",\n\t\"lastname\": \"Đặng\",\n\t\"age\": 12\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/entmt/category",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"entmt",
+										"category"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Playlist By ID",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "cd66d64b-a2dc-474f-a3a8-d04e07c5d5b8",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "authorization",
+										"type": "text",
+										"value": "{{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"firstname\": \"Khải\",\n\t\"lastname\": \"Đặng\",\n\t\"age\": 12\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/entmt/category/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"entmt",
+										"category",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Upload music",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "audio",
+									"type": "file",
+									"src": "/D:/Downloads/Music/file_example_MP3_700KB.mp3"
+								},
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": "/D:/Downloads/iconfinder_Android_1298724.png"
+								},
+								{
+									"key": "name",
+									"value": "Hello World",
+									"type": "text"
+								}
+							],
+							"options": {
+								"formdata": {}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/post_file",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"post_file"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "110958fc-d399-4591-9f7c-5bb96cd8f8f0",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "973e120c-0e4b-41fa-9503-0a2b513f5989",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Profile",
+			"item": [
+				{
+					"name": "Get my profile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/users/me",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update my profile",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "authorization",
+								"type": "text",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"age\": 14\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/users/me",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"me"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
