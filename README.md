@@ -13,7 +13,7 @@
 
 ### Tech
 
-Hotel Management Backend uses a number of latest technology to work properly:
+Music App Android uses a number of latest technology to work properly:
 
 * [markdown-it] - Markdown parser done right. Fast and easy to extend.
 * [Java] - evented I/O for the Android
