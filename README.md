@@ -11,5 +11,25 @@
 * Learn your hobby, automatically create new playlist
 * etc
 
+### Tech
+
+Hotel Management Backend uses a number of latest technology to work properly:
+
+* [markdown-it] - Markdown parser done right. Fast and easy to extend.
+* [Java] - evented I/O for the Android
+* [AdoptJDK] - Open source JDK for Android Development
+* [RxJava] - Reactive Extensions for the JVM
+* [OkHttp] - OkHttp is an HTTP client that’s efficient
+
+
 #### Author: Khai Dang (1654052054khai@ou.edu.vn)
+
+License
+----
+
+GPLv3
+
+
+**Happy Coding, Hell Yeah!**
+
 
